@@ -1,0 +1,17 @@
+
+
+
+
+# getreceivedbyaddress 
+在这一栏中
+    "category": "immature",
+TODO  还需要再验证
+因为命令 
+bitcoin-cli -regtest getreceivedbyaddress  n3RGpxPVvixiebGcjRx4fWCftFhebFrckb
+
+
+
+# 更进一步构建交易，用两个节点
+  
+
+然后查看交易信息

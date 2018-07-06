@@ -85,3 +85,75 @@ StephenSun@debian-1:~/bitcoin/study/experiment$ rt getwalletinfo
 # 获取某个地址的账户信息？
  https://bitcoin.stackexchange.com/questions/10090/how-to-get-an-addresss-balance-with-the-bitcoin-client
 bitcoin-cli getaccount "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX"
+
+方式如下
+bitcoin-cli -regtest listunspent
+
+[
+  {
+    "txid": "84b531d7da219bc80d0907a998a50d49a9c7ce705ab1e4300bdf08df7d4f7912",
+    "vout": 0,
+    "address": "mx7AUPNAPQ4KsHKLR7Xivho2zPtBgVArtU",
+    "scriptPubKey": "2102c43428de8dc9dbb99ac78953a0b326fb77d07a2efd8638ef64182085ab4d17d0ac",
+    "amount": 50.00000000,
+    "confirmations": 105,
+    "spendable": true,
+    "solvable": true,
+    "safe": true
+  },
+........
+]
+
+
+bitcoin-cli -regtest listunspent 6 9999999 "[\"mx7AUPNAPQ4KsHKLR7Xivho2zPtBgVArtU\"]"
+bitcoin-cli -regtest listunspent 6 9999999 "[\"n3RGpxPVvixiebGcjRx4fWCftFhebFrckb\"]"
+bitcoin-cli -regtest listunspent 6 9999999 "[\"mx7AUPNAPQ4KsHKLR7Xivho2zPtBgVArtU\",\"n3RGpxPVvixiebGcjRx4fWCftFhebFrckb\"]"
+
+
+
+
+
+
+
+注意地址里面的数额是按照交易来的
+
+
+# bitcoin-cli -regtest listtransactions 
+[
+  {
+    "account": "",
+    "address": "n3RGpxPVvixiebGcjRx4fWCftFhebFrckb",
+    "category": "immature",
+    "amount": 50.00000000,
+    "vout": 0,
+    "confirmations": 10,
+    "generated": true,
+    "blockhash": "348f12e91bbf6ad0e9ab28680e8112710f1adb11e55946835f09c734e90862ac",
+    "blockindex": 0,
+    "blocktime": 1530885617,
+    "txid": "a0665b78614feb20377c597e399dfc5187121066563288eeb634e9aae7e2a6c6",
+    "walletconflicts": [
+    ],
+    "time": 1530885601,
+    "timereceived": 1530885601,
+    "bip125-replaceable": "no"
+  },
+]
+
+
+在这一栏中
+    "category": "immature",
+TODO  还需要再验证
+因为命令 
+bitcoin-cli -regtest getreceivedbyaddress  n3RGpxPVvixiebGcjRx4fWCftFhebFrckb
+
+输出值是0， 通过挖矿， 确认超过100次  看是不是可以输出
+
+What you are seeing is not an inherent property of a transaction but how the transaction looks to you at the current time and how your Bitcoin client wants to display it.
+
+A transaction contains inputs and outputs; if the transaction is considered a "send" or "receive" (or "transfer") depends on which of the input and output addresses are in your wallet and considered to be owned by yourself.
+
+An "unconfirmed" transaction is one which is recent enough to not be considered a canonical part of the block chain. Once enough blocks have been added to the block chain after the one in which your transaction is recorded it will be considered confirmed. The number of blocks depends on your Bitcoin client.
+
+An "immature" transaction is a generation transaction which is not old enough to be made available for spending. Under the current specification a generation transaction must have at least 100 confirmations before it can be spent.
+

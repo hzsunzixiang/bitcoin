@@ -1,0 +1,4 @@
+
+
+
+bitcoin-cli -regtest getdifficulty 
