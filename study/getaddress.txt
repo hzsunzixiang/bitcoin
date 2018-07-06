@@ -1,0 +1,20 @@
+StephenSun@debian-1:~/bitcoin/src$ ./bitcoind  -testnet
+ ./bitcoin-cli -testnet getaccountaddress "account"
+ ./bitcoin-cli -testnet dumpprivkey 2N6nc5PfMhWgiQ8WNZcDWgdn9ScCjsJJW7L
+
+
+
+ StephenSun@debian-1:~/bitcoin/src$ ./bitcoin-cli -testnet getblock 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
+ error code: -5
+ error message:
+ Block not found
+
+
+
+ 想要运行下面的命令 还需要自己在测试区块上挖矿
+ StephenSun@debian-1:~/bitcoin/src$ ./bitcoin-cli -testnet help getblock
+ ....
+ Examples:
+ > bitcoin-cli getblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
+ > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
