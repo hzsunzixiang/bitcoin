@@ -1,0 +1,54 @@
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ bitcoin-cli -regtest getblockchaininfo 
+
+{
+  "chain": "regtest",
+  "blocks": 105,
+  "headers": 105,
+  "bestblockhash": "6aa666dd2c9de002e4f5399b6b49af6ac9f2f46e65cde9265ca897a3bef3401c",
+  "difficulty": 4.656542373906925e-10,
+  "mediantime": 1530885618,
+  "verificationprogress": 1,
+  "initialblockdownload": false,
+  "chainwork": "00000000000000000000000000000000000000000000000000000000000000d4",
+  "size_on_disk": 33037,
+  "pruned": false,
+  "softforks": [
+    {
+      "id": "bip34",
+      "version": 2,
+      "reject": {
+        "status": false
+      }
+    },
+    {
+      "id": "bip66",
+      "version": 3,
+      "reject": {
+        "status": false
+      }
+    },
+    {
+      "id": "bip65",
+      "version": 4,
+      "reject": {
+        "status": false
+      }
+    }
+  ],
+  "bip9_softforks": {
+    "csv": {
+      "status": "defined",
+      "startTime": 0,
+      "timeout": 9223372036854775807,
+      "since": 0
+    },
+    "segwit": {
+      "status": "active",
+      "startTime": -1,
+      "timeout": 9223372036854775807,
+      "since": 0
+    }
+  },
+  "warnings": "This is a pre-release test build - use at your own risk - do not use for mining or merchant applications"
+}
