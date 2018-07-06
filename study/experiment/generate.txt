@@ -1,0 +1,11 @@
+
+
+
+
+直接挖矿 到系统生成的地址
+rt generate 100 
+
+
+挖矿到特定的地址
+rt generatetoaddress  100 2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C
+

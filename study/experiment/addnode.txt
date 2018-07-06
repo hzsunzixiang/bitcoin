@@ -1,0 +1,56 @@
+
+
+
+StephenSun@debian-1:~$ bitcoin-cli -regtest addnode "192.168.1.120:18443" "onetry"
+StephenSun@debian-1:~$ sudo netstat -anpt |grep 18443
+tcp        0      0 192.168.1.110:43964     192.168.1.120:18443     ESTABLISHED 3706/bitcoind
+tcp6       0      0 :::18443                :::*                    LISTEN      3706/bitcoind
+tcp6       0      0 127.0.0.1:18443         127.0.0.1:60772         TIME_WAIT   -
+tcp6       0      0 127.0.0.1:18443         127.0.0.1:60775         TIME_WAIT   -
+tcp6       0      0 127.0.0.1:18443         127.0.0.1:60773         TIME_WAIT   -
+tcp6       0      0 127.0.0.1:18443         127.0.0.1:60774         TIME_WAIT   -
+
+这样添加的节点稍后就断开了
+
+必须制定 add 方式才会一直连接
+bitcoin-cli -regtest addnode "192.168.1.120:18443" "add" 
+
+
+注意到一个很奇怪的现象 两个节点之间不停的断开连接
+StephenSun@debian-1:~$ rt getpeerinfo
+[
+  {
+    "id": 1,
+    "addr": "192.168.1.120:18443",
+    "addrbind": "192.168.1.110:43973",
+    "services": "0000000000000000",
+    "relaytxes": false,
+    "lastsend": 1530888523,
+    "lastrecv": 0,
+    "bytessent": 127,
+    "bytesrecv": 0,
+    "conntime": 1530888523,
+    "timeoffset": 0,
+    "version": 0,
+    "subver": "",
+    "inbound": false,
+    "addnode": true,
+    "startingheight": -1,
+    "banscore": 0,
+    "synced_headers": -1,
+    "synced_blocks": -1,
+    "inflight": [
+    ],
+    "whitelisted": false,
+    "bytessent_per_msg": {
+      "version": 127
+    },
+    "bytesrecv_per_msg": {
+    }
+  }
+]
+
+
+
+
+
