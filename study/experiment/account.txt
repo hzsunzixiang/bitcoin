@@ -1,0 +1,87 @@
+
+
+
+# 列出 accounts
+StephenSun@debian-1:~/bitcoin/study/manual$ rt listaccounts
+{
+  "": 250.00000000
+}
+
+StephenSun@debian-1:~/bitcoin/study/manual$ rt listaccounts 110
+{
+  "": 0.00000000
+}
+StephenSun@debian-1:~/bitcoin/study/manual$ rt listaccounts 105
+{
+  "": 50.00000000
+}
+
+# 通过account获取钱包地址
+StephenSun@debian-1:~/bitcoin/study/manual$ rt getaddressesbyaccount ""
+[
+  "2MuRro4qzzN6uAkuX33NdsDwrSMuuUgBatY",
+  "2Muzo4Uy584Czrkr9gchM2j8pWULTnFHcz5",
+  "2MxJKkdoAdSz1jMr5A6mM2sQ93ii9VJxh4u",
+  "2MybGYrhfzTSpAVDmEbDm7e5jRYb9ry2kzb",
+  "2N11Nbiz9kRTT8oisAWoJM3xibLTSJ6quPV",
+  "2N2ABqsirY1m4CrzLdFSfQ1Z1YsuSZ4A8pw",
+  "2N7i1svcZKSjG7sHqtCA5a1oxHx7oWHpFWF",
+  "2N9fdBiza2PrW9Db7T5vEfJLn3SbzqM5iMJ"
+]
+
+# 通过 钱包地址 获取信息
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt getaddressinfo "2MuRro4qzzN6uAkuX33NdsDwrSMuuUgBatY"
+{
+  "address": "2MuRro4qzzN6uAkuX33NdsDwrSMuuUgBatY",
+  "scriptPubKey": "a91417f322c353a2b7617fac8667af7b87fa8348c98787",
+  "ismine": true,
+  "iswatchonly": false,
+  "isscript": true,
+  "iswitness": false,
+  "script": "witness_v0_keyhash",
+  "hex": "0014fdce2e6aef8b90224db3ce2ed8754cb42258fa0f",
+  "pubkey": "02f4692f9b1dfd2dc4b723ac1347d5b550e60d09362d0f77991916a7a23a929ee3",
+  "embedded": {
+    "isscript": false,
+    "iswitness": true,
+    "witness_version": 0,
+    "witness_program": "fdce2e6aef8b90224db3ce2ed8754cb42258fa0f",
+    "pubkey": "02f4692f9b1dfd2dc4b723ac1347d5b550e60d09362d0f77991916a7a23a929ee3",
+    "address": "bcrt1qlh8zu6h03wgzyndnechdsa2vks3937s0h08rz3",
+    "scriptPubKey": "0014fdce2e6aef8b90224db3ce2ed8754cb42258fa0f"
+  },
+  "account": "",
+  "timestamp": 1215351958,
+  "hdkeypath": "m/0'/0'/2'",
+  "hdmasterkeyid": "665d11d89f39f28b94588e8dffae3807bd770b7c"
+}
+
+注意里面的scriptPubKey(做过hash运算) 和 pubkey
+# TODO 目前不对
+PUBKEY='02f4692f9b1dfd2dc4b723ac1347d5b550e60d09362d0f77991916a7a23a929ee3'
+printf "$PUBKEY" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+
+
+# 老版本的getinfo 中的 unlocked_until 和keypoolsize 都在这个信息中
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt getwalletinfo
+{
+  "walletname": "",
+  "walletversion": 159900,
+  "balance": 250.00000000,
+  "unconfirmed_balance": 0.00000000,
+  "immature_balance": 5000.00000000,
+  "txcount": 105,
+  "keypoololdest": 1530908439,
+  "keypoolsize": 1000,
+  "keypoolsize_hd_internal": 1000,
+  "unlocked_until": 1530912245,
+  "paytxfee": 0.00000000,
+  "hdmasterkeyid": "586764e7f3cde527ac029780d1d6bb367151c23d"
+}
+
+
+# 获取某个地址的账户信息？
+ https://bitcoin.stackexchange.com/questions/10090/how-to-get-an-addresss-balance-with-the-bitcoin-client
+bitcoin-cli getaccount "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX"
