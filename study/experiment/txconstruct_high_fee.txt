@@ -1,0 +1,184 @@
+
+
+
+1. 在本机上构建交易
+
+
+   # 先用固定的钱包id构建一笔UTXO
+     
+
+
+挖矿到特定的地址
+rt generatetoaddress  100 2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C
+
+
+# 看总额
+rt getbalance
+
+
+rt listunspent 
+找到一笔交易
+
+  {
+    "txid": "edd81aef8944a5e28d63be39b30bae538b10e3afde6721c76e104806780c30ff",
+    "vout": 0,
+    "address": "2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C",
+    "account": "",
+    "redeemScript": "00148108a72ac054682d5b4dc333201f4529a5e65486",
+    "scriptPubKey": "a9141c1bf6bd2317a063a084000f6669a111a335816a87",
+    "amount": 50.00000000,
+    "confirmations": 194,
+    "spendable": true,
+    "solvable": true,
+    "safe": true
+  }
+
+rt gttxout "edd81aef8944a5e28d63be39b30bae538b10e3afde6721c76e104806780c30ff" 0
+
+
+{
+  "bestblock": "389d6e9afccf30fb835990385ef570c4ae81147e13e2d2bcf617ae54b2845700",
+  "confirmations": 194,
+  "value": 50.00000000,
+  "scriptPubKey": {
+    "asm": "OP_HASH160 1c1bf6bd2317a063a084000f6669a111a335816a OP_EQUAL",
+    "hex": "a9141c1bf6bd2317a063a084000f6669a111a335816a87",
+    "reqSigs": 1,
+    "type": "scripthash",
+    "addresses": [
+      "2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C"
+    ]
+  },
+  "coinbase": true
+}
+
+
+
+
+# 新创建一个地址
+
+   rt getnewaddress
+
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt getnewaddress
+2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+
+导出私钥
+
+rt dumpprivkey 2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+
+
+
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt dumpprivkey 2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+cVR8NrpXnMUZ2XQmF9oZsdyzi19sqhfwXMcREWsWnciqWcPWhwH6
+
+
+rt getaddressesbyaccount ""
+
+
+目前这个地址中没有UTXO
+rt listunspent |grep 2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt getaddressesbyaccount ""
+[
+  "2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C",
+  "2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe"
+]
+
+rt createrawtransaction '[{"txid":"edd81aef8944a5e28d63be39b30bae538b10e3afde6721c76e104806780c30ff", "vout":0}]' '{"2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C":24, "2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe":25}'
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt createrawtransaction '[{"txid":"edd81aef8944a5e28d63be39b30bae538b10e3afde6721c76e104806780c30ff", "vout":0}]' '{"2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C":24, "2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe":25}'
+0200000001ff300c780648106ec72167deafe3108b53ae0bb339be638de2a54489ef1ad8ed0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
+StephenSun
+
+rt decoderawtransaction 0200000001ff300c780648106ec72167deafe3108b53ae0bb339be638de2a54489ef1ad8ed0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
+
+
+
+
+此时还没有签名 
+
+
+#rt signrawtransaction 0200000001ff300c780648106ec72167deafe3108b53ae0bb339be638de2a54489ef1ad8ed0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
+
+rt signrawtransactionwithkey 0200000001fbffb30ad4d560d1a543d15ad1137fdc747e9238d2d19f813e2674286672df1e0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
+
+
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt signrawtransaction 0200000001ff300c780648106ec72167deafe3108b53ae0bb339be638de2a54489ef1ad8ed0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
+{
+  "hex": "02000000000101ff300c780648106ec72167deafe3108b53ae0bb339be638de2a54489ef1ad8ed00000000171600148108a72ac054682d5b4dc333201f4529a5e65486ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88702483045022100f1c86b956b0417ac46f0d2ecd88fa299dd4b6b8a4f4f63bc0b1b68c6d04b829002202da5cde8bb837fbb4d44c3a442fae02d74d3c84ac60a9dbd8b4b37ffbb14631d0121031e8ad4c58d659bcc2d7fcb7cb2820708fbdf0a6b2dc33c071f3fbbfedce6dced00000000",
+  "complete": true
+}
+
+
+rt decoderawtransaction "02000000000101ff300c780648106ec72167deafe3108b53ae0bb339be638de2a54489ef1ad8ed00000000171600148108a72ac054682d5b4dc333201f4529a5e65486ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88702483045022100f1c86b956b0417ac46f0d2ecd88fa299dd4b6b8a4f4f63bc0b1b68c6d04b829002202da5cde8bb837fbb4d44c3a442fae02d74d3c84ac60a9dbd8b4b37ffbb14631d0121031e8ad4c58d659bcc2d7fcb7cb2820708fbdf0a6b2dc33c071f3fbbfedce6dced00000000"
+
+{
+  "txid": "6d4ca6615cb90afbf4e2e4dcb6b081d7d674de10215a220f2a5c492c2b2ce32d",
+  "hash": "d608dfc9f441e3b89b518d307a9f4a36375743012cfae132ff84c1f7af7cf428",
+  "version": 2,
+  "size": 248,
+  "vsize": 166,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "edd81aef8944a5e28d63be39b30bae538b10e3afde6721c76e104806780c30ff",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "00148108a72ac054682d5b4dc333201f4529a5e65486",
+        "hex": "1600148108a72ac054682d5b4dc333201f4529a5e65486"
+      },
+      "txinwitness": [
+        "3045022100f1c86b956b0417ac46f0d2ecd88fa299dd4b6b8a4f4f63bc0b1b68c6d04b829002202da5cde8bb837fbb4d44c3a442fae02d74d3c84ac60a9dbd8b4b37ffbb14631d01",
+        "031e8ad4c58d659bcc2d7fcb7cb2820708fbdf0a6b2dc33c071f3fbbfedce6dced"
+      ],
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 24.00000000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_HASH160 1c1bf6bd2317a063a084000f6669a111a335816a OP_EQUAL",
+        "hex": "a9141c1bf6bd2317a063a084000f6669a111a335816a87",
+        "reqSigs": 1,
+        "type": "scripthash",
+        "addresses": [
+          "2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C"
+        ]
+      }
+    },
+    {
+      "value": 25.00000000,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "OP_HASH160 6bec92df7ee37c1eddc143d97a323f01dd9646f8 OP_EQUAL",
+        "hex": "a9146bec92df7ee37c1eddc143d97a323f01dd9646f887",
+        "reqSigs": 1,
+        "type": "scripthash",
+        "addresses": [
+          "2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe"
+        ]
+      }
+    }
+  ]
+}
+
+
+# 发送到网络
+
+
+
+# 看有没有UTXO
+rt listunspent |grep 2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+
+
+费用太高还不行
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt sendrawtransaction 02000000000101ff300c780648106ec72167deafe3108b53ae0bb339be638de2a54489ef1ad8ed00000000171600148108a72ac054682d5b4dc333201f4529a5e65486ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88702483045022100f1c86b956b0417ac46f0d2ecd88fa299dd4b6b8a4f4f63bc0b1b68c6d04b829002202da5cde8bb837fbb4d44c3a442fae02d74d3c84ac60a9dbd8b4b37ffbb14631d0121031e8ad4c58d659bcc2d7fcb7cb2820708fbdf0a6b2dc33c071f3fbbfedce6dced00000000
+error code: -26
+error message:
+absurdly-high-fee, 100000000 > 10000000 (code 256)

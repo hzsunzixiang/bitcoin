@@ -1,0 +1,154 @@
+
+
+
+1. 在本机上构建交易
+
+
+   # 先用固定的钱包id构建一笔UTXO
+     
+
+
+挖矿到特定的地址
+rt generatetoaddress  100 2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C
+
+
+# 看总额
+rt getbalance
+
+
+rt listunspent 
+找到一笔交易
+
+  {
+    "txid": "1edf72662874263e819fd1d238927e74dc7f13d15ad143a5d160d5d40ab3fffb",
+    "vout": 0,
+    "address": "2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C",
+    "account": "",
+    "redeemScript": "00148108a72ac054682d5b4dc333201f4529a5e65486",
+    "scriptPubKey": "a9141c1bf6bd2317a063a084000f6669a111a335816a87",
+    "amount": 50.00000000,
+    "confirmations": 108,
+    "spendable": true,
+    "solvable": true,
+    "safe": true
+  },
+
+rt gettxout "1edf72662874263e819fd1d238927e74dc7f13d15ad143a5d160d5d40ab3fffb" 0
+
+
+{
+  "bestblock": "54b9c5c053a1acba868ead875e97b9de6f68de11f72520a02c9e4f58861f4405",
+  "confirmations": 108,
+  "value": 50.00000000,
+  "scriptPubKey": {
+    "asm": "OP_HASH160 1c1bf6bd2317a063a084000f6669a111a335816a OP_EQUAL",
+    "hex": "a9141c1bf6bd2317a063a084000f6669a111a335816a87",
+    "reqSigs": 1,
+    "type": "scripthash",
+    "addresses": [
+      "2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C"
+    ]
+  },
+  "coinbase": true
+}
+
+
+
+# 新创建一个地址
+
+   rt getnewaddress
+
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt getnewaddress
+2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+
+导出私钥
+
+rt dumpprivkey 2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+
+
+
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt dumpprivkey 2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+cVR8NrpXnMUZ2XQmF9oZsdyzi19sqhfwXMcREWsWnciqWcPWhwH6
+
+
+rt getaddressesbyaccount ""
+
+
+目前这个地址中没有UTXO
+rt listunspent |grep 2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt getaddressesbyaccount ""
+[
+  "2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C",
+  "2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe"
+]
+
+rt createrawtransaction '[{"txid":"1edf72662874263e819fd1d238927e74dc7f13d15ad143a5d160d5d40ab3fffb", "vout":0}]' '{"2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C":24, "2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe":25}'
+
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt createrawtransaction '[{"txid":"1edf72662874263e819fd1d238927e74dc7f13d15ad143a5d160d5d40ab3fffb", "vout":0}]' '{"2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C":24, "2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe":25}'
+0200000001fbffb30ad4d560d1a543d15ad1137fdc747e9238d2d19f813e2674286672df1e0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
+
+
+rt decoderawtransaction 0200000001fbffb30ad4d560d1a543d15ad1137fdc747e9238d2d19f813e2674286672df1e0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
+
+
+
+{
+  "txid": "54b73a576ff70bdcdd130de3fcd672d35492def5ca38312bbd60402b8cc18081",
+  "hash": "54b73a576ff70bdcdd130de3fcd672d35492def5ca38312bbd60402b8cc18081",
+  "version": 2,
+  "size": 115,
+  "vsize": 115,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "1edf72662874263e819fd1d238927e74dc7f13d15ad143a5d160d5d40ab3fffb",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 24.00000000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_HASH160 1c1bf6bd2317a063a084000f6669a111a335816a OP_EQUAL",
+        "hex": "a9141c1bf6bd2317a063a084000f6669a111a335816a87",
+        "reqSigs": 1,
+        "type": "scripthash",
+        "addresses": [
+          "2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C"
+        ]
+      }
+    },
+    {
+      "value": 25.00000000,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "OP_HASH160 6bec92df7ee37c1eddc143d97a323f01dd9646f8 OP_EQUAL",
+        "hex": "a9146bec92df7ee37c1eddc143d97a323f01dd9646f887",
+        "reqSigs": 1,
+        "type": "scripthash",
+        "addresses": [
+          "2N35shEtPzxV8gDKKNjaMmTwYZiPzEu2pRe"
+        ]
+      }
+    }
+  ]
+}
+
+
+
+
+此时还没有签名 
+
+
+#rt signrawtransaction  0200000001fbffb30ad4d560d1a543d15ad1137fdc747e9238d2d19f813e2674286672df1e0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
+rt signrawtransactionwithkey 0200000001fbffb30ad4d560d1a543d15ad1137fdc747e9238d2d19f813e2674286672df1e0000000000ffffffff0200180d8f0000000017a9141c1bf6bd2317a063a084000f6669a111a335816a8700f902950000000017a9146bec92df7ee37c1eddc143d97a323f01dd9646f88700000000
