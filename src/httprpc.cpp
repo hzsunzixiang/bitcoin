@@ -185,6 +185,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
         if (valRequest.isObject()) {
             jreq.parse(valRequest);
 
+			// ericksun excute here
             UniValue result = tableRPC.execute(jreq);
 
             // Send reply

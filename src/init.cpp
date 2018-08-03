@@ -727,6 +727,7 @@ bool AppInitServers()
         return false;
     if (!StartRPC())
         return false;
+	// ericksun : here will start http rpc
     if (!StartHTTPRPC())
         return false;
     if (gArgs.GetBoolArg("-rest", DEFAULT_REST_ENABLE) && !StartREST())
@@ -1741,6 +1742,7 @@ bool AppInitMain()
             connOptions.m_specified_outgoing = connect;
         }
     }
+	// ericksun: here will bind and listen
     if (!connman.Start(scheduler, connOptions)) {
         return false;
     }

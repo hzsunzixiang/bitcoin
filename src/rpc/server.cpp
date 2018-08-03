@@ -477,7 +477,9 @@ UniValue CRPCTable::execute(const JSONRPCRequest &request) const
             throw JSONRPCError(RPC_IN_WARMUP, rpcWarmupStatus);
     }
 
+	// ericksun excute commands
     // Find method
+	// ericksun rpc here
     const CRPCCommand *pcmd = tableRPC[request.strMethod];
     if (!pcmd)
         throw JSONRPCError(RPC_METHOD_NOT_FOUND, "Method not found");
