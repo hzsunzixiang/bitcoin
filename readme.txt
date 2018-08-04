@@ -44,3 +44,11 @@ StephenSun@debian-1:~/bitcoin$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/loca
 StephenSun@debian-1:~/bitcoin$ ldd ./src/bitcoind
 ......
         libdb_cxx-4.8.so => /usr/local/BerkeleyDB.4.8/lib/libdb_cxx-4.8.so (0x00007f3a51e41000)
+
+
+# 开启调试模式 覆盖优化级别
+./configure CXXFLAGS="-g -O0 -I/usr/local/BerkeleyDB.4.8/include" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --enable-debug=true
+
+
+# 编译时的详细输出
+# make V=1 
