@@ -4,11 +4,18 @@
 1. 在一个节点上挖矿同步到另一个节点
 2. 在一个节点上发送交易，在另一个节点挖矿 并在多个节点上同步的问题
 
+
+
+
 1. 在本机上构建交易
+
+
    # 先用固定的钱包id构建一笔UTXO
+     
+
 
 挖矿到特定的地址
-rt generatetoaddress  100 2MwhnD82zeRrr4nS9tCEQPogC49FbVtjjtg
+rt generatetoaddress  100 2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C
 
 
 # 看总额

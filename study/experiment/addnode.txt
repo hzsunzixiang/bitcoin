@@ -1,56 +1,244 @@
 
-
-
-StephenSun@debian-1:~$ bitcoin-cli -regtest addnode "192.168.1.120:18443" "onetry"
-StephenSun@debian-1:~$ sudo netstat -anpt |grep 18443
-tcp        0      0 192.168.1.110:43964     192.168.1.120:18443     ESTABLISHED 3706/bitcoind
-tcp6       0      0 :::18443                :::*                    LISTEN      3706/bitcoind
-tcp6       0      0 127.0.0.1:18443         127.0.0.1:60772         TIME_WAIT   -
-tcp6       0      0 127.0.0.1:18443         127.0.0.1:60775         TIME_WAIT   -
-tcp6       0      0 127.0.0.1:18443         127.0.0.1:60773         TIME_WAIT   -
-tcp6       0      0 127.0.0.1:18443         127.0.0.1:60774         TIME_WAIT   -
-
-这样添加的节点稍后就断开了
-
-必须制定 add 方式才会一直连接
-bitcoin-cli -regtest addnode "192.168.1.120:18443" "add" 
-
-
 注意到一个很奇怪的现象 两个节点之间不停的断开连接
-StephenSun@debian-1:~$ rt getpeerinfo
+这是因为端口没搞对 总是连接不上
+待搞对了之后 是18444 而不是 18443
+
+
+StephenSun@debian-1:~$ bitcoin-cli -regtest addnode "192.168.1.120:18444" "onetry"
+
+
+指定 add 方式
+bitcoin-cli -regtest addnode "192.168.1.120:18444" "add" 
+
+
+
+### 这种情况是在没有同步其他节点信息的情况下的输出
+    "synced_headers": 83,
+    "synced_blocks": -1,
 [
   {
-    "id": 1,
-    "addr": "192.168.1.120:18443",
-    "addrbind": "192.168.1.110:43973",
-    "services": "0000000000000000",
-    "relaytxes": false,
-    "lastsend": 1530888523,
-    "lastrecv": 0,
-    "bytessent": 127,
-    "bytesrecv": 0,
-    "conntime": 1530888523,
-    "timeoffset": 0,
-    "version": 0,
-    "subver": "",
+    "id": 0,
+    "addr": "192.168.1.120:18444",
+    "addrbind": "192.168.1.110:32957",
+    "services": "000000000000040d",
+    "relaytxes": true,
+    "lastsend": 1533401441,
+    "lastrecv": 1533401441,
+    "bytessent": 33238,
+    "bytesrecv": 5767,
+    "conntime": 1533400961,
+    "timeoffset": -35,
+    "pingtime": 0.000665,
+    "minping": 0.000629,
+    "version": 70015,
+    "subver": "/Satoshi:0.16.99/",
     "inbound": false,
     "addnode": true,
-    "startingheight": -1,
+    "startingheight": 0,
     "banscore": 0,
-    "synced_headers": -1,
+    "synced_headers": 83,
     "synced_blocks": -1,
     "inflight": [
     ],
     "whitelisted": false,
     "bytessent_per_msg": {
+      "block": 21440,
+      "cmpctblock": 855,
+      "feefilter": 32,
+      "getaddr": 24,
+      "getheaders": 93,
+      "headers": 10050,
+      "inv": 183,
+      "ping": 160,
+      "pong": 160,
+      "sendcmpct": 66,
+      "sendheaders": 24,
+      "verack": 24,
       "version": 127
     },
     "bytesrecv_per_msg": {
+      "feefilter": 32,
+      "getdata": 4444,
+      "getheaders": 404,
+      "headers": 293,
+      "ping": 160,
+      "pong": 160,
+      "sendcmpct": 99,
+      "sendheaders": 24,
+      "verack": 24,
+      "version": 127
+    }
+  },
+  {
+    "id": 1,
+    "addr": "192.168.1.120:53379",
+    "addrbind": "192.168.1.110:18444",
+    "services": "000000000000040d",
+    "relaytxes": true,
+    "lastsend": 1533401443,
+    "lastrecv": 1533401443,
+    "bytessent": 26278,
+    "bytesrecv": 32643,
+    "conntime": 1533400963,
+    "timeoffset": -35,
+    "pingtime": 0.00088,
+    "minping": 0.000521,
+    "version": 70015,
+    "subver": "/Satoshi:0.16.99/",
+    "inbound": true,
+    "addnode": false,
+    "startingheight": 0,
+    "banscore": 0,
+    "synced_headers": 95,
+    "synced_blocks": -1,
+    "inflight": [
+    ],
+    "whitelisted": false,
+    "bytessent_per_msg": {
+      "block": 6319,
+      "cmpctblock": 570,
+      "feefilter": 32,
+      "getheaders": 285,
+      "headers": 14729,
+      "inv": 3782,
+      "ping": 160,
+      "pong": 160,
+      "sendcmpct": 66,
+      "sendheaders": 24,
+      "verack": 24,
+      "version": 127
+    },
+    "bytesrecv_per_msg": {
+      "feefilter": 32,
+      "getaddr": 24,
+      "getdata": 1303,
+      "getheaders": 30584,
+      "headers": 106,
+      "ping": 160,
+      "pong": 160,
+      "sendcmpct": 99,
+      "sendheaders": 24,
+      "verack": 24,
+      "version": 127
     }
   }
 ]
 
 
-
-
-
+### 待同步过其他节点的信息之后
+    "synced_headers": 120,
+    "synced_blocks": 120,
+信息入下:
+[
+  {
+    "id": 0,
+    "addr": "192.168.1.120:18444",
+    "addrbind": "192.168.1.110:32957",
+    "services": "000000000000040d",
+    "relaytxes": true,
+    "lastsend": 1533401712,
+    "lastrecv": 1533401712,
+    "bytessent": 33582,
+    "bytesrecv": 11903,
+    "conntime": 1533400961,
+    "timeoffset": -35,
+    "pingtime": 0.000811,
+    "minping": 0.000629,
+    "version": 70015,
+    "subver": "/Satoshi:0.16.99/",
+    "inbound": false,
+    "addnode": true,
+    "startingheight": 0,
+    "banscore": 0,
+    "synced_headers": 120,
+    "synced_blocks": 120,
+    "inflight": [
+    ],
+    "whitelisted": false,
+    "bytessent_per_msg": {
+      "block": 21440,
+      "cmpctblock": 855,
+      "feefilter": 32,
+      "getaddr": 24,
+      "getdata": 183,
+      "getheaders": 93,
+      "headers": 10050,
+      "inv": 183,
+      "ping": 224,
+      "pong": 224,
+      "sendcmpct": 99,
+      "sendheaders": 24,
+      "verack": 24,
+      "version": 127
+    },
+    "bytesrecv_per_msg": {
+      "block": 275,
+      "cmpctblock": 5415,
+      "feefilter": 32,
+      "getdata": 4444,
+      "getheaders": 404,
+      "headers": 611,
+      "ping": 224,
+      "pong": 224,
+      "sendcmpct": 99,
+      "sendheaders": 24,
+      "verack": 24,
+      "version": 127
+    }
+  },
+  {
+    "id": 1,
+    "addr": "192.168.1.120:53379",
+    "addrbind": "192.168.1.110:18444",
+    "services": "000000000000040d",
+    "relaytxes": true,
+    "lastsend": 1533401712,
+    "lastrecv": 1533401712,
+    "bytessent": 31027,
+    "bytesrecv": 33586,
+    "conntime": 1533400963,
+    "timeoffset": -35,
+    "pingtime": 0.00071,
+    "minping": 0.000521,
+    "version": 70015,
+    "subver": "/Satoshi:0.16.99/",
+    "inbound": true,
+    "addnode": false,
+    "startingheight": 0,
+    "banscore": 0,
+    "synced_headers": 105,
+    "synced_blocks": 104,
+    "inflight": [
+    ],
+    "whitelisted": false,
+    "bytessent_per_msg": {
+      "block": 6319,
+      "cmpctblock": 5130,
+      "feefilter": 32,
+      "getdata": 61,
+      "getheaders": 285,
+      "headers": 14729,
+      "inv": 3782,
+      "ping": 224,
+      "pong": 224,
+      "sendcmpct": 66,
+      "sendheaders": 24,
+      "verack": 24,
+      "version": 127
+    },
+    "bytesrecv_per_msg": {
+      "cmpctblock": 285,
+      "feefilter": 32,
+      "getaddr": 24,
+      "getdata": 1303,
+      "getheaders": 30584,
+      "headers": 636,
+      "ping": 224,
+      "pong": 224,
+      "sendcmpct": 99,
+      "sendheaders": 24,
+      "verack": 24,
+      "version": 127
+    }
+  }
+]
