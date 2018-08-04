@@ -15,3 +15,11 @@ bitcoin-cli -regtest getreceivedbyaddress  n3RGpxPVvixiebGcjRx4fWCftFhebFrckb
   
 
 然后查看交易信息
+
+
+这里有更详细的命令使用
+https://bitcoin.org/en/developer-examples#testing-applications
+https://bitcoin.org/en/developer-guide#blocks-first
+
+1. 先把单机搞定吧
+2. 多个节点的情况还没发现如何同步节点信息
