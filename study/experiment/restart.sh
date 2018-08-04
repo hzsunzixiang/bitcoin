@@ -6,5 +6,7 @@
 ps aux|grep bitcoind |grep -v grep
 killall bitcoind
 sleep 2
-bitcoind -regtest -daemon -deprecatedrpc=signrawtransaction
+BITCOIND=/home/StephenSun/bitcoin/src/bitcoind
+
+$BITCOIND -regtest -daemon -deprecatedrpc=signrawtransaction
 ps aux|grep bitcoind |grep -v grep
