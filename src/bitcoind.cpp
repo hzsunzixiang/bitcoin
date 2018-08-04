@@ -157,6 +157,7 @@ bool AppInit(int argc, char* argv[])
             // If locking the data directory failed, exit immediately
             return false;
         }
+		// ericksun  http server
         fRet = AppInitMain();
     }
     catch (const std::exception& e) {

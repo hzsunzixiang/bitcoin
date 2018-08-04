@@ -1272,6 +1272,7 @@ bool AppInitMain()
     if (gArgs.GetBoolArg("-server", false))
     {
         uiInterface.InitMessage.connect(SetRPCWarmupStatus);
+		// ericksun  http server
         if (!AppInitServers())
             return InitError(_("Unable to start HTTP server. See debug log for details."));
     }

@@ -1,0 +1,13 @@
+
+
+
+
+(gdb) break CRPCTable::execute                                                                                    
+(gdb) break getwalletinfo  
+
+gdb) p *pcmd
+$13 = {category = "wallet", name = "getwalletinfo", actor = 0x7fee015786e5 <getwalletinfo(JSONRPCRequest const&)>,
+  argNames = std::vector of length 0, capacity 0}
+
+
+
