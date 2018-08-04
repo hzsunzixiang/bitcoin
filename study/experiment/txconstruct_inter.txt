@@ -419,3 +419,182 @@ rt listunspent |grep 2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM
 
 
 # 开始在另外一个节点上操作
+
+
+
+
+# 先确认下， 在第一个节点上生成的交易，已经同步到第二个节点
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt getmempoolinfo
+{
+  "size": 1,
+  "bytes": 166,
+  "usage": 1152,
+  "maxmempool": 300000000,
+  "mempoolminfee": 0.00001000,
+  "minrelaytxfee": 0.00001000
+}
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt getrawmempool true
+{
+  "205e4ab7979a375b88f50fe315c66a99f281703ac041b3455e7bbe08e284d5d0": {
+    "size": 166,
+    "fee": 0.01000000,
+    "modifiedfee": 0.01000000,
+    "time": 1533405194,
+    "height": 102,
+    "descendantcount": 1,
+    "descendantsize": 166,
+    "descendantfees": 1000000,
+    "ancestorcount": 1,
+    "ancestorsize": 166,
+    "ancestorfees": 1000000,
+    "wtxid": "7d4454a65b2793d444ea068fa037aae7324c240e76f406d479875c9ffee6cc34",
+    "depends": [
+    ],
+    "spentby": [
+    ]
+  }
+}
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt getrawmempool 
+[
+  "205e4ab7979a375b88f50fe315c66a99f281703ac041b3455e7bbe08e284d5d0"
+]
+
+# 同样先需要生成一个地址
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt getaddressesbyaccount ""
+[
+]
+# 生成地址 
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt getnewaddress
+2MtkW7AD31Auh9ymGfBnkunUBWnohu2epS2
+
+# 目前没有UTXO
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt listunspent
+[
+]
+# 然后挖矿 
+rt generatetoaddress  1 2MtkW7AD31Auh9ymGfBnkunUBWnohu2epS2
+
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt generatetoaddress  1 2MtkW7AD31Auh9ymGfBnkunUBWnohu2epS2                     [                                               
+  "0da18a6cde9ab54f9a986f756b607e7ef0040d1c3d716a8f46ed970d37e61698"
+]
+
+上面这个返回值是区块的id
+
+
+# 可以发现在第一个节点上已经有了
+
+  发现里面除了本次交易又多了一次交易，因为由于挖矿，使得又获得了一次确认，所以又获取一笔奖励
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt listunspent                 
+[                                                                                                                               
+  {                                                                            
+    "txid": "576510ec6a5ca68d745d66444fa35e2d8228541ac940b04d081f5d25220bae0d",
+    "vout": 0,                                                                 
+    "address": "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ",                          
+    "account": "",                                                             
+    "redeemScript": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3",            
+    "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887",          
+    "amount": 50.00000000,                                                     
+    "confirmations": 102,                                                      
+    "spendable": true,                                                                                                          "solvable": true,                                                                                                           "safe": true
+  },                                                                           
+  {           
+    "txid": "1375e46c51e6f38bb09b2ee6b0f2f856b8bfabf5e62723f23d1fc882b6adab10",
+    "vout": 0,    
+    "address": "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ",
+    "account": "",
+    "redeemScript": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3",
+    "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887",
+    "amount": 50.00000000,
+    "confirmations": 101,
+    "spendable": true,
+    "solvable": true,
+    "safe": true
+  },
+  {
+    "txid": "205e4ab7979a375b88f50fe315c66a99f281703ac041b3455e7bbe08e284d5d0",
+    "vout": 0,
+    "address": "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ",
+    "account": "",
+    "redeemScript": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3",
+    "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887",
+    "amount": 21.49000000,
+    "confirmations": 1,
+    "spendable": true,
+    "solvable": true,
+    "safe": true
+  },
+  {
+    "txid": "205e4ab7979a375b88f50fe315c66a99f281703ac041b3455e7bbe08e284d5d0",
+    "vout": 1,
+    "address": "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM",
+    "account": "",
+    "redeemScript": "0014c1cad5b6368cfba6281a727c295d2ed43954981c",
+    "scriptPubKey": "a91462983ea52b359d304548bf09e4a09f4a4ac7b70087",
+    "amount": 28.50000000,
+    "confirmations": 1,
+    "spendable": true,
+    "solvable": true,
+    "safe": true
+  }
+]
+
+
+# 而且交易已经从交易池中被取出了
+
+
+
+# 但是第二个节点的挖矿需要经过101次确认才能使用
+
+rt gettxout  "205e4ab7979a375b88f50fe315c66a99f281703ac041b3455e7bbe08e284d5d0"
+
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt gettxout  "205e4ab7979a375b88f50fe315c66a99f281703ac041b3455e7bbe08e284d5d0" 0
+{
+  "bestblock": "0da18a6cde9ab54f9a986f756b607e7ef0040d1c3d716a8f46ed970d37e61698",
+  "confirmations": 1,
+  "value": 21.49000000,
+  "scriptPubKey": {
+    "asm": "OP_HASH160 077a414c3d707eaff2718369bad42b26878279c8 OP_EQUAL",
+    "hex": "a914077a414c3d707eaff2718369bad42b26878279c887",
+    "reqSigs": 1,
+    "type": "scripthash",
+    "addresses": [
+      "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
+    ]
+  },
+  "coinbase": false
+}
+
+可以看出才确认一次，还需要确认100次才能花费这笔钱
+
+可以看出金额为 50 + 0.01 符合
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt listunspent
+[
+  {
+    "txid": "6e11006f86a23c6abd55710f71fc603bf606eb28b3d62b924faba64fd6cc007a",
+    "vout": 0,
+    "address": "2MtkW7AD31Auh9ymGfBnkunUBWnohu2epS2",
+    "account": "",
+    "redeemScript": "00142842fc7c76e5791269f0ab7f20fc7a0e35faf2a5",
+    "scriptPubKey": "a9141081a4cd6c2e855d319d83c7bb04f8d8eeca719087",
+    "amount": 50.01000000,
+    "confirmations": 101,
+    "spendable": true,
+    "solvable": true,
+    "safe": true
+  }
+]
+
+# 这个命令列出最新的一个区块
+StephenSun@debian-3:~/bitcoin/study/experiment$ rt getblockchaininfo
+{                      
+  "chain": "regtest",
+  "blocks": 103,
+  "headers": 103,         
+  "bestblockhash": "0da18a6cde9ab54f9a986f756b607e7ef0040d1c3d716a8f46ed970d37e61698",
+  "difficulty": 4.656542373906925e-10,
+  "mediantime": 1533402755,
+  "verificationprogress": 1,
+  "initialblockdownload": false,
+  "chainwork": "00000000000000000000000000000000000000000000000000000000000000d0",
+  "size_on_disk": 31450,
+
