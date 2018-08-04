@@ -65,3 +65,14 @@ StephenSun@debian-1:~/bitcoin/study/experiment$ rt getblockhash 101
 
 发现从第101个开始算起，才是有效的
 之后每挖一次矿 就会有一笔未花费输入
+
+
+
+# 如何获取一个区块中的所有交易
+??? TODO
+
+
+
+
+
+

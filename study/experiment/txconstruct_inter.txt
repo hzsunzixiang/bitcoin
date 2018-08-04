@@ -598,3 +598,14 @@ StephenSun@debian-3:~/bitcoin/study/experiment$ rt getblockchaininfo
   "chainwork": "00000000000000000000000000000000000000000000000000000000000000d0",
   "size_on_disk": 31450,
 
+
+
+
+rt getreceivedbyaddress "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
+rt getreceivedbyaddress  "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"
+
+
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt getreceivedbyaddress "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
+21.49000000
+StephenSun@debian-1:~/bitcoin/study/experiment$ rt getreceivedbyaddress  "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"
+28.50000000
