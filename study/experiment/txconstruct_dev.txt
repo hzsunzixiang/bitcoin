@@ -1,0 +1,192 @@
+
+
+
+
+在办公网络
+
+
+1. 在本机上构建交易
+
+# 生成一个地址
+
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt getnewaddress
+2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt getaddressesbyaccount ""
+[
+	  "2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ"
+]
+
+
+挖矿到特定的地址
+
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt generatetoaddress  1 "2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ"
+
+
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt generatetoaddress  100 "2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ"
+
+
+# 看总额
+rt getbalance
+
+
+rt listunspent 
+找到一笔交易
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt listunspent
+[
+  {
+    "txid": "96f4e08ac83e7d14312b34596aee61eae4401c641747f4dc31997027cc95f7d6",
+    "vout": 0,
+    "address": "2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ",
+    "account": "",
+    "redeemScript": "00141e16ff81c90fe9e42f34da02fe45c185c13e1fc0",
+    "scriptPubKey": "a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87",
+    "amount": 50.00000000,
+    "confirmations": 101,
+    "spendable": true,
+    "solvable": true,
+    "safe": true
+  }
+]
+
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt gettxout 96f4e08ac83e7d14312b34596aee61eae4401c641747f4dc31997027cc95f7d6 0
+{
+  "bestblock": "5176af678d23f53d7a087bf51585c9b37be36bffb2e8b7415f66425e29cb20aa",
+  "confirmations": 101,
+  "value": 50.00000000,
+  "scriptPubKey": {
+    "asm": "OP_HASH160 c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c OP_EQUAL",
+    "hex": "a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87",
+    "reqSigs": 1,
+    "type": "scripthash",
+    "addresses": [
+      "2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ"
+    ]
+  },
+  "coinbase": true
+}
+
+
+
+# 新创建一个地址
+
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt getnewaddress
+2NEj1PfA5YNEP9LqTQp9jGwadEg8hJCb53N
+
+导出私钥
+
+rt dumpprivkey 2NEj1PfA5YNEP9LqTQp9jGwadEg8hJCb53N 
+
+
+
+rt getaddressesbyaccount ""
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt getaddressesbyaccount ""
+[
+  "2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ",
+  "2NEj1PfA5YNEP9LqTQp9jGwadEg8hJCb53N"
+]
+
+
+目前这个地址中没有UTXO
+rt listunspent |grep "2NEj1PfA5YNEP9LqTQp9jGwadEg8hJCb53N" 
+
+# 由上面其中一个交易 "txid": "96f4e08ac83e7d14312b34596aee61eae4401c641747f4dc31997027cc95f7d6",
+构造一个交易
+
+rt createrawtransaction '[{"txid":"96f4e08ac83e7d14312b34596aee61eae4401c641747f4dc31997027cc95f7d6", "vout":0}]' '{"2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ":21.49, "2NEj1PfA5YNEP9LqTQp9jGwadEg8hJCb53N":28.5}'
+
+
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt createrawtransaction '[{"txid":"96f4e08ac83e7d14312b34596aee61eae4401c641747f4dc31997027cc95f7d6", "vout":0}]' '{"2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ":21.49, "2NEj1PfA5YNEP9LqTQp9jGwadEg8hJCb53N":28.5}'
+0200000001d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f4960000000000ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8700000000
+
+
+
+rt decoderawtransaction 0200000001d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f4960000000000ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8700000000
+
+
+此时还没有签名 
+
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt decoderawtransaction 0200000001d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f4960000000000ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8700000000
+
+
+
+# 开始签名
+#rt signrawtransaction 0200000001d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f4960000000000ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8700000000
+
+
+# 导出私钥
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt dumpprivkey "2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ"
+cQbrUqYtYNhS6LgPD2GQejbj2Yd4sfhD4K9GBJSkk5RZRhBMZBcY
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt dumpprivkey "2NEj1PfA5YNEP9LqTQp9jGwadEg8hJCb53N"
+cPHNFoVc5gP2CjFwA9nPh2Ghbdam59LxZRuLbjFunEXHqmn65ShJ
+
+rt signrawtransactionwithkey 0200000001d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f4960000000000ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8700000000 '["cQbrUqYtYNhS6LgPD2GQejbj2Yd4sfhD4K9GBJSkk5RZRhBMZBcY","cPHNFoVc5gP2CjFwA9nPh2Ghbdam59LxZRuLbjFunEXHqmn65ShJ"]'
+
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt signrawtransactionwithkey 0200000001d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f4960000000000ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8700000000 '["cQbrUqYtYNhS6LgPD2GQejbj2Yd4s
+fhD4K9GBJSkk5RZRhBMZBcY","cPHNFoVc5gP2CjFwA9nPh2Ghbdam59LxZRuLbjFunEXHqmn65ShJ"]'
+{
+  "hex": "02000000000101d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f49600000000171600141e16ff81c90fe9e42f34da02fe45c185c13e1fc0ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8702483045022100c01e80253278ef9ae78b24bab6948e03df643976a5fb7ee77c2bf046f5fe126002202d9c01ce30bfadfe5c37c883edd3fbb9c70a455d0761efa24b369252547212d90121037b76dd1add02de56c2dff8032907218481f61ba9e9f8ee90127d0801ed93d65900000000",
+  "complete": true
+}
+
+
+
+# 研究这里
+ericksun@192.168.56.101:~/bitcoin/study/experiment$ rt signrawtransaction 0200000001d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f4960000000000ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8700000000
+{
+  "hex": "02000000000101d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f49600000000171600141e16ff81c90fe9e42f34da02fe45c185c13e1fc0ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8702483045022100c01e80253278ef9ae78b24bab6948e03df643976a5fb7ee77c2bf046f5fe126002202d9c01ce30bfadfe5c37c883edd3fbb9c70a455d0761efa24b369252547212d90121037b76dd1add02de56c2dff8032907218481f61ba9e9f8ee90127d0801ed93d65900000000",
+  "complete": true
+}
+
+
+rt decoderawtransaction "02000000000101d6f795cc27709931dcf44717641c40e4ea61ee6a59342b31147d3ec88ae0f49600000000171600141e16ff81c90fe9e42f34da02fe45c185c13e1fc0ffffffff02402317800000000017a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87808cdfa90000000017a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc8702483045022100c01e80253278ef9ae78b24bab6948e03df643976a5fb7ee77c2bf046f5fe126002202d9c01ce30bfadfe5c37c883edd3fbb9c70a455d0761efa24b369252547212d90121037b76dd1add02de56c2dff8032907218481f61ba9e9f8ee90127d0801ed93d65900000000"
+{
+  "txid": "7e0304f640787d3bfdb716dee833b4cd6de834f535841f239f607fd42f5a4b71",
+  "hash": "9990ab08f489488e2116e95595b4365141654cf454caf005f891b3be76afa739",
+  "version": 2,
+  "size": 248,
+  "vsize": 166,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "96f4e08ac83e7d14312b34596aee61eae4401c641747f4dc31997027cc95f7d6",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "00141e16ff81c90fe9e42f34da02fe45c185c13e1fc0",
+        "hex": "1600141e16ff81c90fe9e42f34da02fe45c185c13e1fc0"
+      },
+      "txinwitness": [
+        "3045022100c01e80253278ef9ae78b24bab6948e03df643976a5fb7ee77c2bf046f5fe126002202d9c01ce30bfadfe5c37c883edd3fbb9c70a455d0761efa24b369252547212d901",
+        "037b76dd1add02de56c2dff8032907218481f61ba9e9f8ee90127d0801ed93d659"
+      ],
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 21.49000000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_HASH160 c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c OP_EQUAL",
+        "hex": "a914c96ce6a7069a6cd7d8856f5f06a4c0eb7bd3f71c87",
+        "reqSigs": 1,
+        "type": "scripthash",
+        "addresses": [
+          "2NBcGGR2RW5FHdXEM1vW3ep6uBsQaUg9YpJ"
+        ]
+      }
+    },
+    {
+      "value": 28.50000000,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "OP_HASH160 eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc OP_EQUAL",
+        "hex": "a914eb9bc5e04faf1ccd081c1ec82baaeef06fb2e2bc87",
+        "reqSigs": 1,
+        "type": "scripthash",
+        "addresses": [
+          "2NEj1PfA5YNEP9LqTQp9jGwadEg8hJCb53N"
+        ]
+      }
+    }
+  ]
+}
