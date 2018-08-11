@@ -12,56 +12,17 @@ rt getblockhash 10
 
 如何由仅有的交易id 获取到其所在区块
 StephenSun@debian-1:~/bitcoin/study/experiment$ rt listunspent
-[
-  {
-    "txid": "e1c667727f98ba8c66c0dc9dc0d453720d71904103bd37d7fa702969689233ef",
-    "vout": 0,
-    "address": "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ",
-    "account": "",
-    "redeemScript": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3",
-    "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887",
-    "amount": 50.00000000,
-    "confirmations": 101,
-    "spendable": true,
-    "solvable": true,
-    "safe": true
-  }
-]
 StephenSun@debian-1:~/bitcoin/study/experiment$ rt gettxout e1c667727f98ba8c66c0dc9dc0d453720d71904103bd37d7fa702969689233ef 0
-{
-  "bestblock": "7d50026ee993304df95d968a622f34bba98e5b5bbb615808c26299f76b3def09",
-  "confirmations": 101,
-  "value": 50.00000000,
-  "scriptPubKey": {
-    "asm": "OP_HASH160 077a414c3d707eaff2718369bad42b26878279c8 OP_EQUAL",
-    "hex": "a914077a414c3d707eaff2718369bad42b26878279c887",
-    "reqSigs": 1,
-    "type": "scripthash",
-    "addresses": [
-      "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
-    ]
-  },
-  "coinbase": true
-}
+
 
 StephenSun@debian-1:~/bitcoin/study/experiment$ rt getblockheader 7d50026ee993304df95d968a622f34bba98e5b5bbb615808c26299f76b3def09
-{
-  "hash": "7d50026ee993304df95d968a622f34bba98e5b5bbb615808c26299f76b3def09",
-  "confirmations": 1,
-  "height": 101,
-  "version": 536870912,
-  "versionHex": "20000000",
-  "merkleroot": "61d170a4545a55dfdca86828dcf0fc525193aadb6f3559f954f2c1c28280be8d",
-  "time": 1533402780,
-  "mediantime": 1533402754,
-  "nonce": 0,
-  "bits": "207fffff",
-  "difficulty": 4.656542373906925e-10,
-  "chainwork": "00000000000000000000000000000000000000000000000000000000000000cc",
-  "previousblockhash": "248bd12f13f863efe944ab5744be7bc4bf62f4c391bad06a1df7cd1c1e0b8406"
-}
+
 StephenSun@debian-1:~/bitcoin/study/experiment$ rt getblockhash 101
 7d50026ee993304df95d968a622f34bba98e5b5bbb615808c26299f76b3def09
+
+
+挖矿到特定的地址
+rt generatetoaddress  100 2MuorQcfYgoMzUU97UprkhzCMauGkvRq62C
 
 发现从第101个开始算起，才是有效的
 之后每挖一次矿 就会有一笔未花费输入
