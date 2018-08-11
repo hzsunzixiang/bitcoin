@@ -1,0 +1,34 @@
+Detailed example
+
+Consider this transaction:
+
+0100000000010115e180dc28a2327e687facc33f10f2a20da717e5548406f7ae8b4c8
+11072f85603000000171600141d7cd6c75c2e86f4cbf98eaed221b30bd9a0b928ffff
+ffff019caef505000000001976a9141d7cd6c75c2e86f4cbf98eaed221b30bd9a0b92
+888ac02483045022100f764287d3e99b1474da9bec7f7ed236d6c81e793b20c4b5aa1
+f3051b9a7daa63022016a198031d5554dbb855bdbe8534776a4be6958bd8d530dc001
+c32b828f6f0ab0121038262a6c6cec93c2d3ecd6c6072efea86d02ff8e3328bbd0242
+b20af3425990ac00000000
+
+Data 	Description 	Raw byte count 	Type (multiplier) 	Section total weight 	Running total weight
+01000000 	Version 1 	4 	Non-witness (4x) 	16 	16
+00 	SegWit marker 	1 	Witness (1x) 	1 	17
+01 	SegWit flag 	1 	Witness (1x) 	1 	18
+01 	Number of inputs (1) 	1 	Non-witness (4x) 	4 	22
+15..56 	Previous output hash 	32 	Non-witness (4x) 	128 	150
+03000000 	Previous output index (3) 	4 	Non-witness (4x) 	16 	166
+17 	Script length (23 bytes) 	1 	Non-witness (4x) 	4 	170
+16..28 	Script: P2SH-enclosed P2WPKH witness program 	23 	Non-witness (4x) 	92 	262
+ffffffff 	Sequence 	4 	Non-witness (4x) 	16 	278
+01 	Output count (1) 	1 	Non-witness (4x) 	4 	282
+9caef50500000000 	Output value (0.99987100 BTC) 	8 	Non-witness (4x) 	32 	314
+19 	Output script size (25) 	1 	Non-witness (4x) 	4 	318
+76..ac 	Script: DUP HASH160 0x1d7c... EQUALVERIFY CHECKSIG 	25 	Non-witness (4x) 	100 	418
+02 	Number of stack items for input 0 (2) 	1 	Witness (1x) 	1 	419
+48 	Size of stack item 0 (72) 	1 	Witness (1x) 	1 	420
+304...ab01 	Stack item 0, signature 	72 	Witness (1x) 	72 	492
+21 	Size of stack item 1 (33) 	1 	Witness (1x) 	1 	493
+03..ac 	Stack item 1, pubkey 	33 	Witness (1x) 	33 	526
+00000000 	Locktime (0) 	4 	Non-witness (4x) 	16 	542
+
+The transaction's real size on disk and over the network is 218 bytes, which is the size in bytes of the whole transaction expressed above in hexadecimal. The weight is always greater than the real size, in this case 542 weight units. The size in vbytes would be 135.5. 
