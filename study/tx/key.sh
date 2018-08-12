@@ -230,6 +230,7 @@ a914077a414c3d707eaff2718369bad42b26878279c887
 17 # 0x17 = 23
 a91462983ea52b359d304548bf09e4a09f4a4ac7b70087
 02  # 从这里开始涉及 txinwitness  这里的02 Number of stack items for input 0 (2) 	#https://en.bitcoin.it/wiki/Weight_units
+   # scriptWitness.stack 部分
 48   # 0x48 = 72
 3045022100cacee8914755740fc1d347ba2188b8f951daf5f9a5f6f1ed2d47a015cffead37022066511fefcd546494bc8d068cc879a70b62c8e2745bf272ea071eaa1085ab879e01   # 签名 我猜测这个签名和之前的区别是：之前是把签名放在中间，现在放在结尾
 21   # 0x21 = 33
