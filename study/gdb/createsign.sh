@@ -139,6 +139,7 @@ StephenSun@debian-1:~/bitcoin/study/gdb$ rt signrawtransaction 0200000002ab07113
 
 
 
+# 由公钥得到公钥hash 进而组合成 0014+pubkeyhash, 再进行hash 然后组合成scriptPubKey a914 + hash160(0014+pubkeyhash) + 87
 # https://bitcoin.stackexchange.com/questions/32628/redeeming-a-raw-transaction-step-by-step-example-required
 # http://www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html
 02000000  # 版本
@@ -177,7 +178,45 @@ a91462983ea52b359d304548bf09e4a09f4a4ac7b70087 # scriptPubKey
 48   # 0x48 = 72
 30450221009e681830a1169d6e3e83a6a8e5dcfbd9e7249a551b23258d25c6bfe7664b1dac02201701a6f64a379e3c8bc2cc9a231cd72560414bbdf69e2be506feea3eb2a7eeaf01
 21   # 0x21 = 33
-02a65db2e280e40f8e546146d1f863aa74f18ed577b5cea330c39712e50604087900000000
+02a65db2e280e40f8e546146d1f863aa74f18ed577b5cea330c39712e506040879
+00000000
 
 
+#
 
+
+# 下面的描述
+
+# 证明 可以兼容之前的版本
+
+# vin 中提供的数据正好可以验证 vout 中的数据, 也就是用vout中的脚本执行
+# 跟之前版本效果一样
+# 之前版本 是在vin中提供公钥和签名，验证 vout 中的脚本， hash然后验证签名
+
+
+# 由公钥得到公钥hash 进而组合成 0014+pubkeyhash, 再进行hash 然后组合成scriptPubKey a914 + hash160(0014+pubkeyhash) + 87
+
+  "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887", # 对应输出的 "scriptPubKey"
+
+ #对应含义
+  "asm": "OP_HASH160 077a414c3d707eaff2718369bad42b26878279c8 OP_EQUAL",
+
+        # 这个体现在 vout 中
+        # 这个 scriptPubKey 的生成方式 
+        # 在非 sigwit的交易中 这个 脚本中其实就是 公钥的hash
+        #"asm": "OP_HASH160 077a414c3d707eaff2718369bad42b26878279c8 OP_EQUAL",
+        #"hex": "a914077a414c3d707eaff2718369bad42b26878279c887",
+        # https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki
+        # 这里有描述 但是没有得知如何计算出的这个
+        # 恍然大悟 原来 077a414c3d707eaff2718369bad42b26878279c8 是对 下面的hex 也就是 0014+pubkeyhash 又做了一次hash
+        # 0014682f951f473c437f4489af026e5bfb1d1ed22aa3 也就是 
+        # StephenSun@debian-1:~/bitcoin/study/gdb$ printf   0014682f951f473c437f4489af026e5bfb1d1ed22aa3 | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+        # (stdin)= 077a414c3d707eaff2718369bad42b26878279c8
+        # 由 hex 到 scriptPubKey 是单向的， 所以 在输入中提供的hex， 可以验证之前的上一个输出
+
+  "hex": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3",  # (0x0014{20-byte-key-hash}) 0x0014 加上对公钥的hash
+        # 这个体现在 vin 中
+        # 公钥hash的生成方式 已经清楚
+        #StephenSun@debian-1:~/bitcoin/study/gdb$ printf  "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+        #(stdin)= 682f951f473c437f4489af026e5bfb1d1ed22aa3
+  "pubkey": "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf",
