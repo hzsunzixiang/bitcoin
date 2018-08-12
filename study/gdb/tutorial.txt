@@ -1,0 +1,38 @@
+
+
+
+https://stackoverflow.com/questions/233328/how-do-i-print-the-full-value-of-a-long-string-in-gdb
+How do I print the full value of a long string in gdb?
+
+(gdb) p request.params[0].val
+$9 = "0200000002ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000000ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000000ffffffff02808895ed0000000017a91407"...
+(gdb) printf "%s\n", request.params[0].val.c_str()
+0200000002ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000000ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000000ffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000
+
+
+
+set print elements 0
+From the GDB manual:
+
+set print elements number-of-elements
+Set a limit on how many elements of an array GDB will print. If GDB is printing a large array, it stops printing after it has printed the number of elements set by the set print elements command. This limit also applies to the display of strings. When GDB starts, this limit is set to 200. Setting number-of-elements to zero means that the printing is unlimited.
+
+https://ftp.gnu.org/old-gnu/Manuals/gdb-5.1.1/html_node/gdb_57.html#IDX353
+
+
+(gdb) show print elements
+Limit on string chars or array elements to print is 200.
+(gdb) set print elements 0
+(gdb) show print elements
+Limit on string chars or array elements to print is unlimited.
+(gdb) p request.params[0].val
+$10 = "0200000002ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000000ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000000ffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000"
+
+
+
+
+As long as your program's in a sane state, you can also call (void)puts(your_string) to print it to stdout. Same principle applies to all functions available to the debugger, actually.
+
+
+
+

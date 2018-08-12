@@ -297,6 +297,8 @@ printf  "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf" | x
 StephenSun@debian-1:~/bitcoin/study/gdb$ printf  "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
 (stdin)= 682f951f473c437f4489af026e5bfb1d1ed22aa3
 
+StephenSun@debian-1:~/bitcoin/study/gdb$ printf   0014682f951f473c437f4489af026e5bfb1d1ed22aa3 | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+(stdin)= 077a414c3d707eaff2718369bad42b26878279c8
 ---------------------------------------------------------------------------------
 P2WPKH
 

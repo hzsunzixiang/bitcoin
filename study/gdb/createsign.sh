@@ -127,6 +127,33 @@ rt createrawtransaction '[{"txid":"bd6be095a9a0a1a209328eba755365f642f92b24fa5ad
 StephenSun@debian-1:~/bitcoin/study/gdb$ rt createrawtransaction '[{"txid":"bd6be095a9a0a1a209328eba755365f642f92b24fa5ad39a2a8adb39371107ab", "vout":0}, {"txid":"bd6be095a9a0a1a209328eba755365f642f92b24fa5ad39a2a8adb39371107ab", "vout":1}]' '{"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ":39.86, "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM":10.11}'
 0200000002ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000000ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000000ffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000
 
+# 分解这个二进制
+02000000     #四字节版本号version
+02 #一个字节的输入个数
+ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd
+
+00000000   # 四字节 指定输出的index
+00  # scriptSig 注意 这里我猜测是暂时置空了 指定其长度为0 可以decode验证的
+ffffffff #  scriptSig 的 nSequence 
+#还有个输入
+ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd
+01000000
+00  # scriptSig
+ffffffff # scriptSig Then we write a four-byte field denoting the sequence. This is currently always set to 0xffffffff: ffffffff
+# 开始输出
+02 # Next comes a one-byte varint containing the number of outputs in our new transaction.  2 in this example: 02 
+808895ed00000000 # We then write an 8-byte field (64 bit integer, little-endian) containing the amount we want to redeem from the specified output   2149000000   0x80172340
+17 # Then we start writing our transaction's output. We start with a one-byte varint denoting the length of the output script (0x17 or 23 bytes): 17 
+a914077a414c3d707eaff2718369bad42b26878279c887  # 对应输出的 "scriptPubKey"
+                                                #意思是"OP_HASH160 077a414c3d707eaff2718369bad42b26878279c8 OP_EQUAL",
+c0a2423c00000000
+17
+a91462983ea52b359d304548bf09e4a09f4a4ac7b70087 # 对应输出的 "scriptPubKey"
+                                                #意思是"OP_HASH160 62983ea52b359d304548bf09e4a09f4a4ac7b700 OP_EQUAL",
+00000000 # Then we write the four-byte "lock time" field: 00000000
+
+
+
 StephenSun@debian-1:~/bitcoin/study/gdb$ rt signrawtransaction 0200000002ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000000ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000000ffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000
 {
 	  "hex": "02000000000102ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000017160014682f951f473c437f4489af026e5bfb1d1ed22aa3ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000017160014c1cad5b6368cfba6281a727c295d2ed43954981cffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b700870247304402203e21c46e702779be870e847da60da523a2f7dbbdc0f73155907bf596be76ad4602204cd0eb152be5904f1232e5b22a071d64bdd4bb19572e03c6aaab67f8deb35106012102b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf024830450221009e681830a1169d6e3e83a6a8e5dcfbd9e7249a551b23258d25c6bfe7664b1dac02201701a6f64a379e3c8bc2cc9a231cd72560414bbdf69e2be506feea3eb2a7eeaf012102a65db2e280e40f8e546146d1f863aa74f18ed577b5cea330c39712e50604087900000000",
@@ -143,8 +170,8 @@ StephenSun@debian-1:~/bitcoin/study/gdb$ rt signrawtransaction 0200000002ab07113
 # https://bitcoin.stackexchange.com/questions/32628/redeeming-a-raw-transaction-step-by-step-example-required
 # http://www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html
 02000000  # 版本
-0001  # If present, always 0001, and indicates the presence of witness data 
-     #https://en.bitcoin.it/wiki/Protocol_documentation#tx
+0001  # If present, always 0001, and indicates the presence of witness data  未签名之前没有个这个字段
+     #https://en.bitcoin.it/wiki/Protocol_documentation#tx  
 02   # Number of Transaction inputs (never zero) 
 ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd # 32字节的hash逆序
 00000000  #Four-byte field denoting the output index we want to redeem from the transaction with the above hash (counting from zero): 00000000
@@ -220,3 +247,34 @@ a91462983ea52b359d304548bf09e4a09f4a4ac7b70087 # scriptPubKey
         #StephenSun@debian-1:~/bitcoin/study/gdb$ printf  "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
         #(stdin)= 682f951f473c437f4489af026e5bfb1d1ed22aa3
   "pubkey": "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf",
+
+
+
+
+
+
+StephenSun@debian-1:~/bitcoin/study/gdb$ rt sendrawtransaction 02000000000102ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000017160014682f951f473c437f4489af026e5bfb1d1ed22aa3ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000017160014c1cad5b6368cfba6281a727c295d2ed43954981cffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b700870247304402203e21c46e702779be870e847da60da523a2f7dbbdc0f73155907bf596be76ad4602204cd0eb152be5904f1232e5b22a071d64bdd4bb19572e03c6aaab67f8deb35106012102b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf024830450221009e681830a1169d6e3e83a6a8e5dcfbd9e7249a551b23258d25c6bfe7664b1dac02201701a6f64a379e3c8bc2cc9a231cd72560414bbdf69e2be506feea3eb2a7eeaf012102a65db2e280e40f8e546146d1f863aa74f18ed577b5cea330c39712e50604087900000000
+2a16bc4d3ce5bcbda8a77ec420e453b8a3c3ae49cc44e384e89d95e1d222c8f3
+
+
+# 发现这样不对
+StephenSun@debian-1:~/bitcoin/study/gdb$ printf 02000000000102ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000017160014682f951f473c437f4489af026e5bfb1d1ed22aa3ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000017160014c1cad5b6368cfba6281a727c295d2ed43954981cffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b700870247304402203e21c46e702779be870e847da60da523a2f7dbbdc0f73155907bf596be76ad4602204cd0eb152be5904f1232e5b22a071d64bdd4bb19572e03c6aaab67f8deb35106012102b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf024830450221009e681830a1169d6e3e83a6a8e5dcfbd9e7249a551b23258d25c6bfe7664b1dac02201701a6f64a379e3c8bc2cc9a231cd72560414bbdf69e2be506feea3eb2a7eeaf012102a65db2e280e40f8e546146d1f863aa74f18ed577b5cea330c39712e50604087900000000 | xxd -r -p |sha256sum -b |xxd -r -p |sha256sum
+470eb908b5ad451ef495d781ca8b2a2579906e80e948ef3dd887afa2a69cf282  -
+
+# 把witness去掉 这样也不对
+StephenSun@debian-1:~/bitcoin/study/gdb$ printf 02000000000102ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000017160014682f951f473c437f4489af026e5bfb1d1ed22aa3ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000017160014c1cad5b6368cfba6281a727c295d2ed43954981cffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000 | xxd -r -p |sha256sum -b |xxd -r -p |sha256sum
+
+# 对比源码 witness去掉之后， 还要去掉 0001 这两个字节
+# transaction.h
+#template<typename Stream, typename TxType>
+#inline void SerializeTransaction(const TxType& tx, Stream& s) {
+#    const bool fAllowWitness = !(s.GetVersion() & SERIALIZE_TRANSACTION_NO_WITNESS);
+# 这样就对了 完美
+StephenSun@debian-1:~/bitcoin/study/gdb$ printf 0200000002ab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0000000017160014682f951f473c437f4489af026e5bfb1d1ed22aa3ffffffffab07113739db8a2a9ad35afa242bf942f6655375ba8e3209a2a1a0a995e06bbd0100000017160014c1cad5b6368cfba6281a727c295d2ed43954981cffffffff02808895ed0000000017a914077a414c3d707eaff2718369bad42b26878279c887c0a2423c0000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000 | xxd -r -p |sha256sum -b |xxd -r -p |sha256sum
+f3c822d2e1959de884e344cc49aec3a3b853e420c47ea7a8bdbce53c4dbc162a  -
+正好是 上面hash值的逆序
+2a16bc4d3ce5bcbda8a77ec420e453b8a3c3ae49cc44e384e89d95e1d222c8f3
+
+
+
+

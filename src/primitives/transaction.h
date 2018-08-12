@@ -227,7 +227,7 @@ inline void UnserializeTransaction(TxType& tx, Stream& s) {
     }
     s >> tx.nLockTime;
 }
-
+// ericksun  这里是真正序列化的地方， 验证了 隔离见证的序列化 生成txid
 template<typename Stream, typename TxType>
 inline void SerializeTransaction(const TxType& tx, Stream& s) {
     const bool fAllowWitness = !(s.GetVersion() & SERIALIZE_TRANSACTION_NO_WITNESS);
@@ -330,6 +330,7 @@ public:
      */
     unsigned int GetTotalSize() const;
 
+	// ericksun 根据 是否有输出来判断是否coinbase
     bool IsCoinBase() const
     {
         return (vin.size() == 1 && vin[0].prevout.IsNull());

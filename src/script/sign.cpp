@@ -137,7 +137,7 @@ static CScript PushAll(const std::vector<valtype>& values)
     }
     return result;
 }
-
+// ericksun fromPubKey 指的是 scriptPubKey
 bool ProduceSignature(const BaseSignatureCreator& creator, const CScript& fromPubKey, SignatureData& sigdata)
 {
     std::vector<valtype> result;
@@ -181,7 +181,7 @@ bool ProduceSignature(const BaseSignatureCreator& creator, const CScript& fromPu
     }
     sigdata.scriptSig = PushAll(result);
 
-    // Test solution
+    // Test solution  ericksun 此时 sigdata.scriptWitness 的值已经有了
     return solved && VerifyScript(sigdata.scriptSig, fromPubKey, &sigdata.scriptWitness, STANDARD_SCRIPT_VERIFY_FLAGS, creator.Checker());
 }
 
