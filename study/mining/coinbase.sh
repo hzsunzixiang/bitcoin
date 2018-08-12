@@ -8,7 +8,7 @@ StephenSun@debian-1:~/bitcoin/study/mining$ rt getblock 27898e4976170fa6de941177
   "confirmations": 101,                                                                                                         
   "strippedsize": 216,                                                                                                          
   "size": 252,                                                                                                                  
-  "weight": 900,                                                                  
+  "weight": 900,   ## 这里的weight就是空间单位                                                                 
   "height": 861,                                                                                                              
   "version": 536870912,                                                                                                         
   "versionHex": "20000000",                                                                                                     
@@ -136,7 +136,10 @@ rt decoderawtransaction "0200000000010100000000000000000000000000000000000000000
 ffffffff # sequence
 
 05 #Now comes the scriptSig. 对coinbase来说 这个可能是一个随机值 或者区块信息? TODO
-025d030101
+025d030101  # 这里再次拆开 5d03 小端字节 0x035d = 861 也就是 height高度
+            # 02 5d03 0101  
+            #https://github.com/bitcoin/bips/blob/master/bip-0034.mediawiki
+            #Add height as the first item in the coinbase transaction's scriptSig, and increase block version to 2. The format of the height is "serialized CScript" -- first byte is number of bytes in the number (will be 0x03 on main net for the next 150 or so years with 2^23-1 blocks), following bytes are little-endian representation of the number (including a sign bit). Height is the height of the mined block in the block chain, where the genesis block is height zero (0).
 ffffffff
 
 02 # output count
