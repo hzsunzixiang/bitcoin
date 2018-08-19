@@ -18,3 +18,9 @@ break generateBlocks
 # mining.cpp  在这里写入  hashMerkleRoot
 #        IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
 
+
+
+break IncrementExtraNonce
+
+
+break BlockMerkleRoot
