@@ -109,6 +109,9 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressinfo 2N2EYbEMbZyr1zy7GAghRK
 
 总结一下
 地址 及对应的公钥
+对应私钥 
+ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
+
   "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
 {
    # 编码 base58(c4 + 077a414c3d707eaff2718369bad42b26878279c8 + a76c6897) - > 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
@@ -121,9 +124,34 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressinfo 2N2EYbEMbZyr1zy7GAghRK
    # printf  "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
    #(stdin)= 682f951f473c437f4489af026e5bfb1d1ed22aa3
   "hex": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3",                          
-   # 公钥
+   # 公钥 前缀为 02 
   "pubkey": "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf", 
+       # 对应私钥这个需要解密的 ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
+  #priv = 0xea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
+  # 符合 这个点为
+  #result: ('0xb9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94dafL', '0x473a9dbea3fb3ebcb43797a9583c634fd205c7d87469b0e4f2a5d3f6a794f424L')
 }
+
+# TODO 没搞清楚
+          data = {0x68, 0x2f, 0x95, 0x1f, 0x47, 0x3c, 0x43, 0x7f, 0x44, 0x89, 0xaf, 0x2, 0x6e, 0x5b, 0xfb, 0x1d, 0x1e, 0xd2,
+            0x2a, 0xa3}       
+        }, <No data fields>}, <No data fields>}] = {
+      static PRIVATE_KEY_SIZE = 0x117,              
+      static COMPRESSED_PRIVATE_KEY_SIZE = 0xd6,            
+      fValid = 0x1,  
+      fCompressed = 0x1,
+      keydata = std::vector of length 32, capacity 32 = {0xea, 0x62, 0x8a, 0xe2, 0x4b, 0xa, 0x68, 0x52, 0xfc, 0x55, 0xf8,    
+        0xa4, 0xb, 0xf0, 0x7f, 0xa9, 0xa9, 0xe3, 0xbe, 0x78, 0xd7, 0x63, 0x59, 0x67, 0x1f, 0x2c, 0x4a, 0xa2, 0xe6, 0x95, 0xca,
+        0x20}
+
+ data = {0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82,
+            0x79, 0xc8}
+        }, <No data fields>}, <No data fields>}] = {
+      <prevector<28u, unsigned char, unsigned int, int>> = {
+        _size = 0x16,
+        _union = {
+          direct = {0x0, 0x14, 0x68, 0x2f, 0x95, 0x1f, 0x47, 0x3c, 0x43, 0x7f, 0x44, 0x89, 0xaf, 0x2, 0x6e, 0x5b, 0xfb, 0x1d,
+            0x1e, 0xd2, 0x2a, 0xa3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
   "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"
 {
   "address": "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM",
