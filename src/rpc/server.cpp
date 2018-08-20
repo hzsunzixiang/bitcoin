@@ -117,6 +117,7 @@ CAmount AmountFromValue(const UniValue& value)
 
 uint256 ParseHashV(const UniValue& v, std::string strName)
 {
+	// ericksun 校验txid 的正确性也就是hash的正确性
     std::string strHex;
     if (v.isStr())
         strHex = v.get_str();
@@ -492,6 +493,7 @@ UniValue CRPCTable::execute(const JSONRPCRequest &request) const
         if (request.params.isObject()) {
             return pcmd->actor(transformNamedArguments(request, pcmd->argNames));
         } else {
+			// ericksun 这里返回 命令的返回值 返回给 static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
             return pcmd->actor(request);
         }
     }

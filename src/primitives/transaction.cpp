@@ -43,6 +43,7 @@ std::string CTxIn::ToString() const
     return str;
 }
 
+// erick 金额和scriptPubKey 初始化 CTxOut
 CTxOut::CTxOut(const CAmount& nValueIn, CScript scriptPubKeyIn)
 {
     nValue = nValueIn;

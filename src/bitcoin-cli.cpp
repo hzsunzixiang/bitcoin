@@ -432,6 +432,7 @@ int CommandLineRPC(int argc, char *argv[])
                 const UniValue reply = CallRPC(rh.get(), method, args);
 
                 // Parse reply
+				// erick  取出 result 正确情况下不需要error信息
                 const UniValue& result = find_value(reply, "result");
                 const UniValue& error  = find_value(reply, "error");
 
@@ -456,7 +457,7 @@ int CommandLineRPC(int argc, char *argv[])
                         }
                     }
                 } else {
-                    // Result
+                    // Result  erick 只返回result部分
                     if (result.isNull())
                         strPrint = "";
                     else if (result.isStr())

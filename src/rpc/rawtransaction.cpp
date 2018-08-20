@@ -371,17 +371,22 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         UniValue::VBOOL
         }, true
     );
+
+	// erick 第0个参数表示输入，是个数组； 第一个参数 表示输出是个object
     if (request.params[0].isNull() || request.params[1].isNull())
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, arguments 1 and 2 must be non-null");
 
+	// erick inuputs 是个array
     UniValue inputs = request.params[0].get_array();
     const bool outputs_is_obj = request.params[1].isObject();
     UniValue outputs = outputs_is_obj ?
                            request.params[1].get_obj() :
                            request.params[1].get_array();
 
+	//erick 这个交易是可变的,后续会move到其他ojb中
     CMutableTransaction rawTx;
 
+	// erick 这个可选参数
     if (!request.params[2].isNull()) {
         int64_t nLockTime = request.params[2].get_int64();
         if (nLockTime < 0 || nLockTime > std::numeric_limits<uint32_t>::max())
@@ -389,14 +394,18 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         rawTx.nLockTime = nLockTime;
     }
 
+	// ericksun 可选参数
     bool rbfOptIn = request.params[3].isTrue();
 
+	// erick 处理inputs的数组
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
         const UniValue& input = inputs[idx];
         const UniValue& o = input.get_obj();
 
+		//erick 找到 txid 放入到 uint256 中 这里已经是逆序
         uint256 txid = ParseHashO(o, "txid");
 
+		// ericksun 找到vout
         const UniValue& vout_v = find_value(o, "vout");
         if (!vout_v.isNum())
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing vout key");
@@ -410,6 +419,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         } else if (rawTx.nLockTime) {
             nSequence = std::numeric_limits<uint32_t>::max() - 1;
         } else {
+			// 如果没有设置 默认为 0xffffffff
             nSequence = std::numeric_limits<uint32_t>::max();
         }
 
@@ -424,6 +434,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             }
         }
 
+		//erick 重点来了 此时 CScript 的值为空，也就是0
         CTxIn in(COutPoint(txid, nOutput), CScript(), nSequence);
 
         rawTx.vin.push_back(in);
@@ -445,6 +456,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         }
         outputs = std::move(outputs_dict);
     }
+    // erick 这是一个字符串vector
     for (const std::string& name_ : outputs.getKeys()) {
         if (name_ == "data") {
             std::vector<unsigned char> data = ParseHexV(outputs[name_].getValStr(), "Data");
@@ -452,6 +464,8 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             CTxOut out(0, CScript() << OP_RETURN << data);
             rawTx.vout.push_back(out);
         } else {
+            // erick 这里解析出的地址是: rmd160 存放在destination 中 
+           //typedef boost::variant<CNoDestination, CKeyID, CScriptID, WitnessV0ScriptHash, WitnessV0KeyHash, WitnessUnknown> CTxDestination;
             CTxDestination destination = DecodeDestination(name_);
             if (!IsValidDestination(destination)) {
                 throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Bitcoin address: ") + name_);
@@ -461,7 +475,10 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
                 throw JSONRPCError(RPC_INVALID_PARAMETER, std::string("Invalid parameter, duplicated address: ") + name_);
             }
 
+            // ericksun 此时得到了 scriptPubKey : *script << OP_HASH160 << ToByteVector(scriptID) << OP_EQUAL;
+            // 例如 a9 14 077a414c3d707eaff2718369bad42b26878279c8 87
             CScript scriptPubKey = GetScriptForDestination(destination);
+            // 获取到整数金额
             CAmount nAmount = AmountFromValue(outputs[name_]);
 
             CTxOut out(nAmount, scriptPubKey);
@@ -473,6 +490,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter combination: Sequence number(s) contradict replaceable option");
     }
 
+    // 最后序列化这个交易
     return EncodeHexTx(rawTx);
 }
 

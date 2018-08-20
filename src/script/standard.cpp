@@ -288,7 +288,7 @@ public:
     }
 
     bool operator()(const CScriptID &scriptID) const {
-        script->clear();
+        script->clear();   // OP_HASH160 = 0xa9, OP_EQUAL = 0x87,
         *script << OP_HASH160 << ToByteVector(scriptID) << OP_EQUAL;
         return true;
     }
@@ -320,6 +320,7 @@ CScript GetScriptForDestination(const CTxDestination& dest)
 {
     CScript script;
 
+    // bool operator()(const CScriptID &scriptID) const 
     boost::apply_visitor(CScriptVisitor(&script), dest);
     return script;
 }

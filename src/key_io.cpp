@@ -87,6 +87,7 @@ CTxDestination DecodeDestination(const std::string& str, const CChainParams& par
         // The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script.
         const std::vector<unsigned char>& script_prefix = params.Base58Prefix(CChainParams::SCRIPT_ADDRESS);
         if (data.size() == hash.size() + script_prefix.size() && std::equal(script_prefix.begin(), script_prefix.end(), data.begin())) {
+            // erick 对于 regtest 去除前面的 0xc4=196 得到RIPEMD160(SHA256(cscript))
             std::copy(data.begin() + script_prefix.size(), data.end(), hash.begin());
             return CScriptID(hash);
         }

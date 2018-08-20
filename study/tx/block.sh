@@ -34,7 +34,9 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressesbyaccount ""
 StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressinfo 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
 {
   "address": "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ",
-  "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887",
+  "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887", #0xa9 指的是 OP_HASH160 指令 0x14指的是长度 0x87=OP_EQUAL
+                     #*script << OP_HASH160 << ToByteVector(scriptID) << OP_EQUAL;
+	                 # 0xa9 + 0x14 + （pubhash）+ 0x87
   "ismine": true,
   "iswatchonly": false,
   "isscript": true,

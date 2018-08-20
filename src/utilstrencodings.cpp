@@ -452,6 +452,7 @@ static inline bool ProcessMantissaDigit(char ch, int64_t &mantissa, int &mantiss
     return true;
 }
 
+// erick 把小数金额 转换为 整数
 bool ParseFixedPoint(const std::string &val, int decimals, int64_t *amount_out)
 {
     int64_t mantissa = 0;

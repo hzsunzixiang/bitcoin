@@ -1,0 +1,84 @@
+Breakpoint 1 at 0x7fb0b13f1a1f: file rpc/server.cpp, line 472.
+Breakpoint 2 at 0x7fb0b13c949e: file rpc/rawtransaction.cpp, line 320.
+Currently logging to "createtx.txt".
+Logs will be appended to the log file.
+Output is being logged and displayed.
+nanosleep () at ../sysdeps/unix/syscall-template.S:85
+85	in ../sysdeps/unix/syscall-template.S
+0x00007fb0b06a3d76 in boost::this_thread::hidden::sleep_for(timespec const&) ()
+   from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.62.0
+Single stepping until exit from function _ZN5boost11this_thread6hidden9sleep_forERK8timespec,
+which has no line number information.
+[Switching to Thread 0x7fb0ab111700 (LWP 13701)]
+
+Breakpoint 1, CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:472
+warning: Source file is more recent than executable.
+#enum VType { VNULL, VOBJ, VARR, VSTR, VNUM, VBOOL, };
+472	{
+$1 = (const JSONRPCRequest &) @0x7fb0ab110b90: {
+  id = {
+    typ = 0x4, 
+    val = "1", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  strMethod = "createrawtransaction", 
+  params = {
+    typ = 0x2, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 2, capacity 2 = {{
+        typ = 0x2, 
+        val = "", 
+        keys = std::vector of length 0, capacity 0, 
+        values = std::vector of length 1, capacity 1 = {{
+            typ = 0x1,  # the array in the object
+            val = "", 
+            keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
+            values = std::vector of length 2, capacity 2 = {{
+                typ = 0x3, 
+                val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+                keys = std::vector of length 0, capacity 0, 
+                values = std::vector of length 0, capacity 0
+              }, {
+                typ = 0x4, 
+                val = "0", 
+                keys = std::vector of length 0, capacity 0, 
+                values = std::vector of length 0, capacity 0
+              }}
+          }}
+      }, {
+        typ = 0x1, 
+        val = "", 
+        keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
+          "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, 
+        values = std::vector of length 2, capacity 2 = {{
+            typ = 0x4, 
+            val = "21.49", 
+            keys = std::vector of length 0, capacity 0, 
+            values = std::vector of length 0, capacity 0
+          }, {
+            typ = 0x4, 
+            val = "28.5", 
+            keys = std::vector of length 0, capacity 0, 
+            values = std::vector of length 0, capacity 0
+          }}
+      }}
+  }, 
+  #enum VType { VNULL, VOBJ, VARR, VSTR, VNUM, VBOOL, };
+  fHelp = 0x0, 
+  URI = "/", 
+  authUser = ""
+}
+type = class JSONRPCRequest {
+  public:
+    UniValue id;
+    std::__cxx11::string strMethod;
+    UniValue params;
+    bool fHelp;
+    std::__cxx11::string URI;
+    std::__cxx11::string authUser;
+
+    JSONRPCRequest(void);
+    void parse(const UniValue &);
+}

@@ -1,0 +1,198 @@
+Breakpoint 1 at 0x7fb0b13f1a1f: file rpc/server.cpp, line 472.
+Breakpoint 2 at 0x7fb0b13c949e: file rpc/rawtransaction.cpp, line 320.
+Currently logging to "createtx.txt".
+Logs will be appended to the log file.
+Output is being logged and displayed.
+[Switching to Thread 0x7fb0ab111700 (LWP 13701)]
+
+Breakpoint 1, CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:472
+warning: Source file is more recent than executable.
+472	{
+475	        LOCK(cs_rpcWarmup);
+476	        if (fRPCInWarmup)
+475	        LOCK(cs_rpcWarmup);
+483	    const CRPCCommand *pcmd = tableRPC[request.strMethod];
+484	    if (!pcmd)
+487	    g_rpcSignals.PreCommand(*pcmd);
+No symbol "reqeust" in current context.
+492	        if (request.params.isObject()) {
+495	            return pcmd->actor(request);
+$1 = (const JSONRPCRequest &) @0x7fb0ab110b90: {id = {typ = UniValue::VNUM, val = "1", 
+    keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}, 
+  strMethod = "createrawtransaction", params = {typ = UniValue::VARR, val = "", keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 2, capacity 2 = {{typ = UniValue::VARR, val = "", 
+        keys = std::vector of length 0, capacity 0, values = std::vector of length 1, capacity 1 = {{typ = UniValue::VOBJ, 
+            val = "", keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
+            values = std::vector of length 2, capacity 2 = {{typ = UniValue::VSTR, 
+                val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+                keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}, {
+                typ = UniValue::VNUM, val = "0", keys = std::vector of length 0, capacity 0, 
+                values = std::vector of length 0, capacity 0}}}}}, {typ = UniValue::VOBJ, val = "", 
+        keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
+          "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, values = std::vector of length 2, capacity 2 = {{typ = UniValue::VNUM, 
+            val = "21.49", keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}, {
+            typ = UniValue::VNUM, val = "28.5", keys = std::vector of length 0, capacity 0, 
+            values = std::vector of length 0, capacity 0}}}}}, fHelp = false, URI = "/", authUser = ""}
+$2 = (const JSONRPCRequest &) @0x7fb0ab110b90: {
+  id = {
+    typ = UniValue::VNUM, 
+    val = "1", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  strMethod = "createrawtransaction", 
+  params = {
+    typ = UniValue::VARR, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 2, capacity 2 = {{
+        typ = UniValue::VARR, 
+        val = "", 
+        keys = std::vector of length 0, capacity 0, 
+        values = std::vector of length 1, capacity 1 = {{
+            typ = UniValue::VOBJ, 
+            val = "", 
+            keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
+            values = std::vector of length 2, capacity 2 = {{
+                typ = UniValue::VSTR, 
+                val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+                keys = std::vector of length 0, capacity 0, 
+                values = std::vector of length 0, capacity 0
+              }, {
+                typ = UniValue::VNUM, 
+                val = "0", 
+                keys = std::vector of length 0, capacity 0, 
+                values = std::vector of length 0, capacity 0
+              }}
+          }}
+      }, {
+        typ = UniValue::VOBJ, 
+        val = "", 
+        keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
+          "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, 
+        values = std::vector of length 2, capacity 2 = {{
+            typ = UniValue::VNUM, 
+            val = "21.49", 
+            keys = std::vector of length 0, capacity 0, 
+            values = std::vector of length 0, capacity 0
+          }, {
+            typ = UniValue::VNUM, 
+            val = "28.5", 
+            keys = std::vector of length 0, capacity 0, 
+            values = std::vector of length 0, capacity 0
+          }}
+      }}
+  }, 
+  fHelp = false, 
+  URI = "/", 
+  authUser = ""
+}
+
+Breakpoint 2, createrawtransaction (request=...) at rpc/rawtransaction.cpp:320
+320	{
+321	    if (request.fHelp || request.params.size() < 2 || request.params.size() > 4) {
+$3 = 2
+367	    RPCTypeCheck(request.params, {
+373	    );
+367	    RPCTypeCheck(request.params, {
+374	    if (request.params[0].isNull() || request.params[1].isNull())
+377	    UniValue inputs = request.params[0].get_array();
+$4 = (const UniValue &) @0x7fb088001e80: {
+  typ = UniValue::VARR, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 1, capacity 1 = {{
+      typ = UniValue::VOBJ, 
+      val = "", 
+      keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
+      values = std::vector of length 2, capacity 2 = {{
+          typ = UniValue::VSTR, 
+          val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+          keys = std::vector of length 0, capacity 0, 
+          values = std::vector of length 0, capacity 0
+        }, {
+          typ = UniValue::VNUM, 
+          val = "0", 
+          keys = std::vector of length 0, capacity 0, 
+          values = std::vector of length 0, capacity 0
+        }}
+    }}
+}
+$5 = (const UniValue &) @0x7fb088001ed8: {
+  typ = UniValue::VOBJ, 
+  val = "", 
+  keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, 
+  values = std::vector of length 2, capacity 2 = {{
+      typ = UniValue::VNUM, 
+      val = "21.49", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = UniValue::VNUM, 
+      val = "28.5", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }}
+}
+378	    const bool outputs_is_obj = request.params[1].isObject();
+#0  createrawtransaction (request=...) at rpc/rawtransaction.cpp:378
+378	    const bool outputs_is_obj = request.params[1].isObject();
+#0  createrawtransaction (request=...) at rpc/rawtransaction.cpp:378
+#1  0x00007fb0b13f1c0a in CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:495
+#2  0x00007fb0b15a33c2 in HTTPReq_JSONRPC (req=0x7fb0940021a0) at httprpc.cpp:189
+#3  0x00007fb0b13766a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
+    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
+    at /usr/include/c++/6/functional:1717
+#4  0x00007fb0b15b05f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7fb0940018d0, __args#0=0x7fb0940021a0, __args#1="") at /usr/include/c++/6/functional:2127
+#5  0x00007fb0b15aeabd in HTTPWorkItem::operator() (this=0x7fb0940018a0) at httpserver.cpp:53
+#6  0x00007fb0b15b1844 in WorkQueue<HTTPClosure>::Run (this=0x7fb0b3e15fb0) at httpserver.cpp:112
+#7  0x00007fb0b15a9b8c in HTTPWorkQueueRun (queue=0x7fb0b3e15fb0) at httpserver.cpp:334
+#8  0x00007fb0b15bf6a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1391
+#9  0x00007fb0b15bf122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
+    this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1380
+#10 0x00007fb0b15be9e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7fb0b3e15b80) at /usr/include/c++/6/thread:197
+#11 0x00007fb0af2dee6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+#12 0x00007fb0aeaf4494 in start_thread (arg=0x7fb0ab111700) at pthread_create.c:333
+#13 0x00007fb0ae836acf in clone () from /lib/x86_64-linux-gnu/libc.so.6
+$6 = {
+  typ = UniValue::VARR, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 1, capacity 1 = {{
+      typ = UniValue::VOBJ, 
+      val = "", 
+      keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
+      values = std::vector of length 2, capacity 2 = {{
+          typ = UniValue::VSTR, 
+          val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+          keys = std::vector of length 0, capacity 0, 
+          values = std::vector of length 0, capacity 0
+        }, {
+          typ = UniValue::VNUM, 
+          val = "0", 
+          keys = std::vector of length 0, capacity 0, 
+          values = std::vector of length 0, capacity 0
+        }}
+    }}
+}
+$7 = (const UniValue &) @0x7fb088001e80: {
+  typ = UniValue::VARR, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 1, capacity 1 = {{
+      typ = UniValue::VOBJ, 
+      val = "", 
+      keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
+      values = std::vector of length 2, capacity 2 = {{
+          typ = UniValue::VSTR, 
+          val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+          keys = std::vector of length 0, capacity 0, 
+          values = std::vector of length 0, capacity 0
+        }, {
+          typ = UniValue::VNUM, 
+          val = "0", 
+          keys = std::vector of length 0, capacity 0, 
+          values = std::vector of length 0, capacity 0
+        }}
+    }}
+}

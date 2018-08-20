@@ -142,6 +142,7 @@ static bool RPCAuthorized(const std::string& strAuth, std::string& strAuthUserna
     return multiUserAuthorized(strUserPass);
 }
 
+//erick execute here: RegisterHTTPHandler("/", true, HTTPReq_JSONRPC);
 static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
 {
     // JSONRPC handles only POST
@@ -185,7 +186,8 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
         if (valRequest.isObject()) {
             jreq.parse(valRequest);
 
-			// ericksun excute here
+			// ericksun excute here server.cpp: UniValue CRPCTable::execute(const JSONRPCRequest &request) const
+			// 然后再利用其返回值  返回相应结果
             UniValue result = tableRPC.execute(jreq);
 
             // Send reply

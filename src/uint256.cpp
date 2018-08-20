@@ -26,6 +26,7 @@ std::string base_blob<BITS>::GetHex() const
 template <unsigned int BITS>
 void base_blob<BITS>::SetHex(const char* psz)
 {
+	// ericksun place the hash to 
     memset(data, 0, sizeof(data));
 
     // skip leading spaces

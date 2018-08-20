@@ -130,6 +130,12 @@ bool DecodeBase58Check(const char* psz, std::vector<unsigned char>& vchRet)
         return false;
     }
     // re-calculate the checksum, ensure it matches the included 4-byte checksum
+    // erick 验证pubkeyhash的正确性  vchRet 计算方式入下
+    // 对公钥PUBKEY 做hash(sha256sum 和 rmd160) 然后加上前缀
+    //printf "$PUBKEY" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+    // 然后前面加上 前缀
+    // 验证的时候再做一次hash 对比前四个字节
+    // printf "$EXTEND160" | xxd -r -p |sha256sum -b |xxd -r -p |sha256sum -b
     uint256 hash = Hash(vchRet.begin(), vchRet.end() - 4);
     if (memcmp(&hash, &vchRet[vchRet.size() - 4], 4) != 0) {
         vchRet.clear();
