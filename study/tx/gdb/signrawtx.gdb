@@ -5,7 +5,13 @@ set logging on
 break CRPCTable::execute                                                                                    
 
 break signrawtransaction 
+#break CKey::GetPubKey
+
+
+break SignTransaction
 break signrawtransactionwithwallet
+break ProduceSignature
+
 #break DecodeHexTx
 #break CheckTxScriptsSanity
 #
@@ -18,9 +24,35 @@ break signrawtransactionwithwallet
 #break SignTransaction
 #break VerifyScript
 
+
+# ~/bitcoin/study/tx/summarized_key.txt
+# 载入环境变量
+#. bitcoin-bash-tools/bitcoin.sh
+#decodeBase58 cN7KpCzkTUgtCNGhewHJfbij7eJWWznH4YZ7BnnMJDUq5kn6cFxF 
+
+
+
+
 # 公钥对应的私钥
-StephenSun@debian-1:~/bitcoin/study/tx$ bitcoin-cli -regtest dumpprivkey  2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
-cVSKEzHXxJ8pJcMB1BX6H6wPXG9ZPDKZQwtqBe9uvjDxoZwjySXg
+#StephenSun@debian-1:~/bitcoin/study/tx$ bitcoin-cli -regtest dumpprivkey  2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
+#cVSKEzHXxJ8pJcMB1BX6H6wPXG9ZPDKZQwtqBe9uvjDxoZwjySXg
+
+
+## 解密私钥
+#StephenSun@debian-1:~/bitcoin/study/tx$ decodeBase58 cVSKEzHXxJ8pJcMB1BX6H6wPXG9ZPDKZQwtqBe9uvjDxoZwjySXg;echo
+#EFEA628AE24B0A6852FC55F8A40BF07FA9A9E3BE78D76359671F2C4AA2E695CA200193EA2697
+#
+## 扔掉最后四个字节
+#EFEA628AE24B0A6852FC55F8A40BF07FA9A9E3BE78D76359671F2C4AA2E695CA2001
+## 扔掉后缀 01
+#EFEA628AE24B0A6852FC55F8A40BF07FA9A9E3BE78D76359671F2C4AA2E695CA20
+#
+## 扔掉前缀EF
+#EA628AE24B0A6852FC55F8A40BF07FA9A9E3BE78D76359671F2C4AA2E695CA20
+#
+## 小写形式
+#ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
+
 
 #{
 #  "txid": "d9f409afddfc82f637230dca8e08415e30d75479b90debaf0ec59960b49060c8",
@@ -73,3 +105,4 @@ cVSKEzHXxJ8pJcMB1BX6H6wPXG9ZPDKZQwtqBe9uvjDxoZwjySXg
 #    }
 #  ]
 #}
+
