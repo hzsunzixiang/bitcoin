@@ -1,800 +1,13 @@
-Breakpoint 1 at 0x7fb0b13f1a1f: file rpc/server.cpp, line 472.
-Breakpoint 2 at 0x7fb0b13c949e: file rpc/rawtransaction.cpp, line 320.
-nanosleep () at ../sysdeps/unix/syscall-template.S:85
-85	in ../sysdeps/unix/syscall-template.S
-0x00007fb0b06a3d76 in boost::this_thread::hidden::sleep_for(timespec const&) ()
-   from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.62.0
-Single stepping until exit from function _ZN5boost11this_thread6hidden9sleep_forERK8timespec,
-which has no line number information.
-[Switching to Thread 0x7fb0ab111700 (LWP 13701)]
-
-Breakpoint 1, CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:472
-warning: Source file is more recent than executable.
-472	{
-475	        LOCK(cs_rpcWarmup);
-476	        if (fRPCInWarmup)
-475	        LOCK(cs_rpcWarmup);
-483	    const CRPCCommand *pcmd = tableRPC[request.strMethod];
-484	    if (!pcmd)
-487	    g_rpcSignals.PreCommand(*pcmd);
-492	        if (request.params.isObject()) {
-495	            return pcmd->actor(request);
-
-Breakpoint 2, createrawtransaction (request=...) at rpc/rawtransaction.cpp:320
-320	{
-321	    if (request.fHelp || request.params.size() < 2 || request.params.size() > 4) {
-$1 = (const JSONRPCRequest &) @0x7fb0ab110b90: {id = {typ = UniValue::VNUM, val = "1", 
-    keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}, 
-  strMethod = "createrawtransaction", params = {typ = UniValue::VARR, val = "", keys = std::vector of length 0, capacity 0, 
-    values = std::vector of length 2, capacity 2 = {{typ = UniValue::VARR, val = "", 
-        keys = std::vector of length 0, capacity 0, values = std::vector of length 1, capacity 1 = {{typ = UniValue::VOBJ, 
-            val = "", keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-            values = std::vector of length 2, capacity 2 = {{typ = UniValue::VSTR, 
-                val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-                keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}, {
-                typ = UniValue::VNUM, val = "0", keys = std::vector of length 0, capacity 0, 
-                values = std::vector of length 0, capacity 0}}}}}, {typ = UniValue::VOBJ, val = "", 
-        keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
-          "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, values = std::vector of length 2, capacity 2 = {{typ = UniValue::VNUM, 
-            val = "21.49", keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}, {
-            typ = UniValue::VNUM, val = "28.5", keys = std::vector of length 0, capacity 0, 
-            values = std::vector of length 0, capacity 0}}}}}, fHelp = false, URI = "/", authUser = ""}
-$2 = (const JSONRPCRequest &) @0x7fb0ab110b90: {
-  id = {
-    typ = UniValue::VNUM, 
-    val = "1", 
-    keys = std::vector of length 0, capacity 0, 
-    values = std::vector of length 0, capacity 0
-  }, 
-  strMethod = "createrawtransaction", 
-  params = {
-    typ = UniValue::VARR, 
-    val = "", 
-    keys = std::vector of length 0, capacity 0, 
-    values = std::vector of length 2, capacity 2 = {{
-        typ = UniValue::VARR, 
-        val = "", 
-        keys = std::vector of length 0, capacity 0, 
-        values = std::vector of length 1, capacity 1 = {{
-            typ = UniValue::VOBJ, 
-            val = "", 
-            keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-            values = std::vector of length 2, capacity 2 = {{
-                typ = UniValue::VSTR, 
-                val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-                keys = std::vector of length 0, capacity 0, 
-                values = std::vector of length 0, capacity 0
-              }, {
-                typ = UniValue::VNUM, 
-                val = "0", 
-                keys = std::vector of length 0, capacity 0, 
-                values = std::vector of length 0, capacity 0
-              }}
-          }}
-      }, {
-        typ = UniValue::VOBJ, 
-        val = "", 
-        keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
-          "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, 
-        values = std::vector of length 2, capacity 2 = {{
-            typ = UniValue::VNUM, 
-            val = "21.49", 
-            keys = std::vector of length 0, capacity 0, 
-            values = std::vector of length 0, capacity 0
-          }, {
-            typ = UniValue::VNUM, 
-            val = "28.5", 
-            keys = std::vector of length 0, capacity 0, 
-            values = std::vector of length 0, capacity 0
-          }}
-      }}
-  }, 
-  fHelp = false, 
-  URI = "/", 
-  authUser = ""
-}
-367	    RPCTypeCheck(request.params, {
-373	    );
-367	    RPCTypeCheck(request.params, {
-374	    if (request.params[0].isNull() || request.params[1].isNull())
-377	    UniValue inputs = request.params[0].get_array();
-378	    const bool outputs_is_obj = request.params[1].isObject();
-$3 = {
-  typ = 0x2, 
-  val = "", 
-  keys = std::vector of length 0, capacity 0, 
-  values = std::vector of length 1, capacity 1 = {{
-      typ = 0x1, 
-      val = "", 
-      keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-      values = std::vector of length 2, capacity 2 = {{
-          typ = 0x3, 
-          val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-          keys = std::vector of length 0, capacity 0, 
-          values = std::vector of length 0, capacity 0
-        }, {
-          typ = 0x4, 
-          val = "0", 
-          keys = std::vector of length 0, capacity 0, 
-          values = std::vector of length 0, capacity 0
-        }}
-    }}
-}
-381	                           request.params[1].get_array();
-380	                           request.params[1].get_obj() :
-381	                           request.params[1].get_array();
-383	    CMutableTransaction rawTx;
-385	    if (!request.params[2].isNull()) {
-392	    bool rbfOptIn = request.params[3].isTrue();
-394	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
-395	        const UniValue& input = inputs[idx];
-396	        const UniValue& o = input.get_obj();
-$4 = (const UniValue &) @0x7fb0880008c0: {
-  typ = 0x1, 
-  val = "", 
-  keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-  values = std::vector of length 2, capacity 2 = {{
-      typ = 0x3, 
-      val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }, {
-      typ = 0x4, 
-      val = "0", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }}
-}
-$5 = {
-  typ = 0x2, 
-  val = "", 
-  keys = std::vector of length 0, capacity 0, 
-  values = std::vector of length 1, capacity 1 = {{
-      typ = 0x1, 
-      val = "", 
-      keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-      values = std::vector of length 2, capacity 2 = {{
-          typ = 0x3, 
-          val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-          keys = std::vector of length 0, capacity 0, 
-          values = std::vector of length 0, capacity 0
-        }, {
-          typ = 0x4, 
-          val = "0", 
-          keys = std::vector of length 0, capacity 0, 
-          values = std::vector of length 0, capacity 0
-        }}
-    }}
-}
-398	        uint256 txid = ParseHashO(o, "txid");
-$6 = (const UniValue &) @0x7fb0880008c0: {
-  typ = 0x1, 
-  val = "", 
-  keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-  values = std::vector of length 2, capacity 2 = {{
-      typ = 0x3, 
-      val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }, {
-      typ = 0x4, 
-      val = "0", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }}
-}
-$7 = (const UniValue &) @0x7fb0880008c0: {
-  typ = 0x1, 
-  val = "", 
-  keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-  values = std::vector of length 2, capacity 2 = {{
-      typ = 0x3, 
-      val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }, {
-      typ = 0x4, 
-      val = "0", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }}
-}
-Breakpoint 3 at 0x7fb0b13ee469: file rpc/server.cpp, line 132.
-
-Breakpoint 3, ParseHashO (o=..., strKey="txid") at rpc/server.cpp:132
-132	{
-133	    return ParseHashV(find_value(o, strKey), strKey);
-Breakpoint 4 at 0x7fb0b13ee194: file rpc/server.cpp, line 119.
-
-Breakpoint 4, ParseHashV (v=..., strName="txid") at rpc/server.cpp:119
-119	{
-#0  ParseHashV (v=..., strName="txid") at rpc/server.cpp:119
-#1  0x00007fb0b13ee4b4 in ParseHashO (o=..., strKey="txid") at rpc/server.cpp:133
-#2  0x00007fb0b13c9dd3 in createrawtransaction (request=...) at rpc/rawtransaction.cpp:398
-#3  0x00007fb0b13f1c0a in CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:495
-#4  0x00007fb0b15a33c2 in HTTPReq_JSONRPC (req=0x7fb094000ea0) at httprpc.cpp:189
-#5  0x00007fb0b13766a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
-    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
-    at /usr/include/c++/6/functional:1717
-#6  0x00007fb0b15b05f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7fb0940017a0, __args#0=0x7fb094000ea0, __args#1="") at /usr/include/c++/6/functional:2127
-#7  0x00007fb0b15aeabd in HTTPWorkItem::operator() (this=0x7fb094001770) at httpserver.cpp:53
-#8  0x00007fb0b15b1844 in WorkQueue<HTTPClosure>::Run (this=0x7fb0b3e15fb0) at httpserver.cpp:112
-#9  0x00007fb0b15a9b8c in HTTPWorkQueueRun (queue=0x7fb0b3e15fb0) at httpserver.cpp:334
-#10 0x00007fb0b15bf6a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1391
-#11 0x00007fb0b15bf122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
-    this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1380
-#12 0x00007fb0b15be9e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7fb0b3e15b80) at /usr/include/c++/6/thread:197
-#13 0x00007fb0af2dee6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
-#14 0x00007fb0aeaf4494 in start_thread (arg=0x7fb0ab111700) at pthread_create.c:333
-#15 0x00007fb0ae836acf in clone () from /lib/x86_64-linux-gnu/libc.so.6
-120	    std::string strHex;
-121	    if (v.isStr())
-$8 = ""
-122	        strHex = v.get_str();
-123	    if (!IsHex(strHex)) // Note: IsHex("") is false
-$9 = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00"
-125	    if (64 != strHex.length())
-127	    uint256 result;
-128	    result.SetHex(strHex);
-Function "SetHex" not defined.
-Make breakpoint pending on future shared library load? (y or [n]) Function "base_blob<BITS>::SetHex" not defined.
-Make breakpoint pending on future shared library load? (y or [n]) Breakpoint 5 at 0x7fb0b17ba766: uint256.cpp:27. (2 locations)
-
-Breakpoint 5, base_blob<256u>::SetHex (this=0x7fb0ab1103d0, 
-    psz=0x7fb0880012a0 "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00") at uint256.cpp:27
-27	void base_blob<BITS>::SetHex(const char* psz)
-$10 = 0x7fb0880012a0 "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00"
-29	    memset(data, 0, sizeof(data));
-32	    while (isspace(*psz))
-36	    if (psz[0] == '0' && tolower(psz[1]) == 'x')
-40	    const char* pbegin = psz;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-Couldn't get information on specified line.
-malformed linespec error: unexpected colon
-Undefined command: "unitl".  Try "help".
-Couldn't get information on specified line.
-Couldn't get information on specified line.
-Couldn't get information on specified line.
-Couldn't get information on specified line.
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-Couldn't get information on specified line.
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-List of classes of commands:
-
-aliases -- Aliases of other commands
-breakpoints -- Making program stop at certain points
-data -- Examining data
-files -- Specifying and examining files
-internals -- Maintenance commands
-obscure -- Obscure features
-running -- Running the program
-stack -- Examining the stack
-status -- Status inquiries
-support -- Support facilities
-tracepoints -- Tracing of program execution without stopping the program
-user-defined -- User-defined commands
-
-Type "help" followed by a class name for a list of commands in that class.
-Type "help all" for the list of all commands.
-Type "help" followed by command name for full documentation.
-Type "apropos word" to search for commands related to "word".
-Command name abbreviations are allowed if unambiguous.
-Running the program.
-
-List of commands:
-
-advance -- Continue the program up to the given location (same form as args for break command)
-attach -- Attach to a process or file outside of GDB
-continue -- Continue program being debugged
-detach -- Detach a process or file previously attached
-detach checkpoint -- Detach from a checkpoint (experimental)
-detach inferiors -- Detach from inferior ID (or list of IDS)
-disconnect -- Disconnect from a target
-finish -- Execute until selected stack frame returns
-handle -- Specify how to handle signals
-inferior -- Use this command to switch between inferiors
-interrupt -- Interrupt the execution of the debugged program
-jump -- Continue program being debugged at specified line or address
-kill -- Kill execution of program being debugged
-kill inferiors -- Kill inferior ID (or list of IDs)
-next -- Step program
-nexti -- Step one instruction
-reverse-continue -- Continue program being debugged but run it in reverse
-reverse-finish -- Execute backward until just before selected stack frame is called
-reverse-next -- Step program backward
-reverse-nexti -- Step backward one instruction
-reverse-step -- Step program backward until it reaches the beginning of another source line
-reverse-stepi -- Step backward exactly one instruction
-run -- Start debugged program
-signal -- Continue program with the specified signal
-start -- Run the debugged program until the beginning of the main procedure
-step -- Step program until it reaches a different source line
-stepi -- Step one instruction exactly
-target -- Connect to a target machine or process
-target child -- Unix child process (started by the "run" command)
-target core -- Use a core file as a target
-target exec -- Use an executable file as a target
-target extended-remote -- Use a remote computer via a serial line
-target record -- Log program while executing and replay execution from log
-target record-btrace -- Collect control-flow trace and provide the execution history
-target record-core -- Log program while executing and replay execution from log
-target record-full -- Log program while executing and replay execution from log
-target remote -- Use a remote computer via a serial line
-target tfile -- Use a trace file as a target
-task -- Use this command to switch between Ada tasks
-thread -- Use this command to switch between threads
-thread apply -- Apply a command to a list of threads
-thread apply all -- Apply a command to all threads
-thread find -- Find threads that match a regular expression
-thread name -- Set the current thread's name
-until -- Execute until the program reaches a source line greater than the current
-
-Type "help" followed by command name for full documentation.
-Type "apropos word" to search for commands related to "word".
-Command name abbreviations are allowed if unambiguous.
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-Couldn't get information on specified line.
-42	        psz++;
-$11 = '\377' <repeats 48 times>, "\000\001\002\003\004\005\006\a\b\t\377\377\377\377\377\377\377\n\v\f\r\016\017", '\377' <repeats 26 times>, "\n\v\f\r\016\017", '\377' <repeats 153 times>
-$12 = {0xff <repeats 48 times>, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 
-  0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0xff <repeats 26 times>, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0xff <repeats 153 times>}
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-41	    while (::HexDigit(*psz) != -1)
-42	        psz++;
-42	        psz++;
-42	        psz++;
-46	    while (psz >= pbegin && p1 < pend) {
-47	        *p1 = ::HexDigit(*psz--);
-$13 = 100 'd'
-48	        if (psz >= pbegin) {
-49	            *p1 |= ((unsigned char)::HexDigit(*psz--) << 4);
-50	            p1++;
-$14 = {0xff <repeats 48 times>, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 
-  0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0xff <repeats 26 times>, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0xff <repeats 153 times>}
-46	    while (psz >= pbegin && p1 < pend) {
-47	        *p1 = ::HexDigit(*psz--);
-48	        if (psz >= pbegin) {
-49	            *p1 |= ((unsigned char)::HexDigit(*psz--) << 4);
-50	            p1++;
-46	    while (psz >= pbegin && p1 < pend) {
-47	        *p1 = ::HexDigit(*psz--);
-48	        if (psz >= pbegin) {
-49	            *p1 |= ((unsigned char)::HexDigit(*psz--) << 4);
-50	            p1++;
-46	    while (psz >= pbegin && p1 < pend) {
-47	        *p1 = ::HexDigit(*psz--);
-48	        if (psz >= pbegin) {
-49	            *p1 |= ((unsigned char)::HexDigit(*psz--) << 4);
-50	            p1++;
-46	    while (psz >= pbegin && p1 < pend) {
-47	        *p1 = ::HexDigit(*psz--);
-48	        if (psz >= pbegin) {
-48	        if (psz >= pbegin) {
-48	        if (psz >= pbegin) {
-48	        if (psz >= pbegin) {
-48	        if (psz >= pbegin) {
-48	        if (psz >= pbegin) {
-48	        if (psz >= pbegin) {
-ParseHashO (o=..., strKey="txid") at rpc/server.cpp:134
-134	}
-460	            if (!destinations.insert(destination).second) {
-448	    for (const std::string& name_ : outputs.getKeys()) {
-$15 = {0xff <repeats 48 times>, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 
-  0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0xff <repeats 26 times>, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0xff <repeats 153 times>}
-#0  createrawtransaction (request=...) at rpc/rawtransaction.cpp:448
-#1  0x00007fb0b13f1c0a in CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:495
-#2  0x00007fb0b15a33c2 in HTTPReq_JSONRPC (req=0x7fb094000ea0) at httprpc.cpp:189
-#3  0x00007fb0b13766a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
-    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
-    at /usr/include/c++/6/functional:1717
-#4  0x00007fb0b15b05f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7fb0940017a0, __args#0=0x7fb094000ea0, __args#1="") at /usr/include/c++/6/functional:2127
-#5  0x00007fb0b15aeabd in HTTPWorkItem::operator() (this=0x7fb094001770) at httpserver.cpp:53
-#6  0x00007fb0b15b1844 in WorkQueue<HTTPClosure>::Run (this=0x7fb0b3e15fb0) at httpserver.cpp:112
-#7  0x00007fb0b15a9b8c in HTTPWorkQueueRun (queue=0x7fb0b3e15fb0) at httpserver.cpp:334
-#8  0x00007fb0b15bf6a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1391
-#9  0x00007fb0b15bf122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
-    this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1380
-#10 0x00007fb0b15be9e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7fb0b3e15b80) at /usr/include/c++/6/thread:197
-#11 0x00007fb0af2dee6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
-#12 0x00007fb0aeaf4494 in start_thread (arg=0x7fb0ab111700) at pthread_create.c:333
-#13 0x00007fb0ae836acf in clone () from /lib/x86_64-linux-gnu/libc.so.6
-Breakpoint 1 at 0x7fb0b13f1a1f: file rpc/server.cpp, line 472.
-Breakpoint 2 at 0x7fb0b13c949e: file rpc/rawtransaction.cpp, line 320.
-[Switching to Thread 0x7fb0ab111700 (LWP 13701)]
-
-Breakpoint 1, CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:472
-warning: Source file is more recent than executable.
-472	{
-475	        LOCK(cs_rpcWarmup);
-476	        if (fRPCInWarmup)
-475	        LOCK(cs_rpcWarmup);
-483	    const CRPCCommand *pcmd = tableRPC[request.strMethod];
-484	    if (!pcmd)
-487	    g_rpcSignals.PreCommand(*pcmd);
-492	        if (request.params.isObject()) {
-495	            return pcmd->actor(request);
-
-Breakpoint 2, createrawtransaction (request=...) at rpc/rawtransaction.cpp:320
-320	{
-321	    if (request.fHelp || request.params.size() < 2 || request.params.size() > 4) {
-367	    RPCTypeCheck(request.params, {
-373	    );
-367	    RPCTypeCheck(request.params, {
-374	    if (request.params[0].isNull() || request.params[1].isNull())
-377	    UniValue inputs = request.params[0].get_array();
-378	    const bool outputs_is_obj = request.params[1].isObject();
-381	                           request.params[1].get_array();
-380	                           request.params[1].get_obj() :
-381	                           request.params[1].get_array();
-383	    CMutableTransaction rawTx;
-385	    if (!request.params[2].isNull()) {
-392	    bool rbfOptIn = request.params[3].isTrue();
-394	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
-395	        const UniValue& input = inputs[idx];
-396	        const UniValue& o = input.get_obj();
-398	        uint256 txid = ParseHashO(o, "txid");
-400	        const UniValue& vout_v = find_value(o, "vout");
-401	        if (!vout_v.isNum())
-$1 = (const UniValue &) @0x7fb0880016c8: {typ = UniValue::VNUM, val = "0", keys = std::vector of length 0, capacity 0, 
-  values = std::vector of length 0, capacity 0}
-$2 = (const UniValue &) @0x7fb0880016c8: {
-  typ = UniValue::VNUM, 
-  val = "0", 
-  keys = std::vector of length 0, capacity 0, 
-  values = std::vector of length 0, capacity 0
-}
-$3 = (const UniValue &) @0x7fb088000b40: {
-  typ = 0x1, 
-  val = "", 
-  keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-  values = std::vector of length 2, capacity 2 = {{
-      typ = 0x3, 
-      val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }, {
-      typ = 0x4, 
-      val = "0", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }}
-}
-$4 = {
-  <base_blob<256u>> = {
-    static WIDTH = 32, 
-    data = "\000͋,\262\066N\205\220\177\332Z\251NR\356)\273\331{\022\257\024\200_!{/*\217\250E"
-  }, <No data fields>}
-$5 = {
-  <base_blob<256u>> = {
-    static WIDTH = 0x20, 
-    data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 0xd9, 
-      0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
-  }, <No data fields>}
-$6 = (const UniValue &) @0x7fb088000b40: {
-  typ = 0x1, 
-  val = "", 
-  keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-  values = std::vector of length 2, capacity 2 = {{
-      typ = 0x3, 
-      val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }, {
-      typ = 0x4, 
-      val = "0", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }}
-}
-403	        int nOutput = vout_v.get_int();
-404	        if (nOutput < 0)
-$7 = 0
-408	        if (rbfOptIn) {
-410	        } else if (rawTx.nLockTime) {
-413	            nSequence = std::numeric_limits<uint32_t>::max();
-417	        const UniValue& sequenceObj = find_value(o, "sequence");
-$8 = 4294967295
-$9 = 0xffffffff
-418	        if (sequenceObj.isNum()) {
-427	        CTxIn in(COutPoint(txid, nOutput), CScript(), nSequence);
-$10 = (const UniValue &) @0x7fb088000b40: {
-  typ = UniValue::VOBJ, 
-  val = "", 
-  keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-  values = std::vector of length 2, capacity 2 = {{
-      typ = UniValue::VSTR, 
-      val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }, {
-      typ = UniValue::VNUM, 
-      val = "0", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }}
-}
-Undefined command: "sequenceObj".  Try "help".
-$11 = 0x0
-429	        rawTx.vin.push_back(in);
-$12 = {
-  prevout = {
-    hash = {
-      <base_blob<256u>> = {
-        static WIDTH = 32, 
-        data = "\000͋,\262\066N\205\220\177\332Z\251NR\356)\273\331{\022\257\024\200_!{/*\217\250E"
-      }, <No data fields>}, 
-    n = 0
-  }, 
-  scriptSig = {
-    <prevector<28u, unsigned char, unsigned int, int>> = {
-      _size = 0, 
-      _union = {
-        direct = '\000' <repeats 27 times>, 
-        {
-          capacity = 0, 
-          indirect = 0x0
-        }
-      }
-    }, <No data fields>}, 
-  nSequence = 4294967295, 
-  scriptWitness = {
-    stack = std::vector of length 0, capacity 0
-  }, 
-  static SEQUENCE_FINAL = 4294967295, 
-  static SEQUENCE_LOCKTIME_DISABLE_FLAG = 2147483648, 
-  static SEQUENCE_LOCKTIME_TYPE_FLAG = 4194304, 
-  static SEQUENCE_LOCKTIME_MASK = 65535, 
-  static SEQUENCE_LOCKTIME_GRANULARITY = 9
-}
-$13 = {
-  prevout = {
-    hash = {
-      <base_blob<256u>> = {
-        static WIDTH = 0x20, 
-        data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
-          0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
-      }, <No data fields>}, 
-    n = 0x0
-  }, 
-  scriptSig = {
-    <prevector<28u, unsigned char, unsigned int, int>> = {
-      _size = 0x0, 
-      _union = {
-        direct = {0x0 <repeats 28 times>}, 
-        {
-          capacity = 0x0, 
-          indirect = 0x0
-        }
-      }
-    }, <No data fields>}, 
-  nSequence = 0xffffffff, 
-  scriptWitness = {
-    stack = std::vector of length 0, capacity 0
-  }, 
-  static SEQUENCE_FINAL = 0xffffffff, 
-  static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
-  static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
-  static SEQUENCE_LOCKTIME_MASK = 0xffff, 
-  static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
-}
-427	        CTxIn in(COutPoint(txid, nOutput), CScript(), nSequence);
-#0  createrawtransaction (request=...) at rpc/rawtransaction.cpp:427
-#1  0x00007fb0b13f1c0a in CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:495
-#2  0x00007fb0b15a33c2 in HTTPReq_JSONRPC (req=0x7fb094006220) at httprpc.cpp:189
-#3  0x00007fb0b13766a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
-    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
-    at /usr/include/c++/6/functional:1717
-#4  0x00007fb0b15b05f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7fb094006070, __args#0=0x7fb094006220, __args#1="") at /usr/include/c++/6/functional:2127
-#5  0x00007fb0b15aeabd in HTTPWorkItem::operator() (this=0x7fb094006040) at httpserver.cpp:53
-#6  0x00007fb0b15b1844 in WorkQueue<HTTPClosure>::Run (this=0x7fb0b3e15fb0) at httpserver.cpp:112
-#7  0x00007fb0b15a9b8c in HTTPWorkQueueRun (queue=0x7fb0b3e15fb0) at httpserver.cpp:334
-#8  0x00007fb0b15bf6a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1391
-#9  0x00007fb0b15bf122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
-    this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1380
-#10 0x00007fb0b15be9e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7fb0b3e15b80) at /usr/include/c++/6/thread:197
-#11 0x00007fb0af2dee6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
-#12 0x00007fb0aeaf4494 in start_thread (arg=0x7fb0ab111700) at pthread_create.c:333
-#13 0x00007fb0ae836acf in clone () from /lib/x86_64-linux-gnu/libc.so.6
-Breakpoint 3 at 0x7fb0b12ededa: COutPoint::COutPoint. (2 locations)
-Breakpoint 4 at 0x7fb0b12edd4e: CScript::CScript. (6 locations)
-394	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
-#0  createrawtransaction (request=...) at rpc/rawtransaction.cpp:394
-#1  0x00007fb0b13f1c0a in CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:495
-#2  0x00007fb0b15a33c2 in HTTPReq_JSONRPC (req=0x7fb094006220) at httprpc.cpp:189
-#3  0x00007fb0b13766a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
-    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
-    at /usr/include/c++/6/functional:1717
-#4  0x00007fb0b15b05f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7fb094006070, __args#0=0x7fb094006220, __args#1="") at /usr/include/c++/6/functional:2127
-#5  0x00007fb0b15aeabd in HTTPWorkItem::operator() (this=0x7fb094006040) at httpserver.cpp:53
-#6  0x00007fb0b15b1844 in WorkQueue<HTTPClosure>::Run (this=0x7fb0b3e15fb0) at httpserver.cpp:112
-#7  0x00007fb0b15a9b8c in HTTPWorkQueueRun (queue=0x7fb0b3e15fb0) at httpserver.cpp:334
-#8  0x00007fb0b15bf6a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1391
-#9  0x00007fb0b15bf122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
-    this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1380
-#10 0x00007fb0b15be9e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7fb0b3e15b80) at /usr/include/c++/6/thread:197
-#11 0x00007fb0af2dee6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
-#12 0x00007fb0aeaf4494 in start_thread (arg=0x7fb0ab111700) at pthread_create.c:333
-#13 0x00007fb0ae836acf in clone () from /lib/x86_64-linux-gnu/libc.so.6
-432	    std::set<CTxDestination> destinations;
+Breakpoint 1 at 0x7ffb1f1daa1f: file rpc/server.cpp, line 473.
+Breakpoint 2 at 0x7ffb1f1b249e: file rpc/rawtransaction.cpp, line 320.
+Currently logging to "createtx.txt".
+Logs will be appended to the log file.
+Output is being logged and displayed.
 Continuing.
+[Switching to Thread 0x7ffb18efa700 (LWP 553)]
 
-Breakpoint 4, CScript::CScript (this=0x7fb0ab1104b0) at ./script/script.h:409
-409	    CScript() { }
-prevector<28u, unsigned char, unsigned int, int>::prevector (this=0x7fb0ab1104b0) at ./prevector.h:249
-249	    prevector() : _size(0), _union{{}} {}
-GetScriptForDestination (dest=...) at script/standard.cpp:323
-323	    boost::apply_visitor(CScriptVisitor(&script), dest);
-324	    return script;
-$14 = {
-  <prevector<28u, unsigned char, unsigned int, int>> = {
-    _size = 23, 
-    _union = {
-      direct = "\251\024\azAL=p~\257\362q\203i\272\324+&\207\202yȇ\000\000\000\000", 
-      {
-        capacity = 2047284393, 
-        indirect = 0x71f2af7e703d4c41 <error: Cannot access memory at address 0x71f2af7e703d4c41>
-      }
-    }
-  }, <No data fields>}
-$15 = {
-  <prevector<28u, unsigned char, unsigned int, int>> = {
-    _size = 0x17, 
-    _union = {
-      direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 
-        0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
-      {
-        capacity = 0x7a0714a9, 
-        indirect = 0x71f2af7e703d4c41
-      }
-    }
-  }, <No data fields>}
-325	}
-createrawtransaction (request=...) at rpc/rawtransaction.cpp:465
-465	            CAmount nAmount = AmountFromValue(outputs[name_]);
-467	            CTxOut out(nAmount, scriptPubKey);
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab110390) at ./script/script.h:389
-389	class CScript : public CScriptBase
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab110518) at ./script/script.h:409
-409	    CScript() { }
-CTxOut::CTxOut (this=0x7fb0ab110510, nValueIn=@0x7fb0ab110100: 2149000000, scriptPubKeyIn=...) at primitives/transaction.cpp:48
-48	    nValue = nValueIn;
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb088013038) at ./script/script.h:389
-389	class CScript : public CScriptBase
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab1104b0) at ./script/script.h:409
-409	    CScript() { }
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab110390) at ./script/script.h:389
-389	class CScript : public CScriptBase
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab110518) at ./script/script.h:409
-409	    CScript() { }
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0880131b0) at ./script/script.h:389
-389	class CScript : public CScriptBase
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb088013188) at ./script/script.h:389
-389	class CScript : public CScriptBase
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb088013204) at ./script/script.h:389
-389	class CScript : public CScriptBase
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb088013258) at ./script/script.h:389
-389	class CScript : public CScriptBase
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb088013280) at ./script/script.h:389
-389	class CScript : public CScriptBase
-Continuing.
-
-Breakpoint 3, COutPoint::COutPoint (this=0x7fb0ab10fda0) at ./primitives/transaction.h:24
-24	    COutPoint(): n((uint32_t) -1) { }
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab10fdc4) at ./script/script.h:409
-409	    CScript() { }
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab10fde8) at ./script/script.h:409
-409	    CScript() { }
-Continuing.
-
-Breakpoint 3, COutPoint::COutPoint (this=0x7fb0ab10fe50) at ./primitives/transaction.h:24
-24	    COutPoint(): n((uint32_t) -1) { }
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab10fe74) at ./script/script.h:409
-409	    CScript() { }
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0ab10fe98) at ./script/script.h:409
-409	    CScript() { }
-Continuing.
-[Switching to Thread 0x7fb0aa910700 (LWP 13702)]
-
-Breakpoint 1, CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:472
-472	{
+Breakpoint 1, CRPCTable::execute (this=0x7ffb1fba3fa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
 Continuing.
 
 Breakpoint 2, createrawtransaction (request=...) at rpc/rawtransaction.cpp:320
@@ -803,1413 +16,25 @@ Breakpoint 2, createrawtransaction (request=...) at rpc/rawtransaction.cpp:320
 367	    RPCTypeCheck(request.params, {
 373	    );
 367	    RPCTypeCheck(request.params, {
-374	    if (request.params[0].isNull() || request.params[1].isNull())
-377	    UniValue inputs = request.params[0].get_array();
-378	    const bool outputs_is_obj = request.params[1].isObject();
-381	                           request.params[1].get_array();
-380	                           request.params[1].get_obj() :
-381	                           request.params[1].get_array();
-383	    CMutableTransaction rawTx;
-385	    if (!request.params[2].isNull()) {
-392	    bool rbfOptIn = request.params[3].isTrue();
-394	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
-395	        const UniValue& input = inputs[idx];
-396	        const UniValue& o = input.get_obj();
-398	        uint256 txid = ParseHashO(o, "txid");
-400	        const UniValue& vout_v = find_value(o, "vout");
-401	        if (!vout_v.isNum())
-403	        int nOutput = vout_v.get_int();
-404	        if (nOutput < 0)
-408	        if (rbfOptIn) {
-410	        } else if (rawTx.nLockTime) {
-413	            nSequence = std::numeric_limits<uint32_t>::max();
-417	        const UniValue& sequenceObj = find_value(o, "sequence");
-418	        if (sequenceObj.isNum()) {
-427	        CTxIn in(COutPoint(txid, nOutput), CScript(), nSequence);
-Breakpoint 5 at 0x7fb0b12ee040: CTxIn::CTxIn. (5 locations)
-Continuing.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0aa90f4b0) at ./script/script.h:409
-409	    CScript() { }
-prevector<28u, unsigned char, unsigned int, int>::prevector (this=0x7fb0aa90f4b0) at ./prevector.h:249
-249	    prevector() : _size(0), _union{{}} {}
-
-Breakpoint 3, COutPoint::COutPoint (this=0x7fb0aa90f510, hashIn=..., nIn=0) at ./primitives/transaction.h:25
-25	    COutPoint(const uint256& hashIn, uint32_t nIn): hash(hashIn), n(nIn) { }
-
-Breakpoint 5, CTxIn::CTxIn (this=0x7fb0aa90f570, prevoutIn=..., scriptSigIn=..., nSequenceIn=4294967295)
-    at primitives/transaction.cpp:17
-17	CTxIn::CTxIn(COutPoint prevoutIn, CScript scriptSigIn, uint32_t nSequenceIn)
-
-Breakpoint 3, COutPoint::COutPoint (this=0x7fb0aa90f570) at ./primitives/transaction.h:24
-24	    COutPoint(): n((uint32_t) -1) { }
-
-Breakpoint 4, CScript::CScript (this=0x7fb0aa90f594) at ./script/script.h:409
-409	    CScript() { }
-CTxIn::CTxIn (this=0x7fb0aa90f570, prevoutIn=..., scriptSigIn=..., nSequenceIn=4294967295) at primitives/transaction.cpp:19
-19	    prevout = prevoutIn;
-20	    scriptSig = scriptSigIn;
-$16 = {
-  hash = {
-    <base_blob<256u>> = {
-      static WIDTH = 32, 
-      data = "\000͋,\262\066N\205\220\177\332Z\251NR\356)\273\331{\022\257\024\200_!{/*\217\250E"
-    }, <No data fields>}, 
-  n = 0
-}
-$17 = {
-  hash = {
-    <base_blob<256u>> = {
-      static WIDTH = 0x20, 
-      data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 0xd9, 
-        0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
-    }, <No data fields>}, 
-  n = 0x0
-}
-21	    nSequence = nSequenceIn;
-$18 = {
-  <prevector<28u, unsigned char, unsigned int, int>> = {
-    _size = 0, 
-    _union = {
-      direct = '\000' <repeats 27 times>, 
-      {
-        capacity = 0, 
-        indirect = 0x0
-      }
-    }
-  }, <No data fields>}
-$19 = {
-  <prevector<28u, unsigned char, unsigned int, int>> = {
-    _size = 0x0, 
-    _union = {
-      direct = {0x0 <repeats 28 times>}, 
-      {
-        capacity = 0x0, 
-        indirect = 0x0
-      }
-    }
-  }, <No data fields>}
-22	}
-$20 = 4294967295
-$21 = 0xffffffff
-createrawtransaction (request=...) at rpc/rawtransaction.cpp:429
-429	        rawTx.vin.push_back(in);
-$22 = {
-  prevout = {
-    hash = {
-      <base_blob<256u>> = {
-        static WIDTH = 0x20, 
-        data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
-          0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
-      }, <No data fields>}, 
-    n = 0x0
-  }, 
-  scriptSig = {
-    <prevector<28u, unsigned char, unsigned int, int>> = {
-      _size = 0x0, 
-      _union = {
-        direct = {0x0 <repeats 28 times>}, 
-        {
-          capacity = 0x0, 
-          indirect = 0x0
-        }
-      }
-    }, <No data fields>}, 
-  nSequence = 0xffffffff, 
-  scriptWitness = {
-    stack = std::vector of length 0, capacity 0
-  }, 
-  static SEQUENCE_FINAL = 0xffffffff, 
-  static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
-  static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
-  static SEQUENCE_LOCKTIME_MASK = 0xffff, 
-  static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
-}
-$23 = {
-  vin = std::vector of length 0, capacity 0, 
-  vout = std::vector of length 0, capacity 0, 
-  nVersion = 2, 
-  nLockTime = 0
-}
-#0  createrawtransaction (request=...) at rpc/rawtransaction.cpp:429
-#1  0x00007fb0b13f1c0a in CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:495
-#2  0x00007fb0b15a33c2 in HTTPReq_JSONRPC (req=0x7fb0940020e0) at httprpc.cpp:189
-#3  0x00007fb0b13766a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
-    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
-    at /usr/include/c++/6/functional:1717
-#4  0x00007fb0b15b05f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7fb094006070, __args#0=0x7fb0940020e0, __args#1="") at /usr/include/c++/6/functional:2127
-#5  0x00007fb0b15aeabd in HTTPWorkItem::operator() (this=0x7fb094006040) at httpserver.cpp:53
-#6  0x00007fb0b15b1844 in WorkQueue<HTTPClosure>::Run (this=0x7fb0b3e15fb0) at httpserver.cpp:112
-#7  0x00007fb0b15a9b8c in HTTPWorkQueueRun (queue=0x7fb0b3e15fb0) at httpserver.cpp:334
-#8  0x00007fb0b15bf6a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7fb0b3e168c8) at /usr/include/c++/6/functional:1391
-#9  0x00007fb0b15bf122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
-    this=0x7fb0b3e168c8) at /usr/include/c++/6/functional:1380
-#10 0x00007fb0b15be9e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7fb0b3e168c0) at /usr/include/c++/6/thread:197
-#11 0x00007fb0af2dee6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
-#12 0x00007fb0aeaf4494 in start_thread (arg=0x7fb0aa910700) at pthread_create.c:333
-#13 0x00007fb0ae836acf in clone () from /lib/x86_64-linux-gnu/libc.so.6
-Undefined command: "frme".  Try "help".
-#0  createrawtransaction (request=...) at rpc/rawtransaction.cpp:429
-429	        rawTx.vin.push_back(in);
-
-Breakpoint 5, CTxIn::CTxIn (this=0x7fb0b48a3bf0) at ./primitives/transaction.h:61
-61	class CTxIn
-No symbol "rawTx" in current context.
-
-Breakpoint 4, CScript::CScript (this=0x7fb0b48a3c14) at ./script/script.h:389
-389	class CScript : public CScriptBase
-Num     Type           Disp Enb Address            What
-1       breakpoint     keep y   0x00007fb0b13f1a1f in CRPCTable::execute(JSONRPCRequest const&) const at rpc/server.cpp:472
-	breakpoint already hit 2 times
-2       breakpoint     keep y   0x00007fb0b13c949e in createrawtransaction(JSONRPCRequest const&) at rpc/rawtransaction.cpp:320
-	breakpoint already hit 2 times
-3       breakpoint     keep y   <MULTIPLE>         
-	breakpoint already hit 4 times
-3.1                         y     0x00007fb0b12ededa in COutPoint::COutPoint() at ./primitives/transaction.h:24
-3.2                         y     0x00007fb0b12edf2b in COutPoint::COutPoint(uint256 const&, unsigned int) 
-                                                   at ./primitives/transaction.h:25
-4       breakpoint     keep y   <MULTIPLE>         
-	breakpoint already hit 19 times
-4.1                         y     0x00007fb0b12edd4e in CScript::CScript() at ./script/script.h:409
-4.2                         y     0x00007fb0b12edd90 in CScript::CScript(CScript const&) at ./script/script.h:389
-4.3                         y     0x00007fb0b136cc90 in CScript::CScript(__gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >) at ./script/script.h:411
-4.4                         y     0x00007fb0b1373138 in CScript::CScript(CScript&&) at ./script/script.h:389
-4.5                         y     0x00007fb0b17b72d0 in CScript::CScript(prevector<28u, unsigned char, unsigned int, int>::const_iterator, prevector<28u, unsigned char, unsigned int, int>::const_iterator) at ./script/script.h:410
-4.6                         y     0x00007fb0b17b731f in CScript::CScript(std::vector<unsigned char, std::allocator<unsigned char> > const&) at ./script/script.h:439
-5       breakpoint     keep y   <MULTIPLE>         
-	breakpoint already hit 2 times
-5.1                         y     0x00007fb0b12ee040 in CTxIn::CTxIn() at ./primitives/transaction.h:96
-5.2                         y     0x00007fb0b1343a85 in CTxIn::CTxIn(CTxIn const&) at ./primitives/transaction.h:61
-5.3                         y     0x00007fb0b16974a0 in CTxIn::CTxIn(CTxIn&&) at ./primitives/transaction.h:61
-5.4                         y     0x00007fb0b17ac18e in CTxIn::CTxIn(COutPoint, CScript, unsigned int) 
-                                                   at primitives/transaction.cpp:17
-5.5                         y     0x00007fb0b17ac297 in CTxIn::CTxIn(uint256, unsigned int, CScript, unsigned int) 
-                                                   at primitives/transaction.cpp:24
-warning: bad breakpoint number at or near 'CScript::CScript'
-Num     Type           Disp Enb Address            What
-1       breakpoint     keep y   0x00007fb0b13f1a1f in CRPCTable::execute(JSONRPCRequest const&) const at rpc/server.cpp:472
-	breakpoint already hit 2 times
-2       breakpoint     keep y   0x00007fb0b13c949e in createrawtransaction(JSONRPCRequest const&) at rpc/rawtransaction.cpp:320
-	breakpoint already hit 2 times
-4       breakpoint     keep y   <MULTIPLE>         
-	breakpoint already hit 19 times
-4.1                         y     0x00007fb0b12edd4e in CScript::CScript() at ./script/script.h:409
-4.2                         y     0x00007fb0b12edd90 in CScript::CScript(CScript const&) at ./script/script.h:389
-4.3                         y     0x00007fb0b136cc90 in CScript::CScript(__gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >) at ./script/script.h:411
-4.4                         y     0x00007fb0b1373138 in CScript::CScript(CScript&&) at ./script/script.h:389
-4.5                         y     0x00007fb0b17b72d0 in CScript::CScript(prevector<28u, unsigned char, unsigned int, int>::const_iterator, prevector<28u, unsigned char, unsigned int, int>::const_iterator) at ./script/script.h:410
-4.6                         y     0x00007fb0b17b731f in CScript::CScript(std::vector<unsigned char, std::allocator<unsigned char> > const&) at ./script/script.h:439
-5       breakpoint     keep y   <MULTIPLE>         
-	breakpoint already hit 2 times
-5.1                         y     0x00007fb0b12ee040 in CTxIn::CTxIn() at ./primitives/transaction.h:96
-5.2                         y     0x00007fb0b1343a85 in CTxIn::CTxIn(CTxIn const&) at ./primitives/transaction.h:61
-5.3                         y     0x00007fb0b16974a0 in CTxIn::CTxIn(CTxIn&&) at ./primitives/transaction.h:61
-5.4                         y     0x00007fb0b17ac18e in CTxIn::CTxIn(COutPoint, CScript, unsigned int) 
-                                                   at primitives/transaction.cpp:17
-5.5                         y     0x00007fb0b17ac297 in CTxIn::CTxIn(uint256, unsigned int, CScript, unsigned int) 
-                                                   at primitives/transaction.cpp:24
-Num     Type           Disp Enb Address            What
-1       breakpoint     keep y   0x00007fb0b13f1a1f in CRPCTable::execute(JSONRPCRequest const&) const at rpc/server.cpp:472
-	breakpoint already hit 2 times
-2       breakpoint     keep y   0x00007fb0b13c949e in createrawtransaction(JSONRPCRequest const&) at rpc/rawtransaction.cpp:320
-	breakpoint already hit 2 times
-5       breakpoint     keep y   <MULTIPLE>         
-	breakpoint already hit 2 times
-5.1                         y     0x00007fb0b12ee040 in CTxIn::CTxIn() at ./primitives/transaction.h:96
-5.2                         y     0x00007fb0b1343a85 in CTxIn::CTxIn(CTxIn const&) at ./primitives/transaction.h:61
-5.3                         y     0x00007fb0b16974a0 in CTxIn::CTxIn(CTxIn&&) at ./primitives/transaction.h:61
-5.4                         y     0x00007fb0b17ac18e in CTxIn::CTxIn(COutPoint, CScript, unsigned int) 
-                                                   at primitives/transaction.cpp:17
-5.5                         y     0x00007fb0b17ac297 in CTxIn::CTxIn(uint256, unsigned int, CScript, unsigned int) 
-                                                   at primitives/transaction.cpp:24
-std::vector<CTxIn, std::allocator<CTxIn> >::_M_emplace_back_aux<CTxIn const&> (this=0x7fb0aa90f150, __args#0=...)
-    at /usr/include/c++/6/bits/vector.tcc:418
-418		    __new_finish = pointer();
-423		       __new_start, _M_get_Tp_allocator());
-422		      (this->_M_impl._M_start, this->_M_impl._M_finish,
-420		    __new_finish
-425		    ++__new_finish;
-437			      _M_get_Tp_allocator());
-436		std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
-439			      this->_M_impl._M_end_of_storage
-440			      - this->_M_impl._M_start);
-438		_M_deallocate(this->_M_impl._M_start,
-441		this->_M_impl._M_start = __new_start;
-442		this->_M_impl._M_finish = __new_finish;
-443		this->_M_impl._M_end_of_storage = __new_start + __len;
-444	      }
-std::vector<CTxIn, std::allocator<CTxIn> >::push_back (this=0x7fb0aa90f150, __x=...)
-    at /usr/include/c++/6/bits/stl_vector.h:928
-928	      }
-createrawtransaction (request=...) at rpc/rawtransaction.cpp:427
-427	        CTxIn in(COutPoint(txid, nOutput), CScript(), nSequence);
-394	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
-432	    std::set<CTxDestination> destinations;
-$24 = {
-  vin = std::vector of length 1, capacity 1 = {{
-      prevout = {
-        hash = {
-          <base_blob<256u>> = {
-            static WIDTH = 32, 
-            data = "\000͋,\262\066N\205\220\177\332Z\251NR\356)\273\331{\022\257\024\200_!{/*\217\250E"
-          }, <No data fields>}, 
-        n = 0
-      }, 
-      scriptSig = {
-        <prevector<28u, unsigned char, unsigned int, int>> = {
-          _size = 0, 
-          _union = {
-            direct = "5ada7f90854e36b22c8bcd00\000\000\000", 
-            {
-              capacity = 1633968437, 
-              indirect = 0x6534353830396637 <error: Cannot access memory at address 0x6534353830396637>
-            }
-          }
-        }, <No data fields>}, 
-      nSequence = 4294967295, 
-      scriptWitness = {
-        stack = std::vector of length 0, capacity 0
-      }, 
-      static SEQUENCE_FINAL = 4294967295, 
-      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 2147483648, 
-      static SEQUENCE_LOCKTIME_TYPE_FLAG = 4194304, 
-      static SEQUENCE_LOCKTIME_MASK = 65535, 
-      static SEQUENCE_LOCKTIME_GRANULARITY = 9
-    }}, 
-  vout = std::vector of length 0, capacity 0, 
-  nVersion = 2, 
-  nLockTime = 0
-}
-$25 = {
-  vin = std::vector of length 1, capacity 1 = {{
-      prevout = {
-        hash = {
-          <base_blob<256u>> = {
-            static WIDTH = 32, 
-            data = "\000͋,\262\066N\205\220\177\332Z\251NR\356)\273\331{\022\257\024\200_!{/*\217\250E"
-          }, <No data fields>}, 
-        n = 0
-      }, 
-      scriptSig = {
-        <prevector<28u, unsigned char, unsigned int, int>> = {
-          _size = 0, 
-          _union = {
-            direct = "5ada7f90854e36b22c8bcd00\000\000\000", 
-            {
-              capacity = 1633968437, 
-              indirect = 0x6534353830396637 <error: Cannot access memory at address 0x6534353830396637>
-            }
-          }
-        }, <No data fields>}, 
-      nSequence = 4294967295, 
-      scriptWitness = {
-        stack = std::vector of length 0, capacity 0
-      }, 
-      static SEQUENCE_FINAL = 4294967295, 
-      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 2147483648, 
-      static SEQUENCE_LOCKTIME_TYPE_FLAG = 4194304, 
-      static SEQUENCE_LOCKTIME_MASK = 65535, 
-      static SEQUENCE_LOCKTIME_GRANULARITY = 9
-    }}, 
-  vout = std::vector of length 0, capacity 0, 
-  nVersion = 2, 
-  nLockTime = 0
-}
-$26 = 0x1
-433	    if (!outputs_is_obj) {
-448	    for (const std::string& name_ : outputs.getKeys()) {
-$27 = {
-  typ = UniValue::VOBJ, 
-  val = "", 
-  keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, 
-  values = std::vector of length 2, capacity 2 = {{
-      typ = UniValue::VNUM, 
-      val = "21.49", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }, {
-      typ = UniValue::VNUM, 
-      val = "28.5", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }}
-}
-449	        if (name_ == "data") {
-Junk after end of expression.
-Invalid data type for function to be called.
-$28 = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}
-$29 = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}
-455	            CTxDestination destination = DecodeDestination(name_);
-$30 = "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
-Breakpoint 6 at 0x7fb0b173e7ab: file key_io.cpp, line 215.
-Note: breakpoint 6 also set at pc 0x7fb0b173e7ab.
-Breakpoint 7 at 0x7fb0b173e7ab: file key_io.cpp, line 215.
-
-Breakpoint 6, DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ") at key_io.cpp:215
-215	{
-216	    return DecodeDestination(str, Params());
-Undefined command: "breake".  Try "help".
-Note: breakpoints 6 and 7 also set at pc 0x7fb0b173e7ab.
-Breakpoint 8 at 0x7fb0b173e7ab: file key_io.cpp, line 215.
-Breakpoint 9 at 0x7fb0b173d788: file key_io.cpp, line 73.
-
-Breakpoint 9, (anonymous namespace)::DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", params=...) at key_io.cpp:74
-74	{
-$31 = (const CChainParams &) @0x7fb0b3dcf250: {
-  consensus = {
-    hashGenesisBlock = {
-      <base_blob<256u>> = {
-        static WIDTH = 32, 
-        data = "\006\"nF\021\032\vYʯ\022`C\353[\277(\303O:^3*\037ǲ\267<\361\210\221\017"
-      }, <No data fields>}, 
-    nSubsidyHalvingInterval = 150, 
-    BIP16Height = 0, 
-    BIP34Height = 100000000, 
-    BIP34Hash = {
-      <base_blob<256u>> = {
-        static WIDTH = 32, 
-        data = '\000' <repeats 31 times>
-      }, <No data fields>}, 
-    BIP65Height = 1351, 
-    BIP66Height = 1251, 
-    nRuleChangeActivationThreshold = 108, 
-    nMinerConfirmationWindow = 144, 
-    vDeployments = {{
-        bit = 28, 
-        nStartTime = 0, 
-        nTimeout = 9223372036854775807, 
-        static NO_TIMEOUT = 9223372036854775807, 
-        static ALWAYS_ACTIVE = -1
-      }, {
-        bit = 0, 
-        nStartTime = 0, 
-        nTimeout = 9223372036854775807, 
-        static NO_TIMEOUT = 9223372036854775807, 
-        static ALWAYS_ACTIVE = -1
-      }, {
-        bit = 1, 
-        nStartTime = -1, 
-        nTimeout = 9223372036854775807, 
-        static NO_TIMEOUT = 9223372036854775807, 
-        static ALWAYS_ACTIVE = -1
-      }}, 
-    powLimit = {
-      <base_blob<256u>> = {
-        static WIDTH = 32, 
-        data = '\377' <repeats 31 times>, "\177"
-      }, <No data fields>}, 
-    fPowAllowMinDifficultyBlocks = true, 
-    fPowNoRetargeting = true, 
-    nPowTargetSpacing = 600, 
-    nPowTargetTimespan = 1209600, 
-    nMinimumChainWork = {
-      <base_blob<256u>> = {
-        static WIDTH = 32, 
-        data = '\000' <repeats 31 times>
-      }, <No data fields>}, 
-    defaultAssumeValid = {
-      <base_blob<256u>> = {
-        static WIDTH = 32, 
-        data = '\000' <repeats 31 times>
-      }, <No data fields>}
-  }, 
-  pchMessageStart = "\372\277\265", <incomplete sequence \332>, 
-  nDefaultPort = 18444, 
-  nPruneAfterHeight = 1000, 
-  vSeeds = std::vector of length 0, capacity 0, 
-  base58Prefixes = {std::vector of length 1, capacity 1 = {111 'o'}, std::vector of length 1, capacity 1 = {196 '\304'}, 
-    std::vector of length 1, capacity 1 = {239 '\357'}, std::vector of length 4, capacity 4 = {4 '\004', 53 '5', 135 '\207', 
-      207 '\317'}, std::vector of length 4, capacity 4 = {4 '\004', 53 '5', 131 '\203', 148 '\224'}}, 
-  bech32_hrp = "bcrt", 
-  strNetworkID = "regtest", 
-  genesis = {
-    <CBlockHeader> = {
-      nVersion = 1, 
-      hashPrevBlock = {
-        <base_blob<256u>> = {
-          static WIDTH = 32, 
-          data = '\000' <repeats 31 times>
-        }, <No data fields>}, 
-      hashMerkleRoot = {
-        <base_blob<256u>> = {
-          static WIDTH = 32, 
-          data = ";\243\355\375z{\022\262z\307,>gv\217a\177\310\033È\212Q2:\237\270\252K\036^J"
-        }, <No data fields>}, 
-      nTime = 1296688602, 
-      nBits = 545259519, 
-      nNonce = 2
-    }, 
-    members of CBlock: 
-    vtx = std::vector of length 1, capacity 1 = {std::shared_ptr (count 1, weak 0) 0x7fb0b3dcf550}, 
-    fChecked = false
-  }, 
-  vFixedSeeds = std::vector of length 0, capacity 0, 
-  fDefaultConsistencyChecks = true, 
-  fRequireStandard = false, 
-  fMineBlocksOnDemand = true, 
-  checkpointData = {
-    mapCheckpoints = std::map with 1 elements = {
-      [0] = {
-        <base_blob<256u>> = {
-          static WIDTH = 32, 
-          data = "\006\"nF\021\032\vYʯ\022`C\353[\277(\303O:^3*\037ǲ\267<\361\210\221\017"
-        }, <No data fields>}
-    }
-  }, 
-  chainTxData = {
-    nTime = 0, 
-    nTxCount = 0, 
-    dTxRate = 0
-  }, 
-  m_fallback_fee_enabled = true
-}
-$32 = "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
-Undefined command: "".  Try "help".
-75	    std::vector<unsigned char> data;
-$33 = std::vector of length 122351880, capacity 16 = {208 '\320', 239 '\357', 144 '\220', 170 '\252', 176 '\260', 127 '\177', 
-  0 '\000', 0 '\000', 152 '\230', 224 '\340', 219 '\333', 177 '\261', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 208 '\320', 
-  239 '\357', 144 '\220', 170 '\252', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 0 '\000', 113 'q', 84 'T', 135 '\207', 
-  127 '\177', 13 '\r', 126 '~', 105 'i', 224 '\340', 239 '\357', 144 '\220', 170 '\252', 176 '\260', 127 '\177', 0 '\000', 
-  0 '\000', 195 '\303', 48 '0', 31 '\037', 177 '\261', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 1 '\001', 0 '\000', 
-  0 '\000', 0 '\000', 0 '\000', 0 '\000', 0 '\000', 0 '\000', 152 '\230', 224 '\340', 219 '\333', 177 '\261', 176 '\260', 
-  127 '\177', 0 '\000', 0 '\000', 216 '\330', 239 '\357', 144 '\220', 170 '\252', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 
-  0 '\000', 113 'q', 84 'T', 135 '\207', 127 '\177', 13 '\r', 126 '~', 105 'i', 16 '\020', 240 '\360', 144 '\220', 170 '\252', 
-  176 '\260', 127 '\177', 0 '\000', 0 '\000', 143 '\217', 88 'X', 114 'r', 177 '\261', 176 '\260', 127 '\177', 0 '\000', 
-  0 '\000', 112 'p', 245 '\365', 144 '\220', 170 '\252', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 152 '\230', 224 '\340', 
-  219 '\333', 177 '\261', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 72 'H', 240 '\360', 144 '\220', 170 '\252', 176 '\260', 
-  127 '\177', 0 '\000', 0 '\000', 0 '\000', 113 'q', 84 'T', 135 '\207', 127 '\177', 13 '\r', 126 '~', 105 'i', 48 '0', 
-  240 '\360', 144 '\220', 170 '\252', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 1 '\001', 0 '\000', 0 '\000', 0 '\000', 
-  0 '\000', 0 '\000', 0 '\000', 0 '\000', 112 'p', 245 '\365', 144 '\220', 170 '\252', 176 '\260', 127 '\177', 0 '\000', 
-  0 '\000', 4 '\004', 0 '\000', 0 '\000', 0 '\000', 0 '\000', 0 '\000', 0 '\000', 0 '\000', 96 '`', 240 '\360', 144 '\220', 
-  170 '\252', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 213 '\325', 231 '\347', 115 's', 177 '\261', 176 '\260', 127 '\177', 
-  0 '\000', 0 '\000', 80 'P', 112 'p', 160 '\240', 180 '\264', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 112 'p', 
-  245 '\365', 144 '\220', 170 '\252', 176 '\260', 127 '\177', 0 '\000', 0 '\000', 144 '\220', 112 'p', 160 '\240', 180 '\264', 
-  176 '\260', 127 '\177', 0 '\000', 0 '\000'...}
-$34 = std::vector of length 122351880, capacity 16 = {0xd0, 0xef, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0x98, 0xe0, 0xdb, 0xb1, 
-  0xb0, 0x7f, 0x0, 0x0, 0xd0, 0xef, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0x0, 0x71, 0x54, 0x87, 0x7f, 0xd, 0x7e, 0x69, 0xe0, 
-  0xef, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0xc3, 0x30, 0x1f, 0xb1, 0xb0, 0x7f, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 
-  0x0, 0x98, 0xe0, 0xdb, 0xb1, 0xb0, 0x7f, 0x0, 0x0, 0xd8, 0xef, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0x0, 0x71, 0x54, 0x87, 
-  0x7f, 0xd, 0x7e, 0x69, 0x10, 0xf0, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0x8f, 0x58, 0x72, 0xb1, 0xb0, 0x7f, 0x0, 0x0, 0x70, 
-  0xf5, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0x98, 0xe0, 0xdb, 0xb1, 0xb0, 0x7f, 0x0, 0x0, 0x48, 0xf0, 0x90, 0xaa, 0xb0, 0x7f, 
-  0x0, 0x0, 0x0, 0x71, 0x54, 0x87, 0x7f, 0xd, 0x7e, 0x69, 0x30, 0xf0, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 
-  0x0, 0x0, 0x0, 0x0, 0x70, 0xf5, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0x4, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x60, 0xf0, 0x90, 
-  0xaa, 0xb0, 0x7f, 0x0, 0x0, 0xd5, 0xe7, 0x73, 0xb1, 0xb0, 0x7f, 0x0, 0x0, 0x50, 0x70, 0xa0, 0xb4, 0xb0, 0x7f, 0x0, 0x0, 
-  0x70, 0xf5, 0x90, 0xaa, 0xb0, 0x7f, 0x0, 0x0, 0x90, 0x70, 0xa0, 0xb4, 0xb0, 0x7f, 0x0, 0x0...}
-76	    uint160 hash;
-Breakpoint 10 at 0x7fb0b1774ec9: DecodeBase58Check. (2 locations)
-77	    if (DecodeBase58Check(str, data)) {
-
-Breakpoint 10, DecodeBase58Check (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", vchRet=std::vector of length 0, capacity 0)
-    at base58.cpp:143
-143	{
-144	    return DecodeBase58Check(str.c_str(), vchRet);
-Breakpoint 11 at 0x7fb0b17744d9: DecodeBase58. (2 locations)
-
-Breakpoint 10, DecodeBase58Check (psz=0x7fb0b4909770 "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
-    vchRet=std::vector of length 0, capacity 0) at base58.cpp:126
-126	{
-127	    if (!DecodeBase58(psz, vchRet) ||
-
-Breakpoint 11, DecodeBase58 (psz=0x7fb0b4909770 "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", vch=std::vector of length 0, capacity 0)
-    at base58.cpp:17
-17	{
-19	    while (*psz && isspace(*psz))
-22	    int zeroes = 0;
-23	    int length = 0;
-24	    while (*psz == '1') {
-29	    int size = strlen(psz) * 733 /1000 + 1; // log(58) / log(256), rounded up.
-30	    std::vector<unsigned char> b256(size);
-$35 = 26
-$36 = 0x23
-$37 = 0x1a
-32	    while (*psz && !isspace(*psz)) {
-34	        const char* ch = strchr(pszBase58, *psz);
-35	        if (ch == nullptr)
-38	        int carry = ch - pszBase58;
-39	        int i = 0;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-41	            carry += 58 * (*it);
-42	            *it = carry % 256;
-43	            carry /= 256;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-45	        assert(carry == 0);
-46	        length = i;
-47	        psz++;
-32	    while (*psz && !isspace(*psz)) {
-34	        const char* ch = strchr(pszBase58, *psz);
-35	        if (ch == nullptr)
-DecodeBase58 (psz=0x7fb0b4909793 "", vch=std::vector of length 0, capacity 0) at base58.cpp:50
-50	    while (isspace(*psz))
-52	    if (*psz != 0)
-55	    std::vector<unsigned char>::iterator it = b256.begin() + (size - length);
-Undefined command: "nn".  Try "help".
-Undefined command: "nn".  Try "help".
-56	    while (it != b256.end() && *it == 0)
-59	    vch.reserve(zeroes + (b256.end() - it));
-$38 = std::vector of length 0, capacity 0
-60	    vch.assign(zeroes, 0x00);
-61	    while (it != b256.end())
-$39 = std::vector of length 0, capacity 25
-62	        vch.push_back(*(it++));
-DecodeBase58 (psz=0x7fb0b4909793 "", vch=std::vector of length 25, capacity 25 = {...}) at base58.cpp:63
-63	    return true;
-$40 = std::vector of length 25, capacity 25 = {0xc4, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 
-  0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8, 0xa7, 0x6c, 0x68, 0x97}
-$41 = std::vector of length 25, capacity 25 = {196 '\304', 7 '\a', 122 'z', 65 'A', 76 'L', 61 '=', 112 'p', 126 '~', 
-  175 '\257', 242 '\362', 113 'q', 131 '\203', 105 'i', 186 '\272', 212 '\324', 43 '+', 38 '&', 135 '\207', 130 '\202', 
-  121 'y', 200 '\310', 167 '\247', 108 'l', 104 'h', 151 '\227'}
-$42 = std::vector of length 25, capacity 25 = {196 '\304', 7 '\a', 122 'z', 65 'A', 76 'L', 61 '=', 112 'p', 126 '~', 
-  175 '\257', 242 '\362', 113 'q', 131 '\203', 105 'i', 186 '\272', 212 '\324', 43 '+', 38 '&', 135 '\207', 130 '\202', 
-  121 'y', 200 '\310', 167 '\247', 108 'l', 104 'h', 151 '\227'}
-Couldn't find method std::vector<unsigned char, std::allocator<unsigned char> >::c_str
-$43 = std::vector of length 25, capacity 25 = {0xc4, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 
-  0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8, 0xa7, 0x6c, 0x68, 0x97}
-$44 = "0014682f951f473c437f4489af026e5bfb1d1ed22aa3"
-$45 = "a914077a414c3d707eaff2718369bad42b26878279c887"
-$46 = "todo here , compare the result"
-30	    std::vector<unsigned char> b256(size);
-[Switching to Thread 0x7fb0ab111700 (LWP 13701)]
-
-Breakpoint 1, CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:472
-472	{
-#0  CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:472
-#1  0x00007fb0b15a33c2 in HTTPReq_JSONRPC (req=0x7fb094001e70) at httprpc.cpp:189
-#2  0x00007fb0b13766a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
-    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
-    at /usr/include/c++/6/functional:1717
-#3  0x00007fb0b15b05f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7fb094001f80, __args#0=0x7fb094001e70, __args#1="") at /usr/include/c++/6/functional:2127
-#4  0x00007fb0b15aeabd in HTTPWorkItem::operator() (this=0x7fb094001f50) at httpserver.cpp:53
-#5  0x00007fb0b15b1844 in WorkQueue<HTTPClosure>::Run (this=0x7fb0b3e15fb0) at httpserver.cpp:112
-#6  0x00007fb0b15a9b8c in HTTPWorkQueueRun (queue=0x7fb0b3e15fb0) at httpserver.cpp:334
-#7  0x00007fb0b15bf6a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1391
-#8  0x00007fb0b15bf122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
-    this=0x7fb0b3e15b88) at /usr/include/c++/6/functional:1380
-#9  0x00007fb0b15be9e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7fb0b3e15b80) at /usr/include/c++/6/thread:197
-#10 0x00007fb0af2dee6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
-#11 0x00007fb0aeaf4494 in start_thread (arg=0x7fb0ab111700) at pthread_create.c:333
-#12 0x00007fb0ae836acf in clone () from /lib/x86_64-linux-gnu/libc.so.6
-475	        LOCK(cs_rpcWarmup);
-[Switching to Thread 0x7fb0aa910700 (LWP 13702)]
-
-Breakpoint 6, DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM") at key_io.cpp:215
-215	{
-[Switching to Thread 0x7fb0ab111700 (LWP 13701)]
-
-Breakpoint 6, DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ") at key_io.cpp:215
-215	{
-216	    return DecodeDestination(str, Params());
-Note: breakpoint 9 also set at pc 0x7fb0b173d788.
-Breakpoint 12 at 0x7fb0b173d788: file key_io.cpp, line 73.
-Continuing.
-
-Breakpoint 9, (anonymous namespace)::DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", params=...) at key_io.cpp:74
-74	{
-75	    std::vector<unsigned char> data;
-76	    uint160 hash;
-77	    if (DecodeBase58Check(str, data)) {
-[Switching to Thread 0x7fb0aa910700 (LWP 13702)]
-
-Breakpoint 9, (anonymous namespace)::DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", params=...) at key_io.cpp:74
-74	{
-[Switching to Thread 0x7fb0ab111700 (LWP 13701)]
-
-Breakpoint 10, DecodeBase58Check (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", vchRet=std::vector of length 0, capacity 0)
-    at base58.cpp:143
-143	{
-144	    return DecodeBase58Check(str.c_str(), vchRet);
-Note: breakpoint 10 also set at pc 0x7fb0b1775010.
-Note: breakpoint 10 also set at pc 0x7fb0b1774ec9.
-Breakpoint 13 at 0x7fb0b1774ec9: DecodeBase58Check. (2 locations)
-
-Breakpoint 10, DecodeBase58Check (psz=0x7fb088000ed0 "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
-    vchRet=std::vector of length 0, capacity 0) at base58.cpp:126
-126	{
-127	    if (!DecodeBase58(psz, vchRet) ||
-$47 = 0x7fb088000ed0
-$48 = 0x7fb088000ed0 "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
-Value can't be converted to integer.
-
-Breakpoint 11, DecodeBase58 (psz=0x7fb088000ed0 "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", vch=std::vector of length 0, capacity 0)
-    at base58.cpp:17
-17	{
-19	    while (*psz && isspace(*psz))
-22	    int zeroes = 0;
-23	    int length = 0;
-24	    while (*psz == '1') {
-29	    int size = strlen(psz) * 733 /1000 + 1; // log(58) / log(256), rounded up.
-30	    std::vector<unsigned char> b256(size);
-32	    while (*psz && !isspace(*psz)) {
-34	        const char* ch = strchr(pszBase58, *psz);
-35	        if (ch == nullptr)
-38	        int carry = ch - pszBase58;
-39	        int i = 0;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-41	            carry += 58 * (*it);
-42	            *it = carry % 256;
-43	            carry /= 256;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-45	        assert(carry == 0);
-46	        length = i;
-47	        psz++;
-32	    while (*psz && !isspace(*psz)) {
-[Switching to Thread 0x7fb0aa910700 (LWP 13702)]
-
-Breakpoint 10, DecodeBase58Check (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", vchRet=std::vector of length 0, capacity 0)
-    at base58.cpp:143
-143	{
-144	    return DecodeBase58Check(str.c_str(), vchRet);
-
-Breakpoint 10, DecodeBase58Check (psz=0x7fb0b4a02110 "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", 
-    vchRet=std::vector of length 0, capacity 0) at base58.cpp:126
-126	{
-127	    if (!DecodeBase58(psz, vchRet) ||
-No symbol "vn" in current context.
-
-Breakpoint 11, DecodeBase58 (psz=0x7fb0b4a02110 "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", vch=std::vector of length 0, capacity 0)
-    at base58.cpp:17
-17	{
-19	    while (*psz && isspace(*psz))
-22	    int zeroes = 0;
-23	    int length = 0;
-24	    while (*psz == '1') {
-29	    int size = strlen(psz) * 733 /1000 + 1; // log(58) / log(256), rounded up.
-30	    std::vector<unsigned char> b256(size);
-32	    while (*psz && !isspace(*psz)) {
-34	        const char* ch = strchr(pszBase58, *psz);
-35	        if (ch == nullptr)
-38	        int carry = ch - pszBase58;
-39	        int i = 0;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-41	            carry += 58 * (*it);
-42	            *it = carry % 256;
-43	            carry /= 256;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-45	        assert(carry == 0);
-46	        length = i;
-47	        psz++;
-32	    while (*psz && !isspace(*psz)) {
-34	        const char* ch = strchr(pszBase58, *psz);
-35	        if (ch == nullptr)
-38	        int carry = ch - pszBase58;
-39	        int i = 0;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-41	            carry += 58 * (*it);
-42	            *it = carry % 256;
-43	            carry /= 256;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-45	        assert(carry == 0);
-46	        length = i;
-47	        psz++;
-32	    while (*psz && !isspace(*psz)) {
-34	        const char* ch = strchr(pszBase58, *psz);
-35	        if (ch == nullptr)
-38	        int carry = ch - pszBase58;
-39	        int i = 0;
-40	        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
-41	            carry += 58 * (*it);
-42	            *it = carry % 256;
-malformed linespec error: unexpected colon
-DecodeBase58 (psz=0x7fb0b4a02133 "", vch=std::vector of length 0, capacity 0) at base58.cpp:50
-50	    while (isspace(*psz))
-52	    if (*psz != 0)
-55	    std::vector<unsigned char>::iterator it = b256.begin() + (size - length);
-56	    while (it != b256.end() && *it == 0)
-59	    vch.reserve(zeroes + (b256.end() - it));
-60	    vch.assign(zeroes, 0x00);
-61	    while (it != b256.end())
-62	        vch.push_back(*(it++));
-61	    while (it != b256.end())
-62	        vch.push_back(*(it++));
-61	    while (it != b256.end())
-62	        vch.push_back(*(it++));
-61	    while (it != b256.end())
-62	        vch.push_back(*(it++));
-61	    while (it != b256.end())
-62	        vch.push_back(*(it++));
-61	    while (it != b256.end())
-62	        vch.push_back(*(it++));
-61	    while (it != b256.end())
-DecodeBase58 (psz=0x7fb0b4a02133 "", vch=std::vector of length 25, capacity 25 = {...}) at base58.cpp:63
-63	    return true;
-$49 = 0x7fb0b4a02133
-$50 = 0x7fb0b4a02133 ""
-$51 = std::vector of length 25, capacity 25 = {196 '\304', 98 'b', 152 '\230', 62 '>', 165 '\245', 43 '+', 53 '5', 157 '\235', 
-  48 '0', 69 'E', 72 'H', 191 '\277', 9 '\t', 228 '\344', 160 '\240', 159 '\237', 74 'J', 74 'J', 199 '\307', 183 '\267', 
-  0 '\000', 156 '\234', 122 'z', 216 '\330', 238 '\356'}
-$52 = std::vector of length 25, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x9c, 0x7a, 0xd8, 0xee}
-$53 = "a91462983ea52b359d304548bf09e4a09f4a4ac7b70087"
-30	    std::vector<unsigned char> b256(size);
-#0  DecodeBase58 (psz=0x7fb0b4a02133 "", vch=std::vector of length 25, capacity 25 = {...}) at base58.cpp:30
-30	    std::vector<unsigned char> b256(size);
-64	}
-DecodeBase58Check (psz=0x7fb0b4a02110 "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", 
-    vchRet=std::vector of length 25, capacity 25 = {...}) at base58.cpp:128
-128	        (vchRet.size() < 4)) {
-$54 = std::vector of length 25, capacity 25 = {196 '\304', 98 'b', 152 '\230', 62 '>', 165 '\245', 43 '+', 53 '5', 157 '\235', 
-  48 '0', 69 'E', 72 'H', 191 '\277', 9 '\t', 228 '\344', 160 '\240', 159 '\237', 74 'J', 74 'J', 199 '\307', 183 '\267', 
-  0 '\000', 156 '\234', 122 'z', 216 '\330', 238 '\356'}
-$55 = std::vector of length 25, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x9c, 0x7a, 0xd8, 0xee}
-$56 = "a91462983ea52b359d304548bf09e4a09f4a4ac7b70087"
-$57 = "62983ea52b359d304548bf09e4a09f4a4ac7b700"
-$58 = "c462983ea52b359d304548bf09e4a09f4a4ac7b700"
-$59 = std::vector of length 25, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x9c, 0x7a, 0xd8, 0xee}
-127	    if (!DecodeBase58(psz, vchRet) ||
-133	    uint256 hash = Hash(vchRet.begin(), vchRet.end() - 4);
-134	    if (memcmp(&hash, &vchRet[vchRet.size() - 4], 4) != 0) {
-No symbol "has" in current context.
-$60 = {
-  <base_blob<256u>> = {
-    static WIDTH = 32, 
-    data = "\234z\330\356;\257\340\354\001\225\070\067\336\032\025\024\370JSa,\276f\315\317AafӶ\023\026"
-  }, <No data fields>}
-$61 = {
-  <base_blob<256u>> = {
-    static WIDTH = 0x20, 
-    data = {0x9c, 0x7a, 0xd8, 0xee, 0x3b, 0xaf, 0xe0, 0xec, 0x1, 0x95, 0x38, 0x37, 0xde, 0x1a, 0x15, 0x14, 0xf8, 0x4a, 0x53, 
-      0x61, 0x2c, 0xbe, 0x66, 0xcd, 0xcf, 0x41, 0x61, 0x66, 0xd3, 0xb6, 0x13, 0x16}
-  }, <No data fields>}
-138	    vchRet.resize(vchRet.size() - 4);
-$62 = std::vector of length 25, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x9c, 0x7a, 0xd8, 0xee}
-139	    return true;
-$63 = std::vector of length 21, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0}
-140	}
-DecodeBase58Check (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", vchRet=std::vector of length 21, capacity 25 = {...})
-    at base58.cpp:145
-145	}
-$64 = std::vector of length 21, capacity 25 = {196 '\304', 98 'b', 152 '\230', 62 '>', 165 '\245', 43 '+', 53 '5', 157 '\235', 
-  48 '0', 69 'E', 72 'H', 191 '\277', 9 '\t', 228 '\344', 160 '\240', 159 '\237', 74 'J', 74 'J', 199 '\307', 183 '\267', 
-  0 '\000'}
-$65 = std::vector of length 21, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0}
-#0  DecodeBase58Check (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", vchRet=std::vector of length 21, capacity 25 = {...})
-    at base58.cpp:145
-145	}
-(anonymous namespace)::DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", params=...) at key_io.cpp:81
-81	        const std::vector<unsigned char>& pubkey_prefix = params.Base58Prefix(CChainParams::PUBKEY_ADDRESS);
-$66 = std::vector of length 21, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0}
-82	        if (data.size() == hash.size() + pubkey_prefix.size() && std::equal(pubkey_prefix.begin(), pubkey_prefix.end(), data.begin())) {
-$67 = std::vector of length 1, capacity 1 = {111 'o'}
-$68 = std::vector of length 1, capacity 1 = {0x6f}
-$69 = 0x1
-$70 = std::vector of length 21, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0}
-$71 = 21
-$72 = 21
-$73 = 20
-$74 = {
-  <base_blob<160u>> = {
-    static WIDTH = 0x14, 
-    data = {0x0 <repeats 20 times>}
-  }, <No data fields>}
-$75 = std::vector of length 1, capacity 1 = {111 'o'}
-$76 = std::vector of length 1, capacity 1 = {0x6f}
-$77 = std::vector of length 21, capacity 25 = {0xc4, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 
-  0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0}
-88	        const std::vector<unsigned char>& script_prefix = params.Base58Prefix(CChainParams::SCRIPT_ADDRESS);
-89	        if (data.size() == hash.size() + script_prefix.size() && std::equal(script_prefix.begin(), script_prefix.end(), data.begin())) {
-90	            std::copy(data.begin() + script_prefix.size(), data.end(), hash.begin());
-$78 = std::vector of length 1, capacity 1 = {0xc4}
-$79 = 196
-91	            return CScriptID(hash);
-$80 = {
-  <base_blob<160u>> = {
-    static WIDTH = 0x14, 
-    data = {0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 
-      0x0}
-  }, <No data fields>}
-75	    std::vector<unsigned char> data;
-#0  (anonymous namespace)::DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", params=...) at key_io.cpp:75
-75	    std::vector<unsigned char> data;
-130	}
-DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM") at key_io.cpp:217
-217	}
-createrawtransaction (request=...) at rpc/rawtransaction.cpp:456
-456	            if (!IsValidDestination(destination)) {
-$81 = {
-  which_ = 2, 
-  storage_ = {
-    <boost::detail::aligned_storage::aligned_storage_imp<48ul, 4ul>> = {
-      data_ = {
-        buf = "b\230>\245+5\235\060EH\277\t䠟JJǷ\000_!{/*\217\250E", '\000' <repeats 19 times>, 
-        align_ = {<No data fields>}
-      }
-    }, 
-    members of boost::aligned_storage<48ul, 4ul>: 
-    static size = <optimized out>, 
-    static alignment = <optimized out>
-  }
-}
-$82 = {
-  which_ = 0x2, 
-  storage_ = {
-    <boost::detail::aligned_storage::aligned_storage_imp<48ul, 4ul>> = {
-      data_ = {
-        buf = {0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 
-          0xb7, 0x0, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45, 0x0 <repeats 20 times>}, 
-        align_ = {<No data fields>}
-      }
-    }, 
-    members of boost::aligned_storage<48ul, 4ul>: 
-    static size = <optimized out>, 
-    static alignment = <optimized out>
-  }
-}
-$83 = "a91462983ea52b359d304548bf09e4a09f4a4ac7b70087"
-$84 = "62983ea52b359d304548bf09e4a09f4a4ac7b700"
-$85 = 2
-460	            if (!destinations.insert(destination).second) {
-$86 = std::set with 1 elements = {
-  [0] = {
-    which_ = 2, 
-    storage_ = {
-      <boost::detail::aligned_storage::aligned_storage_imp<48ul, 4ul>> = {
-        data_ = {
-          buf = "\azAL=p~\257\362q\203i\272\324+&\207\202y\310\062c8bcd00", '\000' <repeats 16 times>, "`\000\000", 
-          align_ = {<No data fields>}
-        }
-      }, 
-      members of boost::aligned_storage<48ul, 4ul>: 
-      static size = <optimized out>, 
-      static alignment = <optimized out>
-    }
-  }
-}
-464	            CScript scriptPubKey = GetScriptForDestination(destination);
-Breakpoint 14 at 0x7fb0b176d27a: file script/standard.cpp, line 320.
-$87 = {
-  which_ = 2, 
-  storage_ = {
-    <boost::detail::aligned_storage::aligned_storage_imp<48ul, 4ul>> = {
-      data_ = {
-        buf = "b\230>\245+5\235\060EH\277\t䠟JJǷ\000_!{/*\217\250E", '\000' <repeats 19 times>, 
-        align_ = {<No data fields>}
-      }
-    }, 
-    members of boost::aligned_storage<48ul, 4ul>: 
-    static size = <optimized out>, 
-    static alignment = <optimized out>
-  }
-}
-$88 = {
-  which_ = 0x2, 
-  storage_ = {
-    <boost::detail::aligned_storage::aligned_storage_imp<48ul, 4ul>> = {
-      data_ = {
-        buf = {0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 
-          0xb7, 0x0, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45, 0x0 <repeats 20 times>}, 
-        align_ = {<No data fields>}
-      }
-    }, 
-    members of boost::aligned_storage<48ul, 4ul>: 
-    static size = <optimized out>, 
-    static alignment = <optimized out>
-  }
-}
-
-Breakpoint 14, GetScriptForDestination (dest=...) at script/standard.cpp:320
-320	{
-321	    CScript script;
-Function "CScriptVisitor::operator()" not defined.
-Make breakpoint pending on future shared library load? (y or [n]) Function "CScriptVisitor::operator()" not defined.
-Make breakpoint pending on future shared library load? (y or [n]) Breakpoint 15 at 0x7fb0b176ce34: file script/standard.cpp, line 279.
-Breakpoint 16 at 0x7fb0b176ce7f: file script/standard.cpp, line 284.
-Breakpoint 17 at 0x7fb0b176cf57: file script/standard.cpp, line 290.
-Breakpoint 18 at 0x7fb0b176d015: file script/standard.cpp, line 296.
-Breakpoint 19 at 0x7fb0b176d0c5: file script/standard.cpp, line 303.
-Breakpoint 20 at 0x7fb0b176d175: file script/standard.cpp, line 310.
-323	    boost::apply_visitor(CScriptVisitor(&script), dest);
-
-Breakpoint 17, (anonymous namespace)::CScriptVisitor::operator() (this=0x7fb0aa90f040, scriptID=...) at script/standard.cpp:290
-290	    bool operator()(const CScriptID &scriptID) const {
-291	        script->clear();
-$89 = (const CScriptID &) @0x7fb0aa90f574: {
-  <uint160> = {
-    <base_blob<160u>> = {
-      static WIDTH = 20, 
-      data = "b\230>\245+5\235\060EH\277\t䠟JJǷ"
-    }, <No data fields>}, <No data fields>}
-$90 = (const CScriptID &) @0x7fb0aa90f574: {
-  <uint160> = {
-    <base_blob<160u>> = {
-      static WIDTH = 0x14, 
-      data = {0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 
-        0x0}
-    }, <No data fields>}, <No data fields>}
-$91 = 0xa9
-Function "ToByteVector" not defined.
-Make breakpoint pending on future shared library load? (y or [n]) 292	        *script << OP_HASH160 << ToByteVector(scriptID) << OP_EQUAL;
-No symbol "ToByteVector" in current context.
-$92 = (const CScriptID &) @0x7fb0aa90f574: {
-  <uint160> = {
-    <base_blob<160u>> = {
-      static WIDTH = 20, 
-      data = "b\230>\245+5\235\060EH\277\t䠟JJǷ"
-    }, <No data fields>}, <No data fields>}
-$93 = (const CScriptID &) @0x7fb0aa90f574: {
-  <uint160> = {
-    <base_blob<160u>> = {
-      static WIDTH = 0x14, 
-      data = {0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 
-        0x0}
-    }, <No data fields>}, <No data fields>}
-$94 = OP_HASH160
-$95 = 0xa9
-293	        return true;
-$96 = (CScript *) 0x7fb0aa90f4b0
-$97 = {
-  <prevector<28u, unsigned char, unsigned int, int>> = {
-    _size = 0x17, 
-    _union = {
-      direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 
-        0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
-      {
-        capacity = 0x986214a9, 
-        indirect = 0x4845309d352ba53e
-      }
-    }
-  }, <No data fields>}
-294	    }
-boost::detail::variant::invoke_visitor<(anonymous namespace)::CScriptVisitor const>::internal_visit<CScriptID const> (
-    this=0x7fb0aa90efe0, operand=...) at /usr/include/boost/variant/variant.hpp:1047
-1047	    }
-boost::detail::variant::visitation_impl_invoke_impl<boost::detail::variant::invoke_visitor<(anonymous namespace)::CScriptVisitor const>, void const*, CScriptID> (visitor=..., storage=0x7fb0aa90f574)
-    at /usr/include/boost/variant/detail/visitation_impl.hpp:115
-115	}
-boost::detail::variant::visitation_impl_invoke<boost::detail::variant::invoke_visitor<(anonymous namespace)::CScriptVisitor const>, void const*, CScriptID, boost::variant<CNoDestination, CKeyID, CScriptID, WitnessV0ScriptHash, WitnessV0KeyHash, WitnessUnknown>::has_fallback_type_> (internal_which=2, visitor=..., storage=0x7fb0aa90f574, t=0x0)
-    at /usr/include/boost/variant/detail/visitation_impl.hpp:158
-158	}
-boost::detail::variant::visitation_impl<mpl_::int_<0>, boost::detail::variant::visitation_impl_step<boost::mpl::l_iter<boost::mpl::l_item<mpl_::long_<6l>, CNoDestination, boost::mpl::l_item<mpl_::long_<5l>, CKeyID, boost::mpl::l_item<mpl_::long_<4l>, CScriptID, boost::mpl::l_item<mpl_::long_<3l>, WitnessV0ScriptHash, boost::mpl::l_item<mpl_::long_<2l>, WitnessV0KeyHash, boost::mpl::l_item<mpl_::long_<1l>, WitnessUnknown, boost::mpl::l_end> > > > > > >, boost::mpl::l_iter<boost::mpl::l_end> >, boost::detail::variant::invoke_visitor<(anonymous namespace)::CScriptVisitor const>, void const*, boost::variant<CNoDestination, CKeyID, CScriptID, WitnessV0ScriptHash, WitnessV0KeyHash, WitnessUnknown>::has_fallback_type_> (internal_which=2, logical_which=2, 
-    visitor=..., storage=0x7fb0aa90f574, no_backup_flag=...) at /usr/include/boost/variant/detail/visitation_impl.hpp:268
-268	}
-boost::variant<CNoDestination, CKeyID, CScriptID, WitnessV0ScriptHash, WitnessV0KeyHash, WitnessUnknown>::internal_apply_visitor_impl<boost::detail::variant::invoke_visitor<(anonymous namespace)::CScriptVisitor const>, void const*> (internal_which=2, 
-    logical_which=2, visitor=..., storage=0x7fb0aa90f574) at /usr/include/boost/variant/variant.hpp:2390
-2390	    }
-boost::variant<CNoDestination, CKeyID, CScriptID, WitnessV0ScriptHash, WitnessV0KeyHash, WitnessUnknown>::internal_apply_visitor<boost::detail::variant::invoke_visitor<(anonymous namespace)::CScriptVisitor const> > (this=0x7fb0aa90f570, visitor=...)
-    at /usr/include/boost/variant/variant.hpp:2412
-2412	    }
-boost::variant<CNoDestination, CKeyID, CScriptID, WitnessV0ScriptHash, WitnessV0KeyHash, WitnessUnknown>::apply_visitor<(anonymous namespace)::CScriptVisitor const> (this=0x7fb0aa90f570, visitor=...) at /usr/include/boost/variant/variant.hpp:2434
-2434	    }
-boost::apply_visitor<(anonymous namespace)::CScriptVisitor, boost::variant<CNoDestination, CKeyID, CScriptID, WitnessV0ScriptHash, WitnessV0KeyHash, WitnessUnknown> const> (visitor=..., visitable=...)
-    at /usr/include/boost/variant/detail/apply_visitor_unary.hpp:85
-85	}
-GetScriptForDestination (dest=...) at script/standard.cpp:324
-324	    return script;
-$98 = {
-  <prevector<28u, unsigned char, unsigned int, int>> = {
-    _size = 0x17, 
-    _union = {
-      direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 
-        0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
-      {
-        capacity = 0x986214a9, 
-        indirect = 0x4845309d352ba53e
-      }
-    }
-  }, <No data fields>}
-325	}
-createrawtransaction (request=...) at rpc/rawtransaction.cpp:465
-465	            CAmount nAmount = AmountFromValue(outputs[name_]);
-$99 = {
-  typ = UniValue::VOBJ, 
-  val = "", 
-  keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, 
-  values = std::vector of length 2, capacity 2 = {{
-      typ = UniValue::VNUM, 
-      val = "21.49", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }, {
-      typ = UniValue::VNUM, 
-      val = "28.5", 
-      keys = std::vector of length 0, capacity 0, 
-      values = std::vector of length 0, capacity 0
-    }}
-}
-$100 = "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"
-Breakpoint 21 at 0x7fb0b13eded6: file rpc/server.cpp, line 107.
-
-Breakpoint 21, AmountFromValue (value=...) at rpc/server.cpp:107
-107	{
-108	    if (!value.isNum() && !value.isStr())
-$101 = (const UniValue &) @0x7fb0b4a382c8: {
-  typ = UniValue::VNUM, 
-  val = "28.5", 
-  keys = std::vector of length 0, capacity 0, 
-  values = std::vector of length 0, capacity 0
-}
-$102 = (const UniValue &) @0x7fb0b4a382c8: {
-  typ = 0x4, 
-  val = "28.5", 
-  keys = std::vector of length 0, capacity 0, 
-  values = std::vector of length 0, capacity 0
-}
-#0  AmountFromValue (value=...) at rpc/server.cpp:108
-108	    if (!value.isNum() && !value.isStr())
-$103 = (const UniValue &) @0x7fb0b4a382c8: {
-  typ = UniValue::VNUM, 
-  val = "28.5", 
-  keys = std::vector of length 0, capacity 0, 
-  values = std::vector of length 0, capacity 0
-}
-111	    if (!ParseFixedPoint(value.getValStr(), 8, &amount))
-$104 = "28.5"
-113	    if (!MoneyRange(amount))
-$105 = 2850000000
-115	    return amount;
-$106 = 2850000000
-116	}
-createrawtransaction (request=...) at rpc/rawtransaction.cpp:467
-467	            CTxOut out(nAmount, scriptPubKey);
-$107 = {
-  <prevector<28u, unsigned char, unsigned int, int>> = {
-    _size = 23, 
-    _union = {
-      direct = "\251\024b\230>\245+5\235\060EH\277\t䠟JJǷ\000\207\000\000\000\000", 
-      {
-        capacity = 2556564649, 
-        indirect = 0x4845309d352ba53e <error: Cannot access memory at address 0x4845309d352ba53e>
-      }
-    }
-  }, <No data fields>}
-$108 = {
-  <prevector<28u, unsigned char, unsigned int, int>> = {
-    _size = 0x17, 
-    _union = {
-      direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 
-        0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
-      {
-        capacity = 0x986214a9, 
-        indirect = 0x4845309d352ba53e
-      }
-    }
-  }, <No data fields>}
-468	            rawTx.vout.push_back(out);
-$109 = {
-  nValue = 0xa9df8c80, 
-  scriptPubKey = {
-    <prevector<28u, unsigned char, unsigned int, int>> = {
-      _size = 0x17, 
-      _union = {
-        direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 
-          0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
-        {
-          capacity = 0x986214a9, 
-          indirect = 0x4845309d352ba53e
-        }
-      }
-    }, <No data fields>}
-}
-$110 = {
-  vin = std::vector of length 1, capacity 1 = {{
-      prevout = {
-        hash = {
-          <base_blob<256u>> = {
-            static WIDTH = 0x20, 
-            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
-              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
-          }, <No data fields>}, 
-        n = 0x0
-      }, 
-      scriptSig = {
-        <prevector<28u, unsigned char, unsigned int, int>> = {
-          _size = 0x0, 
-          _union = {
-            direct = {0x35, 0x61, 0x64, 0x61, 0x37, 0x66, 0x39, 0x30, 0x38, 0x35, 0x34, 0x65, 0x33, 0x36, 0x62, 0x32, 0x32, 
-              0x63, 0x38, 0x62, 0x63, 0x64, 0x30, 0x30, 0x0, 0x0, 0x0, 0x0}, 
-            {
-              capacity = 0x61646135, 
-              indirect = 0x6534353830396637
-            }
-          }
-        }, <No data fields>}, 
-      nSequence = 0xffffffff, 
-      scriptWitness = {
-        stack = std::vector of length 0, capacity 0
-      }, 
-      static SEQUENCE_FINAL = 0xffffffff, 
-      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
-      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
-      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
-      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
-    }}, 
-  vout = std::vector of length 1, capacity 1 = {{
-      nValue = 0x80172340, 
-      scriptPubKey = {
-        <prevector<28u, unsigned char, unsigned int, int>> = {
-          _size = 0x17, 
-          _union = {
-            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
-              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0xb1, 0xb0, 0x7f, 0x0, 0x0}, 
-            {
-              capacity = 0x7a0714a9, 
-              indirect = 0x71f2af7e703d4c41
-            }
-          }
-        }, <No data fields>}
-    }}, 
-  nVersion = 0x2, 
-  nLockTime = 0x0
-}
-467	            CTxOut out(nAmount, scriptPubKey);
-464	            CScript scriptPubKey = GetScriptForDestination(destination);
-$111 = {
-  vin = std::vector of length 1, capacity 1 = {{
-      prevout = {
-        hash = {
-          <base_blob<256u>> = {
-            static WIDTH = 0x20, 
-            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
-              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
-          }, <No data fields>}, 
-        n = 0x0
-      }, 
-      scriptSig = {
-        <prevector<28u, unsigned char, unsigned int, int>> = {
-          _size = 0x0, 
-          _union = {
-            direct = {0x35, 0x61, 0x64, 0x61, 0x37, 0x66, 0x39, 0x30, 0x38, 0x35, 0x34, 0x65, 0x33, 0x36, 0x62, 0x32, 0x32, 
-              0x63, 0x38, 0x62, 0x63, 0x64, 0x30, 0x30, 0x0, 0x0, 0x0, 0x0}, 
-            {
-              capacity = 0x61646135, 
-              indirect = 0x6534353830396637
-            }
-          }
-        }, <No data fields>}, 
-      nSequence = 0xffffffff, 
-      scriptWitness = {
-        stack = std::vector of length 0, capacity 0
-      }, 
-      static SEQUENCE_FINAL = 0xffffffff, 
-      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
-      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
-      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
-      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
-    }}, 
-  vout = std::vector of length 2, capacity 2 = {{
-      nValue = 0x80172340, 
-      scriptPubKey = {
-        <prevector<28u, unsigned char, unsigned int, int>> = {
-          _size = 0x17, 
-          _union = {
-            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
-              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0xb4, 0xb0, 0x7f, 0x0, 0x0}, 
-            {
-              capacity = 0x7a0714a9, 
-              indirect = 0x71f2af7e703d4c41
-            }
-          }
-        }, <No data fields>}
-    }, {
-      nValue = 0xa9df8c80, 
-      scriptPubKey = {
-        <prevector<28u, unsigned char, unsigned int, int>> = {
-          _size = 0x17, 
-          _union = {
-            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
-              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0xb4, 0xb0, 0x7f, 0x0, 0x0}, 
-            {
-              capacity = 0x986214a9, 
-              indirect = 0x4845309d352ba53e
-            }
-          }
-        }, <No data fields>}
-    }}, 
-  nVersion = 0x2, 
-  nLockTime = 0x0
-}
-455	            CTxDestination destination = DecodeDestination(name_);
-448	    for (const std::string& name_ : outputs.getKeys()) {
-472	    if (!request.params[3].isNull() && rbfOptIn != SignalsOptInRBF(rawTx)) {
-476	    return EncodeHexTx(rawTx);
-Function "EncodeHexTx" not defined.
-Make breakpoint pending on future shared library load? (y or [n]) 
-Breakpoint 5, CTxIn::CTxIn (this=0x7fb0b3cbadf0) at ./primitives/transaction.h:61
-61	class CTxIn
-std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<CTxIn const*, std::vector<CTxIn, std::allocator<CTxIn> > >, CTxIn*> (
-    __first=Python Exception <type 'exceptions.UnicodeEncodeError'> 'ascii' codec can't encode character u'\u034b' in position 105: ordinal not in range(128): 
-, 
-    __last=Python Exception <type 'exceptions.UnicodeEncodeError'> 'ascii' codec can't encode character u'\u05f3' in position 196: ordinal not in range(128): 
-, __result=0x7fb0b3cbadf0) at /usr/include/c++/6/bits/stl_uninitialized.h:74
-74		      for (; __first != __last; ++__first, (void)++__cur)
-76		      return __cur;
-83		}
-std::uninitialized_copy<__gnu_cxx::__normal_iterator<CTxIn const*, std::vector<CTxIn, std::allocator<CTxIn> > >, CTxIn*> (
-    __first=Python Exception <type 'exceptions.UnicodeEncodeError'> 'ascii' codec can't encode character u'\u034b' in position 105: ordinal not in range(128): 
-, 
-    __last=Python Exception <type 'exceptions.UnicodeEncodeError'> 'ascii' codec can't encode character u'\u05f3' in position 196: ordinal not in range(128): 
-, __result=0x7fb0b3cbadf0) at /usr/include/c++/6/bits/stl_uninitialized.h:127
-127	    }
-std::vector<CTxIn, std::allocator<CTxIn> >::vector (this=0x7fb0aa90f570, __x=std::vector of length 1, capacity 1 = {...})
-    at /usr/include/c++/6/bits/stl_vector.h:323
-323	      { this->_M_impl._M_finish =
-327	      }
-
-Breakpoint 5, CTxIn::CTxIn (this=0x7fb0aa90eda0) at ./primitives/transaction.h:96
-96	    CTxIn()
-97	    {
-98	        nSequence = SEQUENCE_FINAL;
-99	    }
-Serialize<CHashWriter, CTxIn, std::allocator<CTxIn> > (os=..., v=std::vector of length 1, capacity 1 = {...})
-    at ./serialize.h:687
-687	}
-CHashWriter::operator<< <std::vector<CTxIn, std::allocator<CTxIn> > > (this=0x7fb0aa90ef70, 
-    obj=std::vector of length 1, capacity 1 = {...}) at ./hash.h:145
-145	        return (*this);
-146	    }
-SerializeTransaction<CHashWriter, CTransaction> (tx=..., s=...) at ./primitives/transaction.h:251
-251	    s << tx.vout;
-252	    if (flags & 1) {
-257	    s << tx.nLockTime;
-258	}
-CTransaction::Serialize<CHashWriter> (this=0x7fb0aa90f570, s=...) at ./primitives/transaction.h:303
-303	    }
-Serialize<CHashWriter, CTransaction> (os=..., a=...) at ./serialize.h:562
-562	}
-Breakpoint 22 at 0x7fb0b1736007: file core_write.cpp, line 126.
-CHashWriter::operator<< <CTransaction> (this=0x7fb0aa90ef70, obj=...) at ./hash.h:145
-145	        return (*this);
-146	    }
-SerializeHash<CTransaction> (obj=..., nType=4, nVersion=1073741824) at ./hash.h:190
-190	    return ss.GetHash();
-191	}
-CTransaction::ComputeHash (this=0x7fb0aa90f570) at primitives/transaction.cpp:68
-68	}
-
-Breakpoint 22, EncodeHexTx[abi:cxx11](CTransaction const&, int) (tx=..., serializeFlags=0) at core_write.cpp:126
-126	    CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION | serializeFlags);
-$112 = 0
-127	    ssTx << tx;
-
-Breakpoint 5, CTxIn::CTxIn (this=0x7fb0aa90ee50) at ./primitives/transaction.h:96
-96	    CTxIn()
-No symbol "ssTx" in current context.
-97	    {
-98	        nSequence = SEQUENCE_FINAL;
-99	    }
-Serialize<CDataStream, CTxIn, std::allocator<CTxIn> > (os=..., v=std::vector of length 1, capacity 1 = {...})
-    at ./serialize.h:687
-687	}
-CDataStream::operator<< <std::vector<CTxIn, std::allocator<CTxIn> > > (this=0x7fb0aa90f020, 
-    obj=std::vector of length 1, capacity 1 = {...}) at ./streams.h:398
-398	        return (*this);
-399	    }
-SerializeTransaction<CDataStream, CTransaction> (tx=..., s=...) at ./primitives/transaction.h:251
-251	    s << tx.vout;
-252	    if (flags & 1) {
-257	    s << tx.nLockTime;
-258	}
-CTransaction::Serialize<CDataStream> (this=0x7fb0aa90f570, s=...) at ./primitives/transaction.h:303
-303	    }
-Serialize<CDataStream, CTransaction> (os=..., a=...) at ./serialize.h:562
-562	}
-CDataStream::operator<< <CTransaction> (this=0x7fb0aa90f020, obj=...) at ./streams.h:398
-398	        return (*this);
-399	    }
-EncodeHexTx[abi:cxx11](CTransaction const&, int) (tx=..., serializeFlags=0) at core_write.cpp:128
-128	    return HexStr(ssTx.begin(), ssTx.end());
-$113 = {
-  vch = std::vector of length 115, capacity 222 = {2 '\002', 0 '\000', 0 '\000', 0 '\000', 1 '\001', 0 '\000', -51 '\315', 
-    -117 '\213', 44 ',', -78 '\262', 54 '6', 78 'N', -123 '\205', -112 '\220', 127 '\177', -38 '\332', 90 'Z', -87 '\251', 
-    78 'N', 82 'R', -18 '\356', 41 ')', -69 '\273', -39 '\331', 123 '{', 18 '\022', -81 '\257', 20 '\024', -128 '\200', 
-    95 '_', 33 '!', 123 '{', 47 '/', 42 '*', -113 '\217', -88 '\250', 69 'E', 0 '\000', 0 '\000', 0 '\000', 0 '\000', 
-    0 '\000', -1 '\377', -1 '\377', -1 '\377', -1 '\377', 2 '\002', 64 '@', 35 '#', 23 '\027', -128 '\200', 0 '\000', 
-    0 '\000', 0 '\000', 0 '\000', 23 '\027', -87 '\251', 20 '\024', 7 '\a', 122 'z', 65 'A', 76 'L', 61 '=', 112 'p', 126 '~', 
-    -81 '\257', -14 '\362', 113 'q', -125 '\203', 105 'i', -70 '\272', -44 '\324', 43 '+', 38 '&', -121 '\207', -126 '\202', 
-    121 'y', -56 '\310', -121 '\207', -128 '\200', -116 '\214', -33 '\337', -87 '\251', 0 '\000', 0 '\000', 0 '\000', 
-    0 '\000', 23 '\027', -87 '\251', 20 '\024', 98 'b', -104 '\230', 62 '>', -91 '\245', 43 '+', 53 '5', -99 '\235', 48 '0', 
-    69 'E', 72 'H', -65 '\277', 9 '\t', -28 '\344', -96 '\240', -97 '\237', 74 'J', 74 'J', -57 '\307', -73 '\267', 0 '\000', 
-    -121 '\207', 0 '\000', 0 '\000', 0 '\000', 0 '\000'}, 
-  nReadPos = 0, 
-  nType = 1, 
-  nVersion = 70015
-}
-$114 = {
-  vch = std::vector of length 115, capacity 222 = {0x2, 0x0, 0x0, 0x0, 0x1, 0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 
-    0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 
-    0x2a, 0x8f, 0xa8, 0x45, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0xff, 0xff, 0x2, 0x40, 0x23, 0x17, 0x80, 0x0, 0x0, 0x0, 0x0, 
-    0x17, 0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 
-    0x82, 0x79, 0xc8, 0x87, 0x80, 0x8c, 0xdf, 0xa9, 0x0, 0x0, 0x0, 0x0, 0x17, 0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 
-    0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0}, 
-  nReadPos = 0x0, 
-  nType = 0x1, 
-  nVersion = 0x1117f
-}
-No symbol "HexStr" in current context.
-126	    CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION | serializeFlags);
-128	    return HexStr(ssTx.begin(), ssTx.end());
-129	}
-createrawtransaction (request=...) at rpc/rawtransaction.cpp:432
-432	    std::set<CTxDestination> destinations;
-383	    CMutableTransaction rawTx;
-381	                           request.params[1].get_array();
-377	    UniValue inputs = request.params[0].get_array();
-476	    return EncodeHexTx(rawTx);
-477	}
-CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:502
-502	}
-#0  CRPCTable::execute (this=0x7fb0b1dbafa0 <tableRPC>, request=...) at rpc/server.cpp:502
-502	}
-$115 = (const JSONRPCRequest &) @0x7fb0aa90fb90: {
-  id = {
-    typ = UniValue::VNUM, 
-    val = "1", 
-    keys = std::vector of length 0, capacity 0, 
-    values = std::vector of length 0, capacity 0
-  }, 
-  strMethod = "createrawtransaction", 
-  params = {
-    typ = UniValue::VARR, 
-    val = "", 
-    keys = std::vector of length 0, capacity 0, 
-    values = std::vector of length 2, capacity 2 = {{
-        typ = UniValue::VARR, 
-        val = "", 
-        keys = std::vector of length 0, capacity 0, 
-        values = std::vector of length 1, capacity 1 = {{
-            typ = UniValue::VOBJ, 
-            val = "", 
-            keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
-            values = std::vector of length 2, capacity 2 = {{
-                typ = UniValue::VSTR, 
-                val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
-                keys = std::vector of length 0, capacity 0, 
-                values = std::vector of length 0, capacity 0
-              }, {
-                typ = UniValue::VNUM, 
-                val = "0", 
-                keys = std::vector of length 0, capacity 0, 
-                values = std::vector of length 0, capacity 0
-              }}
-          }}
-      }, {
-        typ = UniValue::VOBJ, 
-        val = "", 
-        keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
-          "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, 
-        values = std::vector of length 2, capacity 2 = {{
-            typ = UniValue::VNUM, 
-            val = "21.49", 
-            keys = std::vector of length 0, capacity 0, 
-            values = std::vector of length 0, capacity 0
-          }, {
-            typ = UniValue::VNUM, 
-            val = "28.5", 
-            keys = std::vector of length 0, capacity 0, 
-            values = std::vector of length 0, capacity 0
-          }}
-      }}
-  }, 
-  fHelp = false, 
-  URI = "/", 
-  authUser = ""
-}
-$116 = (const JSONRPCRequest &) @0x7fb0aa90fb90: {
+No symbol "re" in current context.
+No symbol "re" in current context.
+No symbol "re" in current context.
+No symbol "re" in current context.
+No symbol "re" in current context.
+$1 = (const JSONRPCRequest &) @0x7ffb18ef9b90: {id = {typ = 0x4, val = "1", keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0}, strMethod = "createrawtransaction", params = {typ = 0x2, val = "", 
+    keys = std::vector of length 0, capacity 0, values = std::vector of length 2, capacity 2 = {{typ = 0x2, val = "", 
+        keys = std::vector of length 0, capacity 0, values = std::vector of length 1, capacity 1 = {{typ = 0x1, val = "", 
+            keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, values = std::vector of length 2, capacity 2 = {{
+                typ = 0x3, val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+                keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}, {typ = 0x4, 
+                val = "0", keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}}}}}, {
+        typ = 0x1, val = "", keys = std::vector of length 2, capacity 2 = {"2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
+          "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"}, values = std::vector of length 2, capacity 2 = {{typ = 0x4, val = "21.49", 
+            keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}, {typ = 0x4, 
+            val = "28.5", keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}}}}}, 
+  fHelp = 0x0, URI = "/", authUser = ""}
+$2 = (const JSONRPCRequest &) @0x7ffb18ef9b90: {
   id = {
     typ = 0x4, 
     val = "1", 
@@ -2263,34 +88,613 @@ $116 = (const JSONRPCRequest &) @0x7fb0aa90fb90: {
   URI = "/", 
   authUser = ""
 }
-Breakpoint 23 at 0x7fb0b15a33c2: file httprpc.cpp, line 192.
-
-Breakpoint 23, HTTPReq_JSONRPC (req=0x7fb0940020e0) at httprpc.cpp:192
-warning: Source file is more recent than executable.
-192	            strReply = JSONRPCReply(result, NullUniValue, jreq.id);
-$117 = {
-  typ = UniValue::VSTR, 
-  val = "020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548"..., 
-  keys = std::vector of length 0, capacity 0, 
-  values = std::vector of length 0, capacity 0
+376	    if (request.params[0].isNull() || request.params[1].isNull())
+380	    UniValue inputs = request.params[0].get_array();
+381	    const bool outputs_is_obj = request.params[1].isObject();
+384	                           request.params[1].get_array();
+383	                           request.params[1].get_obj() :
+384	                           request.params[1].get_array();
+387	    CMutableTransaction rawTx;
+390	    if (!request.params[2].isNull()) {
+398	    bool rbfOptIn = request.params[3].isTrue();
+401	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
+402	        const UniValue& input = inputs[idx];
+$3 = "input:------"
+$4 = (const UniValue &) @0x7ffb18ef9120: {
+  typ = 0x18ef9160, 
+  val = '\000' <repeats 48 times>, "\300\000\000\000\000\000\000\000U\000\000\000\000\000\000\000\260\f\000\360\372\177\000\000\004\000\000\000\000\000\000\000txid\000f127bd9bb29\320\f\000\360\372\177\000\000\004\000\000\000\000\000\000\000vout\000\066b22c8bcd00\000\016\000\360\372\177\000\000U\000\000\000\000\000\000\000`\r\000\360\372\177\000\000#\000\000\000\000\000\000\000#", '\000' <repeats 15 times>, "P\025\000\360\372\177\000\000#\000\000\000\000\000\000\000#\000\000\000\000\000\000\000"..., 
+  keys = std::vector of length -4397391670477, capacity -4397391670477 = {
+    <error: Cannot access memory at address 0x334864f8458b4890>, <error: Cannot access memory at address 0x48e0758948e87d89>, 
+    "", <error: Cannot access memory at address 0xfb713ce805740000>, "", "", 
+    <error: Cannot access memory at address 0x2504334864f8458b>, "", 
+    <error: Cannot access memory at address 0xcae8c78948d68948>, "", 
+    <error: Cannot access memory at address 0xe8458b48e04d8b48>, <error: Cannot access memory at address 0xfffb703de8057400>, 
+    "", <error: Cannot access memory at address 0x2504334864f8458b>, "", 
+    <error: Cannot access memory at address 0x282504334864f8>, "", 
+    <error: Cannot access memory at address 0x48e0458b485674e0>, "", "", 
+    <error: Cannot access memory at address 0x7400000028250433>, "", "", "", 
+    <error: Cannot access memory at address 0x282514334864f855>, <error: Cannot access memory at address 0x2825048b4864987d>, 
+    <error: Cannot access memory at address 0x63f905158d48a0>, <error: Cannot access memory at address 0xc7894898458b48ff>, 
+    <error: Cannot access memory at address 0xff0294e8c7894800>, <error: Cannot access memory at address 0x98458b48ffff2463>, 
+    "", "", <error: Cannot access memory at address 0x4820ec8348e58948>, 
+    <error: Cannot access memory at address 0x4864f8558b480840>, "", 
+    <error: Cannot access memory at address 0x4890108948e8458b>, "", "", "", "", 
+    <error: Cannot access memory at address 0x48e8458b48c031f8>, "", 
+    <error: Cannot access memory at address 0xf8558b48ffffffa4>, <error: Cannot access memory at address 0x4864e87d894820ec>, 
+    <error: Cannot access memory at address 0x334864f8558b48ff>, <error: Cannot access memory at address 0x25048b4864e87d89>, 
+    <error: Cannot access memory at address 0x282514334864f855>, "", "", 
+    <error: Cannot access memory at address 0x48b4864d0758948>, "", "", 
+    <error: Cannot access memory at address 0x48e8458b48c031f8>, "", 
+    <error: Cannot access memory at address 0xf8558b48ffffffa4>, <error: Cannot access memory at address 0x4864e87d894820ec>, 
+    <error: Cannot access memory at address 0x334864f8558b48ff>, <error: Cannot access memory at address 0x25048b4864e87d89>, 
+    <error: Cannot access memory at address 0x282514334864f855>, "", "", 
+    <error: Cannot access memory at address 0x25048b4864e07589>, <error: Cannot access memory at address 0x2504334864f8458b>, 
+    "", <error: Cannot access memory at address 0x2bfba00644b>, <error: Cannot access memory at address 0x4864f8558b48008b>, 
+    <error: Cannot access memory at address 0x8b4864e87d894820>, <error: Cannot access memory at address 0x458b4890fffb9c79>, 
+    <error: Cannot access memory at address 0x48e87d894820ec83>, <error: Cannot access memory at address 0x8b4890108948e055>, 
+    <error: Cannot access memory at address 0xe87d894820ec8348>, "", "", "", 
+    <error: Cannot access memory at address 0x25048b4864e07589>, <error: Cannot access memory at address 0x282504334864f845>, 
+    <error: Cannot access memory at address 0xfffffe08bd894800>, <error: Cannot access memory at address 0x4589480000002825>, 
+    "", "", <error: Cannot access memory at address 0xb0b58d482074c084>, 
+    <error: Cannot access memory at address 0x8958b48000090af>, "", "", "", "", "", "", 
+    <error: Cannot access memory at address 0xb0958d48c6894800>, "", "", 
+    <error: Cannot access memory at address 0xb0958d48c6894800>, <error: Cannot access memory at address 0x48fffffe20858d48>, 
+    "", "", "", <error: Cannot access memory at address 0x48fffffe20858d48>, "", "", "", "", 
+    <error: Cannot access memory at address 0x31f8458948000000>, <error: Cannot access memory at address 0xc8458b48c04d8b48>, 
+    <error: Cannot access memory at address 0xfffb64bde8057400>, <error: Cannot access memory at address 0x458b48c031f84589>, 
+    <error: Cannot access memory at address 0x4820ec8348e58948>, <error: Cannot access memory at address 0x8b48ffffffa4e8c7>, 
+    <error: Cannot access memory at address 0xe87d894820ec8348>, <error: Cannot access memory at address 0x64f8558b48ffffff>, 
+    <error: Cannot access memory at address 0x8b4864e87d894820>, <error: Cannot access memory at address 0x14334864f8558b48>, 
+    <error: Cannot access memory at address 0x25048b4864e87d89>, <error: Cannot access memory at address 0x282514334864f855>, 
+    "", <error: Cannot access memory at address 0x2279e8c78948e845>, 
+    <error: Cannot access memory at address 0xec8348e5894855c3>, "", 
+    <error: Cannot access memory at address 0xfffb62fde8057400>, "", 
+    <error: Cannot access memory at address 0x282504334864f845>, <error: Cannot access memory at address 0x2825048b4864>, "", 
+    "", "", "", <error: Cannot access memory at address 0x48e5894855c3c9ff>, "", 
+    <error: Cannot access memory at address 0xec8348e589485590>, "", "", "", "", 
+    <error: Cannot access memory at address 0x2825048b4864>, "", "", "", "", 
+    <error: Cannot access memory at address 0x48e5894855c3c9ff>, "", 
+    <error: Cannot access memory at address 0xec8348e589485590>, <error: Cannot access memory at address 0xffffff9be8c78948>, 
+    <error: Cannot access memory at address 0xec8348e5894855c3>, "", "", "", 
+    <error: Cannot access memory at address 0xf8558b48e8458b48>, <error: Cannot access memory at address 0x8948e87d894820ec>, 
+    "", "", "", "", <error: Cannot access memory at address 0xe5894855c3c9fffb>, "", 
+    <error: Cannot access memory at address 0x458b48108b48ffff>, <error: Cannot access memory at address 0x64f8458b48901089>, 
+    <error: Cannot access memory at address 0x758948a87d894870>, "", "", "", 
+    <error: Cannot access memory at address 0xe8c78948e8458b48>, "", 
+    <error: Cannot access memory at address 0x48e8458b48c031f8>, <error: Cannot access memory at address 0x7d894820ec8348e5>, 
+    <error: Cannot access memory at address 0xffffffa0e8c78948>, "", "", 
+    <error: Cannot access memory at address 0x480000002825048b>, <error: Cannot access memory at address 0x55c3c9fffb5cc0e8>, 
+    "", <error: Cannot access memory at address 0xe5894855c3c9fffb>, 
+<error: Cannot access memory at address 0x9ce8c78948e8458b>Quit
+403	        const UniValue& o = input.get_obj();
+$5 = (const UniValue &) @0x7ffaf00009d0: {
+  typ = UniValue::VOBJ, 
+  val = "", 
+  keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
+  values = std::vector of length 2, capacity 2 = {{
+      typ = UniValue::VSTR, 
+      val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = UniValue::VNUM, 
+      val = "0", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }}
 }
-189	            UniValue result = tableRPC.execute(jreq);
-200	        req->WriteHeader("Content-Type", "application/json");
-$118 = "{\"result\":\"020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52"...
-$119 = "{\"result\":\"020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52"...
-$120 = "set print elements 0"
-$121 = "{\"result\":\"020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000\",\"error\":null,\"id\":1}\n"
-201	        req->WriteReply(HTTP_OK, strReply);
-183	        std::string strReply;
+406	        uint256 txid = ParseHashO(o, "txid");
+409	        const UniValue& vout_v = find_value(o, "vout");
+410	        if (!vout_v.isNum())
+412	        int nOutput = vout_v.get_int();
+413	        if (nOutput < 0)
+417	        if (rbfOptIn) {
+419	        } else if (rawTx.nLockTime) {
+423	            nSequence = std::numeric_limits<uint32_t>::max();
+427	        const UniValue& sequenceObj = find_value(o, "sequence");
+428	        if (sequenceObj.isNum()) {
+438	        CTxIn in(COutPoint(txid, nOutput), CScript(), nSequence);
+440	        rawTx.vin.push_back(in);
+$6 = (const UniValue &) @0x7ffaf00009d0: {
+  typ = <error reading variable>, 
+  val = "", 
+  keys = std::vector of length 2, capacity 2 = {"txid", "vout"}, 
+  values = std::vector of length 2, capacity 2 = {{
+      typ = <error reading variable>, 
+      val = "45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = <error reading variable>, 
+      val = "0", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }}
+}
+438	        CTxIn in(COutPoint(txid, nOutput), CScript(), nSequence);
+401	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
+No symbol "in" in current context.
+443	    std::set<CTxDestination> destinations;
+444	    if (!outputs_is_obj) {
+460	    for (const std::string& name_ : outputs.getKeys()) {
+461	        if (name_ == "data") {
+469	            CTxDestination destination = DecodeDestination(name_);
+$7 = "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
+Bad format string, missing '"'.
+$8 = "name_"
+$9 = "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
+Breakpoint 3 at 0x7ffb1f5277ab: file key_io.cpp, line 216.
+Breakpoint 4 at 0x7ffb1f526788: file key_io.cpp, line 73.
+Continuing.
+
+Breakpoint 3, DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ") at key_io.cpp:216
+216	{
+217	    return DecodeDestination(str, Params());
+
+Breakpoint 4, (anonymous namespace)::DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", params=...) at key_io.cpp:74
+74	{
+75	    std::vector<unsigned char> data;
+Breakpoint 5 at 0x7ffb1f55dec9: DecodeBase58Check. (2 locations)
+76	    uint160 hash;
+77	    if (DecodeBase58Check(str, data)) {
+$10 = "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
+
+Breakpoint 5, DecodeBase58Check (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", vchRet=std::vector of length 0, capacity 0)
+    at base58.cpp:149
+149	{
+150	    return DecodeBase58Check(str.c_str(), vchRet);
+
+Breakpoint 5, DecodeBase58Check (psz=0x7ffaf0000ea0 "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
+    vchRet=std::vector of length 0, capacity 0) at base58.cpp:126
+126	{
+127	    if (!DecodeBase58(psz, vchRet) ||
+128	        (vchRet.size() < 4)) {
+$11 = 0x7ffaf0000ea0
+$12 = 0x32
+$13 = 0x7ffaf0000ea0 "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
+127	    if (!DecodeBase58(psz, vchRet) ||
+139	    uint256 hash = Hash(vchRet.begin(), vchRet.end() - 4);
+$14 = std::vector of length 25, capacity 25 = {196 '\304', 7 '\a', 122 'z', 65 'A', 76 'L', 61 '=', 112 'p', 126 '~', 
+  175 '\257', 242 '\362', 113 'q', 131 '\203', 105 'i', 186 '\272', 212 '\324', 43 '+', 38 '&', 135 '\207', 130 '\202', 
+  121 'y', 200 '\310', 167 '\247', 108 'l', 104 'h', 151 '\227'}
+$15 = std::vector of length 25, capacity 25 = {0xc4, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 
+  0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8, 0xa7, 0x6c, 0x68, 0x97}
+#0  DecodeBase58Check (psz=0x7ffaf0000ea0 "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
+    vchRet=std::vector of length 25, capacity 25 = {...}) at base58.cpp:139
+139	    uint256 hash = Hash(vchRet.begin(), vchRet.end() - 4);
+140	    if (memcmp(&hash, &vchRet[vchRet.size() - 4], 4) != 0) {
+$16 = {
+  <base_blob<256u>> = {
+    static WIDTH = 32, 
+    data = "\247lh\227T\367\226*\234\312\331N~R\312D\317\061\345w\307:\266)5\240\261B\023\362\245", <incomplete sequence \315>
+  }, <No data fields>}
+$17 = {
+  <base_blob<256u>> = {
+    static WIDTH = 0x20, 
+    data = {0xa7, 0x6c, 0x68, 0x97, 0x54, 0xf7, 0x96, 0x2a, 0x9c, 0xca, 0xd9, 0x4e, 0x7e, 0x52, 0xca, 0x44, 0xcf, 0x31, 0xe5, 
+      0x77, 0xc7, 0x3a, 0xb6, 0x29, 0x35, 0xa0, 0xb1, 0x42, 0x13, 0xf2, 0xa5, 0xcd}
+  }, <No data fields>}
+144	    vchRet.resize(vchRet.size() - 4);
+145	    return true;
+$18 = {
+  <base_blob<256u>> = {
+    static WIDTH = 0x20, 
+    data = {0xa7, 0x6c, 0x68, 0x97, 0x54, 0xf7, 0x96, 0x2a, 0x9c, 0xca, 0xd9, 0x4e, 0x7e, 0x52, 0xca, 0x44, 0xcf, 0x31, 0xe5, 
+      0x77, 0xc7, 0x3a, 0xb6, 0x29, 0x35, 0xa0, 0xb1, 0x42, 0x13, 0xf2, 0xa5, 0xcd}
+  }, <No data fields>}
+$19 = std::vector of length 21, capacity 25 = {0xc4, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 
+  0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8}
+146	}
+DecodeBase58Check (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", vchRet=std::vector of length 21, capacity 25 = {...})
+    at base58.cpp:151
+151	}
+$20 = std::vector of length 21, capacity 25 = {196 '\304', 7 '\a', 122 'z', 65 'A', 76 'L', 61 '=', 112 'p', 126 '~', 
+  175 '\257', 242 '\362', 113 'q', 131 '\203', 105 'i', 186 '\272', 212 '\324', 43 '+', 38 '&', 135 '\207', 130 '\202', 
+  121 'y', 200 '\310'}
+$21 = std::vector of length 21, capacity 25 = {0xc4, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 
+  0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8}
+(anonymous namespace)::DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", params=...) at key_io.cpp:81
+81	        const std::vector<unsigned char>& pubkey_prefix = params.Base58Prefix(CChainParams::PUBKEY_ADDRESS);
+82	        if (data.size() == hash.size() + pubkey_prefix.size() && std::equal(pubkey_prefix.begin(), pubkey_prefix.end(), data.begin())) {
+$22 = std::vector of length 21, capacity 25 = {0xc4, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 
+  0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8}
+$23 = 0x6f
+#0  (anonymous namespace)::DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", params=...) at key_io.cpp:82
+82	        if (data.size() == hash.size() + pubkey_prefix.size() && std::equal(pubkey_prefix.begin(), pubkey_prefix.end(), data.begin())) {
+$24 = std::vector of length 1, capacity 1 = {0x6f}
+$25 = 0xc4
+88	        const std::vector<unsigned char>& script_prefix = params.Base58Prefix(CChainParams::SCRIPT_ADDRESS);
+89	        if (data.size() == hash.size() + script_prefix.size() && std::equal(script_prefix.begin(), script_prefix.end(), data.begin())) {
+$26 = std::vector of length 1, capacity 1 = {0xc4}
+91	            std::copy(data.begin() + script_prefix.size(), data.end(), hash.begin());
+$27 = std::vector of length 21, capacity 25 = {0xc4, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 
+  0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8}
+$28 = {
+  <base_blob<160u>> = {
+    static WIDTH = 0x14, 
+    data = {0x0 <repeats 20 times>}
+  }, <No data fields>}
+92	            return CScriptID(hash);
+$29 = {
+  <base_blob<160u>> = {
+    static WIDTH = 0x14, 
+    data = {0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 
+      0xc8}
+  }, <No data fields>}
+75	    std::vector<unsigned char> data;
+$30 = {
+  <base_blob<160u>> = {
+    static WIDTH = 0x14, 
+    data = {0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 
+      0xc8}
+  }, <No data fields>}
+#0  (anonymous namespace)::DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", params=...) at key_io.cpp:75
+75	    std::vector<unsigned char> data;
+131	}
+DecodeDestination (str="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ") at key_io.cpp:218
+218	}
+createrawtransaction (request=...) at rpc/rawtransaction.cpp:470
+470	            if (!IsValidDestination(destination)) {
+$31 = {
+  which_ = 2, 
+  storage_ = {
+    <boost::detail::aligned_storage::aligned_storage_imp<48ul, 4ul>> = {
+      data_ = {
+        buf = "\azAL=p~\257\362q\203i\272\324+&\207\202y\310_!{/*\217\250E", '\000' <repeats 19 times>, 
+        align_ = {<No data fields>}
+      }
+    }, 
+    members of boost::aligned_storage<48ul, 4ul>: 
+    static size = <optimized out>, 
+    static alignment = <optimized out>
+  }
+}
+$32 = {
+  which_ = 0x2, 
+  storage_ = {
+    <boost::detail::aligned_storage::aligned_storage_imp<48ul, 4ul>> = {
+      data_ = {
+        buf = {0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 
+          0x79, 0xc8, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45, 0x0 <repeats 20 times>}, 
+        align_ = {<No data fields>}
+      }
+    }, 
+    members of boost::aligned_storage<48ul, 4ul>: 
+    static size = <optimized out>, 
+    static alignment = <optimized out>
+  }
+}
+474	            if (!destinations.insert(destination).second) {
+480	            CScript scriptPubKey = GetScriptForDestination(destination);
+482	            CAmount nAmount = AmountFromValue(outputs[name_]);
+$33 = {
+  <prevector<28u, unsigned char, unsigned int, int>> = {
+    _size = 23, 
+    _union = {
+      direct = "\251\024\azAL=p~\257\362q\203i\272\324+&\207\202yȇ\000\000\000\000", 
+      {
+        capacity = 2047284393, 
+        indirect = 0x71f2af7e703d4c41 <error: Cannot access memory at address 0x71f2af7e703d4c41>
+      }
+    }
+  }, <No data fields>}
+$34 = {
+  <prevector<28u, unsigned char, unsigned int, int>> = {
+    _size = 0x17, 
+    _union = {
+      direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 
+        0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+      {
+        capacity = 0x7a0714a9, 
+        indirect = 0x71f2af7e703d4c41
+      }
+    }
+  }, <No data fields>}
+484	            CTxOut out(nAmount, scriptPubKey);
+485	            rawTx.vout.push_back(out);
+$35 = {
+  nValue = 2149000000, 
+  scriptPubKey = {
+    <prevector<28u, unsigned char, unsigned int, int>> = {
+      _size = 23, 
+      _union = {
+        direct = "\251\024\azAL=p~\257\362q\203i\272\324+&\207\202yȇ\000\000\000\000", 
+        {
+          capacity = 2047284393, 
+          indirect = 0x71f2af7e703d4c41 <error: Cannot access memory at address 0x71f2af7e703d4c41>
+        }
+      }
+    }, <No data fields>}
+}
+$36 = {
+  nValue = 0x80172340, 
+  scriptPubKey = {
+    <prevector<28u, unsigned char, unsigned int, int>> = {
+      _size = 0x17, 
+      _union = {
+        direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 
+          0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+        {
+          capacity = 0x7a0714a9, 
+          indirect = 0x71f2af7e703d4c41
+        }
+      }
+    }, <No data fields>}
+}
+484	            CTxOut out(nAmount, scriptPubKey);
+480	            CScript scriptPubKey = GetScriptForDestination(destination);
+$37 = {
+  nValue = 0x80172340, 
+  scriptPubKey = {
+    <prevector<28u, unsigned char, unsigned int, int>> = {
+      _size = 0x17, 
+      _union = {
+        direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 
+          0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+        {
+          capacity = 0x7a0714a9, 
+          indirect = 0x71f2af7e703d4c41
+        }
+      }
+    }, <No data fields>}
+}
+469	            CTxDestination destination = DecodeDestination(name_);
+$38 = {
+  nValue = 0x80172340, 
+  scriptPubKey = {
+    <prevector<28u, unsigned char, unsigned int, int>> = {
+      _size = 0x17, 
+      _union = {
+        direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 
+          0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+        {
+          capacity = 0x7a0714a9, 
+          indirect = 0x71f2af7e703d4c41
+        }
+      }
+    }, <No data fields>}
+}
+460	    for (const std::string& name_ : outputs.getKeys()) {
+461	        if (name_ == "data") {
+469	            CTxDestination destination = DecodeDestination(name_);
+
+Breakpoint 3, DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM") at key_io.cpp:216
+216	{
+217	    return DecodeDestination(str, Params());
+
+Breakpoint 4, (anonymous namespace)::DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", params=...) at key_io.cpp:74
+74	{
+75	    std::vector<unsigned char> data;
+76	    uint160 hash;
+77	    if (DecodeBase58Check(str, data)) {
+
+Breakpoint 5, DecodeBase58Check (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", vchRet=std::vector of length 0, capacity 0)
+    at base58.cpp:149
+149	{
+150	    return DecodeBase58Check(str.c_str(), vchRet);
+
+Breakpoint 5, DecodeBase58Check (psz=0x7ffaf00008c0 "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", 
+    vchRet=std::vector of length 0, capacity 0) at base58.cpp:126
+126	{
+127	    if (!DecodeBase58(psz, vchRet) ||
+128	        (vchRet.size() < 4)) {
+127	    if (!DecodeBase58(psz, vchRet) ||
+139	    uint256 hash = Hash(vchRet.begin(), vchRet.end() - 4);
+140	    if (memcmp(&hash, &vchRet[vchRet.size() - 4], 4) != 0) {
+144	    vchRet.resize(vchRet.size() - 4);
+145	    return true;
+146	}
+DecodeBase58Check (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", vchRet=std::vector of length 21, capacity 25 = {...})
+    at base58.cpp:151
+151	}
+(anonymous namespace)::DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM", params=...) at key_io.cpp:81
+81	        const std::vector<unsigned char>& pubkey_prefix = params.Base58Prefix(CChainParams::PUBKEY_ADDRESS);
+82	        if (data.size() == hash.size() + pubkey_prefix.size() && std::equal(pubkey_prefix.begin(), pubkey_prefix.end(), data.begin())) {
+88	        const std::vector<unsigned char>& script_prefix = params.Base58Prefix(CChainParams::SCRIPT_ADDRESS);
+89	        if (data.size() == hash.size() + script_prefix.size() && std::equal(script_prefix.begin(), script_prefix.end(), data.begin())) {
+91	            std::copy(data.begin() + script_prefix.size(), data.end(), hash.begin());
+92	            return CScriptID(hash);
+75	    std::vector<unsigned char> data;
+131	}
+DecodeDestination (str="2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM") at key_io.cpp:218
+218	}
+createrawtransaction (request=...) at rpc/rawtransaction.cpp:470
+470	            if (!IsValidDestination(destination)) {
+474	            if (!destinations.insert(destination).second) {
+480	            CScript scriptPubKey = GetScriptForDestination(destination);
+482	            CAmount nAmount = AmountFromValue(outputs[name_]);
+484	            CTxOut out(nAmount, scriptPubKey);
+485	            rawTx.vout.push_back(out);
+$39 = {
+  nValue = 0xa9df8c80, 
+  scriptPubKey = {
+    <prevector<28u, unsigned char, unsigned int, int>> = {
+      _size = 0x17, 
+      _union = {
+        direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 
+          0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+        {
+          capacity = 0x986214a9, 
+          indirect = 0x4845309d352ba53e
+        }
+      }
+    }, <No data fields>}
+}
+$40 = {
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x0, 
+          _union = {
+            direct = {0x71, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1a, 0x0, 0xf0, 0xfa, 0x7f, 0x0, 0x0, 0xe0, 0x8, 0x0, 
+              0xf0, 0xfa, 0x7f, 0x0, 0x0, 0x40, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x171, 
+              indirect = 0xf0001a0000000000
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 0, capacity 0
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 1, capacity 1 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0xf0, 0xfa, 0x7f, 0x0, 0x0}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0
+}
+484	            CTxOut out(nAmount, scriptPubKey);
+480	            CScript scriptPubKey = GetScriptForDestination(destination);
+469	            CTxDestination destination = DecodeDestination(name_);
+460	    for (const std::string& name_ : outputs.getKeys()) {
+489	    if (!request.params[3].isNull() && rbfOptIn != SignalsOptInRBF(rawTx)) {
+494	    return EncodeHexTx(rawTx);
+443	    std::set<CTxDestination> destinations;
+$41 = {
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x0, 
+          _union = {
+            direct = {0x71, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1a, 0x0, 0xf0, 0xfa, 0x7f, 0x0, 0x0, 0xe0, 0x8, 0x0, 
+              0xf0, 0xfa, 0x7f, 0x0, 0x0, 0x40, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x171, 
+              indirect = 0xf0001a0000000000
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 0, capacity 0
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 2, capacity 2 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x34, 0x39, 0x36, 0x37, 0x32}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }, {
+      nValue = 0xa9df8c80, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
+              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x986214a9, 
+              indirect = 0x4845309d352ba53e
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0
+}
+$42 = 2047284393
+$43 = 2556564649
+$44 = 2556564649
+$45 = 2850000000
+387	    CMutableTransaction rawTx;
+384	                           request.params[1].get_array();
+380	    UniValue inputs = request.params[0].get_array();
+494	    return EncodeHexTx(rawTx);
+495	}
+CRPCTable::execute (this=0x7ffb1fba3fa0 <tableRPC>, request=...) at rpc/server.cpp:504
+504	}
+HTTPReq_JSONRPC (req=0x7ffb0c0021f0) at httprpc.cpp:194
+194	            strReply = JSONRPCReply(result, NullUniValue, jreq.id);
+191	            UniValue result = tableRPC.execute(jreq);
+202	        req->WriteHeader("Content-Type", "application/json");
+203	        req->WriteReply(HTTP_OK, strReply);
+$46 = "{\"result\":\"020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52"...
+$47 = "{\"result\":\"020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52"...
+$48 = "{\"result\":\"020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000\",\"error\":null,\"id\":1}\n"
+184	        std::string strReply;
+Continuing.
 
 Program received signal SIGPIPE, Broken pipe.
-[Switching to Thread 0x7fb0ab912700 (LWP 13700)]
-0x00007fb0ae82ee8d in writev () from /lib/x86_64-linux-gnu/libc.so.6
-Single stepping until exit from function writev,
-which has no line number information.
-0x00007fb0af5bb8cb in ?? () from /usr/lib/x86_64-linux-gnu/libevent-2.0.so.5
+[Switching to Thread 0x7ffb196fb700 (LWP 552)]
+0x00007ffb1c617e8d in writev () from /lib/x86_64-linux-gnu/libc.so.6
 A debugging session is active.
 
-	Inferior 1 [process 13698] will be detached.
+	Inferior 1 [process 550] will be detached.
 
-Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 13698
+Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 550
+Breakpoint 1 at 0x7f610c6aca1f: file rpc/server.cpp, line 473.
+Breakpoint 2 at 0x7f610c68b0f8: file rpc/rawtransaction.cpp, line 960.
+Breakpoint 3 at 0x7f610c8d32eb: file wallet/rpcwallet.cpp, line 3260.
+Continuing.
+[Switching to Thread 0x7f61063cc700 (LWP 11711)]
+
+Breakpoint 1, CRPCTable::execute (this=0x7f610d075fa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
+Continuing.
+
+Breakpoint 2, signrawtransaction (request=...) at rpc/rawtransaction.cpp:960
+960	{
+Already logging to createtx.txt.
+Breakpoint 4 at 0x7f610c6aca1f: file rpc/server.cpp, line 473.
+Breakpoint 5 at 0x7f610c68b0f8: file rpc/rawtransaction.cpp, line 960.
+Breakpoint 6 at 0x7f610c8d32eb: file wallet/rpcwallet.cpp, line 3260.
+Currently logging to "createtx.txt".
+Future logs will be written to signtx.txt.
+Logs will be appended to the log file.
+Output is being logged and displayed.
+A debugging session is active.
+
+	Inferior 1 [process 11708] will be detached.
+
+Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 11708

@@ -1,0 +1,377 @@
+Breakpoint 1 at 0x7f610c6aca1f: file rpc/server.cpp, line 473.
+Breakpoint 2 at 0x7f610c68b0f8: file rpc/rawtransaction.cpp, line 960.
+Breakpoint 3 at 0x7f610c8d32eb: file wallet/rpcwallet.cpp, line 3260.
+#0  0x00007f6109db87dd in nanosleep () at ../sysdeps/unix/syscall-template.S:84
+#1  0x00007f610b95ed76 in boost::this_thread::hidden::sleep_for(timespec const&) ()
+   from /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.62.0
+#2  0x00007f610ca5b8f1 in boost::this_thread::sleep_for (ns=...) at /usr/include/boost/thread/pthread/thread_data.hpp:243
+#3  0x00007f610ca5cf1a in boost::this_thread::sleep_for<long, boost::ratio<1l, 1000l> > (d=...)
+    at /usr/include/boost/thread/v2/thread.hpp:124
+#4  0x00007f610ca5ae01 in MilliSleep (n=200) at utiltime.cpp:69
+#5  0x00007f610c46390f in WaitForShutdown () at bitcoind.cpp:48
+#6  0x00007f610c4644c2 in AppInit (argc=4, argv=0x7fffd7e6fad8) at bitcoind.cpp:173
+#7  0x00007f610c464aff in main (argc=4, argv=0x7fffd7e6fad8) at bitcoind.cpp:187
+Continuing.
+[Switching to Thread 0x7f61063cc700 (LWP 11711)]
+
+Breakpoint 1, CRPCTable::execute (this=0x7f610d075fa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
+476	        LOCK(cs_rpcWarmup);
+477	        if (fRPCInWarmup)
+476	        LOCK(cs_rpcWarmup);
+484	    const CRPCCommand *pcmd = tableRPC[request.strMethod];
+485	    if (!pcmd)
+488	    g_rpcSignals.PreCommand(*pcmd);
+493	        if (request.params.isObject()) {
+497	            return pcmd->actor(request);
+
+Breakpoint 2, signrawtransaction (request=...) at rpc/rawtransaction.cpp:960
+960	{
+A debugging session is active.
+
+	Inferior 1 [process 11708] will be detached.
+
+Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 11708
+Breakpoint 1 at 0x7f610c6aca1f: file rpc/server.cpp, line 473.
+Breakpoint 2 at 0x7f610c68b0f8: file rpc/rawtransaction.cpp, line 960.
+Breakpoint 3 at 0x7f610c8d32eb: file wallet/rpcwallet.cpp, line 3260.
+signrawtx.gdb:22: Error in sourced command file:
+Undefined command: "StephenSun".  Try "help".
+Currently logging to "signtx.txt".
+Logs will be appended to the log file.
+Output is being logged and displayed.
+Continuing.
+[Switching to Thread 0x7f61063cc700 (LWP 11711)]
+
+Breakpoint 1, CRPCTable::execute (this=0x7f610d075fa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
+Continuing.
+
+Breakpoint 2, signrawtransaction (request=...) at rpc/rawtransaction.cpp:960
+960	{
+$1 = (const JSONRPCRequest &) @0x7f61063cbb90: {id = {typ = 0x4, val = "1", keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0}, strMethod = "signrawtransaction", params = {typ = 0x2, val = "", 
+    keys = std::vector of length 0, capacity 0, values = std::vector of length 1, capacity 1 = {{typ = 0x3, 
+        val = "020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548"..., 
+        keys = std::vector of length 0, capacity 0, values = std::vector of length 0, capacity 0}}}, fHelp = 0x0, URI = "/", 
+  authUser = ""}
+$2 = (const JSONRPCRequest &) @0x7f61063cbb90: {
+  id = {
+    typ = 0x4, 
+    val = "1", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  strMethod = "signrawtransaction", 
+  params = {
+    typ = 0x2, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 1, capacity 1 = {{
+        typ = 0x3, 
+        val = "020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548"..., 
+        keys = std::vector of length 0, capacity 0, 
+        values = std::vector of length 0, capacity 0
+      }}
+  }, 
+  fHelp = 0x0, 
+  URI = "/", 
+  authUser = ""
+}
+Undefined set print command: "elment 0".  Try "help set print".
+$3 = (const JSONRPCRequest &) @0x7f61063cbb90: {
+  id = {
+    typ = 0x4, 
+    val = "1", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  strMethod = "signrawtransaction", 
+  params = {
+    typ = 0x2, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 1, capacity 1 = {{
+        typ = 0x3, 
+        val = "020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000", 
+        keys = std::vector of length 0, capacity 0, 
+        values = std::vector of length 0, capacity 0
+      }}
+  }, 
+  fHelp = 0x0, 
+  URI = "/", 
+  authUser = ""
+}
+962	    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
+965	    if (request.fHelp || request.params.size() < 1 || request.params.size() > 4)
+1023	    if (!IsDeprecatedRPCEnabled("signrawtransaction")) {
+1029	    RPCTypeCheck(request.params, {UniValue::VSTR, UniValue::VARR, UniValue::VARR, UniValue::VSTR}, true);
+1032	    JSONRPCRequest new_request;
+1033	    new_request.id = request.id;
+$4 = {
+  typ = UniValue::VNUM, 
+  val = "1", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 0, capacity 0
+}
+$5 = {
+  id = {
+    typ = 0x0, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  strMethod = "", 
+  params = {
+    typ = 0x0, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  fHelp = 0x0, 
+  URI = "", 
+  authUser = ""
+}
+1034	    new_request.params.setArray();
+1037	    if (!request.params[2].isNull()) {
+$6 = {
+  id = {
+    typ = 0x4, 
+    val = "1", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  strMethod = "", 
+  params = {
+    typ = 0x2, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  fHelp = 0x0, 
+  URI = "", 
+  authUser = ""
+}
+Undefined command: "request".  Try "help".
+$7 = (const UniValue &) @0x7f610d079760: {
+  typ = 0x0, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 0, capacity 0
+}
+1048	        new_request.params.push_back(request.params[0]);
+1049	        new_request.params.push_back(request.params[1]);
+Undefined command: "nn".  Try "help".
+1050	        new_request.params.push_back(request.params[3]);
+1051	        return signrawtransactionwithwallet(new_request);
+$8 = (const JSONRPCRequest &) @0x7f61063cbb90: {
+  id = {
+    typ = UniValue::VNUM, 
+    val = "1", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  strMethod = "signrawtransaction", 
+  params = {
+    typ = UniValue::VARR, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 1, capacity 1 = {{
+        typ = UniValue::VSTR, 
+        val = "020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000", 
+        keys = std::vector of length 0, capacity 0, 
+        values = std::vector of length 0, capacity 0
+      }}
+  }, 
+  fHelp = false, 
+  URI = "/", 
+  authUser = ""
+}
+$9 = (const JSONRPCRequest &) @0x7f61063cbb90: {
+  id = {
+    typ = 0x4, 
+    val = "1", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 0, capacity 0
+  }, 
+  strMethod = "signrawtransaction", 
+  params = {
+    typ = 0x2, 
+    val = "", 
+    keys = std::vector of length 0, capacity 0, 
+    values = std::vector of length 1, capacity 1 = {{
+        typ = 0x3, 
+        val = "020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000", 
+        keys = std::vector of length 0, capacity 0, 
+        values = std::vector of length 0, capacity 0
+      }}
+  }, 
+  fHelp = 0x0, 
+  URI = "/", 
+  authUser = ""
+}
+No symbol "operator[]" in current context.
+$10 = (const UniValue &) @0x7f60e8000940: {
+  typ = 0x3, 
+  val = "020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 0, capacity 0
+}
+$11 = (const UniValue &) @0x7f610d079760: {
+  typ = 0x0, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 0, capacity 0
+}
+$12 = (const UniValue &) @0x7f610d079760: {
+  typ = 0x0, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 0, capacity 0
+}
+$13 = (const UniValue &) @0x7f610d079760: {
+  typ = 0x0, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 0, capacity 0
+}
+Note: breakpoint 3 also set at pc 0x7f610c8d32eb.
+Breakpoint 4 at 0x7f610c8d32eb: file wallet/rpcwallet.cpp, line 3260.
+Continuing.
+
+Breakpoint 3, signrawtransactionwithwallet (request=...) at wallet/rpcwallet.cpp:3260
+3260	{
+3261	    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
+3262	    if (!EnsureWalletIsAvailable(pwallet, request.fHelp)) {
+3266	    if (request.fHelp || request.params.size() < 1 || request.params.size() > 3)
+3316	    RPCTypeCheck(request.params, {UniValue::VSTR, UniValue::VARR, UniValue::VSTR}, true);
+3318	    CMutableTransaction mtx;
+3319	    if (!DecodeHexTx(mtx, request.params[0].get_str(), true)) {
+3324	    LOCK2(cs_main, pwallet->cs_wallet);
+3325	    return SignTransaction(mtx, request.params[1], pwallet, false, request.params[2]);
+3324	    LOCK2(cs_main, pwallet->cs_wallet);
+$14 = {
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 32, 
+            data = "\000͋,\262\066N\205\220\177\332Z\251NR\356)\273\331{\022\257\024\200_!{/*\217\250E"
+          }, <No data fields>}, 
+        n = 0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 23, 
+          _union = {
+            direct = "\026\000\024h/\225\037G<C\177D\211\257\002n[\373\035\036\322*\243\000\000\000\000", 
+            {
+              capacity = 1746141206, 
+              indirect = 0x447f433c471f952f <error: Cannot access memory at address 0x447f433c471f952f>
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 4294967295, 
+      scriptWitness = {
+        stack = std::vector of length 2, capacity 2 = {std::vector of length 72, capacity 72 = {48 '0', 69 'E', 2 '\002', 
+            33 '!', 0 '\000', 205 '\315', 92 '\\', 242 '\362', 8 '\b', 164 '\244', 192 '\300', 100 'd', 25 '\031', 214 '\326', 
+            77 'M', 249 '\371', 139 '\213', 167 '\247', 239 '\357', 204 '\314', 212 '\324', 246 '\366', 106 'j', 126 '~', 
+            119 'w', 186 '\272', 75 'K', 48 '0', 185 '\271', 40 '(', 93 ']', 80 'P', 43 '+', 116 't', 142 '\216', 102 'f', 
+            42 '*', 2 '\002', 32 ' ', 67 'C', 33 '!', 96 '`', 161 '\241', 172 '\254', 183 '\267', 242 '\362', 24 '\030', 
+            141 '\215', 56 '8', 91 '[', 13 '\r', 108 'l', 237 '\355', 68 'D', 26 '\032', 162 '\242', 219 '\333', 31 '\037', 
+            252 '\374', 30 '\036', 111 'o', 200 '\310', 140 '\214', 63 '?', 212 '\324', 62 '>', 217 '\331', 95 '_', 86 'V', 
+            43 '+', 199 '\307', 1 '\001'}, std::vector of length 33, capacity 33 = {2 '\002', 185 '\271', 199 '\307', 7 '\a', 
+            125 '}', 170 '\252', 165 '\245', 90 'Z', 207 '\317', 0 '\000', 4 '\004', 139 '\213', 202 '\312', 60 '<', 93 ']', 
+            4 '\004', 208 '\320', 83 'S', 165 '\245', 164 '\244', 228 '\344', 140 '\214', 50 '2', 200 '\310', 142 '\216', 
+            103 'g', 118 'v', 204 '\314', 194 '\302', 117 'u', 201 '\311', 77 'M', 175 '\257'}}
+Quit
+Quit
+$15 = {
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0x16, 0x0, 0x14, 0x68, 0x2f, 0x95, 0x1f, 0x47, 0x3c, 0x43, 0x7f, 0x44, 0x89, 0xaf, 0x2, 0x6e, 0x5b, 
+              0xfb, 0x1d, 0x1e, 0xd2, 0x2a, 0xa3, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x68140016, 
+              indirect = 0x447f433c471f952f
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 2, capacity 2 = {std::vector of length 72, capacity 72 = {0x30, 0x45, 0x2, 0x21, 0x0, 
+            0xcd, 0x5c, 0xf2, 0x8, 0xa4, 0xc0, 0x64, 0x19, 0xd6, 0x4d, 0xf9, 0x8b, 0xa7, 0xef, 0xcc, 0xd4, 0xf6, 0x6a, 0x7e, 
+            0x77, 0xba, 0x4b, 0x30, 0xb9, 0x28, 0x5d, 0x50, 0x2b, 0x74, 0x8e, 0x66, 0x2a, 0x2, 0x20, 0x43, 0x21, 0x60, 0xa1, 
+            0xac, 0xb7, 0xf2, 0x18, 0x8d, 0x38, 0x5b, 0xd, 0x6c, 0xed, 0x44, 0x1a, 0xa2, 0xdb, 0x1f, 0xfc, 0x1e, 0x6f, 0xc8, 
+            0x8c, 0x3f, 0xd4, 0x3e, 0xd9, 0x5f, 0x56, 0x2b, 0xc7, 0x1}, std::vector of length 33, capacity 33 = {0x2, 0xb9, 
+            0xc7, 0x7, 0x7d, 0xaa, 0xa5, 0x5a, 0xcf, 0x0, 0x4, 0x8b, 0xca, 0x3c, 0x5d, 0x4, 0xd0, 0x53, 0xa5, 0xa4, 0xe4, 
+            0x8c, 0x32, 0xc8, 0x8e, 0x67, 0x76, 0xcc, 0xc2, 0x75, 0xc9, 0x4d, 0xaf}}
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 2, capacity 2 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }, {
+      nValue = 0xa9df8c80, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
+              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x986214a9, 
+              indirect = 0x4845309d352ba53e
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0
+}
+No symbol "equest" in current context.
+$16 = (const UniValue &) @0x7f60e8001458: {
+  typ = 0x0, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 0, capacity 0
+}
+$17 = (const UniValue &) @0x7f60e80014b0: {
+  typ = 0x0, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 0, capacity 0
+}
+A debugging session is active.
+
+	Inferior 1 [process 11708] will be detached.
+
+Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 11708

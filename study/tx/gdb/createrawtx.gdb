@@ -4,6 +4,7 @@ set logging on
 
 break CRPCTable::execute                                                                                    
 break createrawtransaction 
+break key_io.cpp:73 #CTxDestination DecodeDestination(const std::string& str, const CChainParams& params)
 
 #break signrawtransaction 
 #break signrawtransactionwithwallet

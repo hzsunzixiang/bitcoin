@@ -16,10 +16,21 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressesbyaccount ""
 ]
 
 # 由公钥得到公钥hash 进而组合成 0014+pubkeyhash, 再进行hash 然后组合成scriptPubKey a914 + hash160(0014+pubkeyhash) + 87
+# 从而如果提供公钥 用scriptPubKey 就能证明所有人的公钥正确； 再结合签名证明所有人的签名正确
+# witness 的钱包地址生成方式 跟普通的差别较大
 StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressinfo 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
 {
   "address": "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ",
-  "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887", # 对应输出的 "scriptPubKey"
+        # 由钱包地址得到 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ -> c4 + 077a414c3d707eaff2718369bad42b26878279c8 + a76c6897
+  "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887", 
+        # printf "c4077a414c3d707eaff2718369bad42b26878279c8" | xxd -r -p |sha256sum -b |xxd -r -p |sha256sum -b
+        # 得到 a76c689754f7962a9ccad94e7e52ca44cf31e577c73ab62935a0b14213f2a5cd  取最前面四位
+        # base58(c4 + 077a414c3d707eaff2718369bad42b26878279c8 + a76c6897) - > 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
+
+        # 对应输出的 "scriptPubKey" #0xa9 指的是 OP_HASH160 指令 0x14指的是长度 0x87=OP_EQUAL
+        # *script << OP_HASH160 << ToByteVector(scriptID) << OP_EQUAL;
+	    # 0xa9 + 0x14 + （pubhash）+ 0x87
+
         # 这个体现在 vout 中
         # 这个 scriptPubKey 的生成方式 
         # 在非 sigwit的交易中 这个 脚本中其实就是 公钥的hash
@@ -32,7 +43,6 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressinfo 2MsvmB4K5yFMxAdFhGyGW8
         # StephenSun@debian-1:~/bitcoin/study/gdb$ printf   0014682f951f473c437f4489af026e5bfb1d1ed22aa3 | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
         # (stdin)= 077a414c3d707eaff2718369bad42b26878279c8
         # 由 hex 到 scriptPubKey 是单向的， 所以 在输入中提供的hex， 可以验证之前的上一个输出
-
 
   "ismine": true,
   "iswatchonly": false,
@@ -48,12 +58,17 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressinfo 2MsvmB4K5yFMxAdFhGyGW8
         # 这个 是真正的公钥pubkey 已经清楚
   "embedded": {
     "isscript": false,
-    "iswitness": true,
+    "iswitness": true,   # 意思是对于 iswitness 版本的交易, 
     "witness_version": 0,
-    "witness_program": "682f951f473c437f4489af026e5bfb1d1ed22aa3",  # 这里是公钥的hash 参看上面  已经清楚
-    "pubkey": "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf",  # 已经清楚
-    "address": "bcrt1qdqhe286883ph73yf4upxuklmr50dy24ra7qpd0",
-    "scriptPubKey": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3"  # 已经清楚 就是 0x0014 +  公钥hash
+
+     # 这里是公钥的hash 参看上面  已经清楚 
+	 # 要想花费这笔钱 必须提供这个 pubkeyhash  本篇后面有解释
+    "witness_program": "682f951f473c437f4489af026e5bfb1d1ed22aa3",  
+    "pubkey": "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf",  # 公钥 已经清楚
+    "address": "bcrt1qdqhe286883ph73yf4upxuklmr50dy24ra7qpd0",  # TODO
+
+    #scriptPubKey  已经清楚 就是 0x0014 +  公钥hash  注意是公钥hash
+    "scriptPubKey": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3"  # 也就是 00 + 0x14 + pubkeyhash 
   },
   "account": "",
   "timestamp": 1533402402,
@@ -96,10 +111,18 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressinfo 2N2EYbEMbZyr1zy7GAghRK
 地址 及对应的公钥
   "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
 {
+   # 编码 base58(c4 + 077a414c3d707eaff2718369bad42b26878279c8 + a76c6897) - > 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
   "address": "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ",
-  "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887",
-  "hex": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3",
-  "pubkey": "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf",
+   # 再做一次rmd160
+   # StephenSun@debian-1:~/bitcoin/study/gdb$ printf   0014682f951f473c437f4489af026e5bfb1d1ed22aa3 | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+   # (stdin)= 077a414c3d707eaff2718369bad42b26878279c8
+  "scriptPubKey": "a914077a414c3d707eaff2718369bad42b26878279c887",               
+   # 对公钥做rmd160
+   # printf  "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+   #(stdin)= 682f951f473c437f4489af026e5bfb1d1ed22aa3
+  "hex": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3",                          
+   # 公钥
+  "pubkey": "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf", 
 }
   "2N2EYbEMbZyr1zy7GAghRKSDo4EXpFYRvQM"
 {
@@ -236,6 +259,9 @@ a91462983ea52b359d304548bf09e4a09f4a4ac7b70087
 21   # 0x21 = 33
 02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf   # 这个是公钥 
 00000000
+
+
+# 这里做一些解释
 {
   "txid": "666643850c1df51b32e4deda2637b2c72562b02f85cb479d99fcb7e68f0f6375",
   "hash": "6a6ed4b53aa9a7ec4c4dfd7fdf58dabd677908e2470d5e594a1b6dc3ae69c24d",
@@ -247,14 +273,23 @@ a91462983ea52b359d304548bf09e4a09f4a4ac7b70087
     {
       "txid": "36cde5c4e1d8e2ef8a6c696ef6d9c594e54501edb2945d4f418511206d83adff",
       "vout": 0,
+      # 要花费这笔钱 需要提供的脚本  也就是包含公钥hash的 (详情参看上面)
+      # 这样就可以验证txout "asm": 或者 "hex": "a914077a414c3d707eaff2718369bad42b26878279c887",
+      # 以证明提供的pubkeyhash是跟txout中的 相关信息匹配
       "scriptSig": {
         "asm": "0014682f951f473c437f4489af026e5bfb1d1ed22aa3", # 0x0014 + 对公钥的hash
         "hex": "160014682f951f473c437f4489af026e5bfb1d1ed22aa3"
       },
+      #  这里是签名+公钥 
+      #  由公钥对应公钥hash，从而证明公钥是匹配的
+      #  由签名证明确实有拥有者的私钥
       "txinwitness": [
         "3045022100cacee8914755740fc1d347ba2188b8f951daf5f9a5f6f1ed2d47a015cffead37022066511fefcd546494bc8d068cc879a70b62c8e2745bf272ea071eaa1085ab879e01",
         "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf"
       ],
+	 # sign<- private -> pubukey 签名证明拥有私钥  而且可以用公钥pubkey验证
+     # pubkey -> pubkeyhash(scriptSig) -> scriptPubKey 
+	 # vin中提供的scriptSig  跟vout中的scriptPubKey 相匹配, 已搞明白
       "sequence": 4294967295
     }
   ],
