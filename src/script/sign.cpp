@@ -19,15 +19,22 @@ TransactionSignatureCreator::TransactionSignatureCreator(const CKeyStore* keysto
 
 bool TransactionSignatureCreator::CreateSig(std::vector<unsigned char>& vchSig, const CKeyID& address, const CScript& scriptCode, SigVersion sigversion) const
 {
-    CKey key;
+    CKey key;  // key中存放着私钥
     if (!keystore->GetKey(address, key))
         return false;
 
+	// 这里得到了私钥
+	// #priv = 0xea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
     // Signing with uncompressed keys is disabled in witness scripts
+	// 这里必须是压缩公钥
     if (sigversion == SIGVERSION_WITNESS_V0 && !key.IsCompressed())
         return false;
 
     uint256 hash = SignatureHash(scriptCode, *txTo, nIn, nHashType, amount, sigversion);
+	// 这行数据是终极签名函数
+
+	// hash 是要签名的hash值， vchSig 是签名
+	// key中有私钥 里面获得签名之后，再编码签名
     if (!key.Sign(hash, vchSig))
         return false;
     vchSig.push_back((unsigned char)nHashType);
@@ -138,10 +145,13 @@ static CScript PushAll(const std::vector<valtype>& values)
     return result;
 }
 // ericksun fromPubKey 指的是 scriptPubKey
+// 比如  a914077a414c3d707eaff2718369bad42b26878279c887
 bool ProduceSignature(const BaseSignatureCreator& creator, const CScript& fromPubKey, SignatureData& sigdata)
 {
     std::vector<valtype> result;
     txnouttype whichType;
+	// 此时result存放的 是上一级的hash
+	// 比如 0014682f951f473c437f4489af026e5bfb1d1ed22aa3
     bool solved = SignStep(creator, fromPubKey, result, whichType, SIGVERSION_BASE);
     bool P2SH = false;
     CScript subscript;
@@ -153,6 +163,8 @@ bool ProduceSignature(const BaseSignatureCreator& creator, const CScript& fromPu
         // the final scriptSig is the signatures from that
         // and then the serialized subscript:
         subscript = CScript(result[0].begin(), result[0].end());
+		// subscript 形如 0014682f951f473c437f4489af026e5bfb1d1ed22aa3 0d14317f 
+	    // result 形如 0014682f951f473c437f4489af026e5bfb1d1ed22aa3
         solved = solved && SignStep(creator, subscript, result, whichType, SIGVERSION_BASE) && whichType != TX_SCRIPTHASH;
         P2SH = true;
     }
@@ -162,6 +174,7 @@ bool ProduceSignature(const BaseSignatureCreator& creator, const CScript& fromPu
         CScript witnessscript;
         witnessscript << OP_DUP << OP_HASH160 << ToByteVector(result[0]) << OP_EQUALVERIFY << OP_CHECKSIG;
         txnouttype subType;
+	    // witnessscript 形如 76a914682f951f473c437f4489af026e5bfb1d1ed22aa3 88ac
         solved = solved && SignStep(creator, witnessscript, result, subType, SIGVERSION_WITNESS_V0);
         sigdata.scriptWitness.stack = result;
         result.clear();

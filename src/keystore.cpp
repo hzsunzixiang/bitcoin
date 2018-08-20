@@ -78,9 +78,15 @@ std::set<CKeyID> CBasicKeyStore::GetKeys() const
 
 bool CBasicKeyStore::GetKey(const CKeyID &address, CKey &keyOut) const
 {
+	// address 比如 682f951f473c437f4489af026e5bfb1d1ed22aa3
+	// 这个address是 公钥经过hash之后的值
     LOCK(cs_KeyStore);
     KeyMap::const_iterator mi = mapKeys.find(address);
     if (mi != mapKeys.end()) {
+		// 这里真正得到了私钥 放在 keyOut中
+		// 可见其 kv对为（682f951f473c437f4489af026e5bfb1d1ed22aa3,ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20)
+		// 也就是(pubkeyhash, privateKey) ,这里没有体现pubkey
+		// #priv = 0xea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
         keyOut = mi->second;
         return true;
     }
