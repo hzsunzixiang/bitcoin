@@ -673,3 +673,28 @@ A debugging session is active.
 	Inferior 1 [process 550] will be detached.
 
 Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 550
+Breakpoint 1 at 0x7f610c6aca1f: file rpc/server.cpp, line 473.
+Breakpoint 2 at 0x7f610c68b0f8: file rpc/rawtransaction.cpp, line 960.
+Breakpoint 3 at 0x7f610c8d32eb: file wallet/rpcwallet.cpp, line 3260.
+Continuing.
+[Switching to Thread 0x7f61063cc700 (LWP 11711)]
+
+Breakpoint 1, CRPCTable::execute (this=0x7f610d075fa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
+Continuing.
+
+Breakpoint 2, signrawtransaction (request=...) at rpc/rawtransaction.cpp:960
+960	{
+Already logging to createtx.txt.
+Breakpoint 4 at 0x7f610c6aca1f: file rpc/server.cpp, line 473.
+Breakpoint 5 at 0x7f610c68b0f8: file rpc/rawtransaction.cpp, line 960.
+Breakpoint 6 at 0x7f610c8d32eb: file wallet/rpcwallet.cpp, line 3260.
+Currently logging to "createtx.txt".
+Future logs will be written to signtx.txt.
+Logs will be appended to the log file.
+Output is being logged and displayed.
+A debugging session is active.
+
+	Inferior 1 [process 11708] will be detached.
+
+Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 11708
