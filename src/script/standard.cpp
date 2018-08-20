@@ -287,6 +287,10 @@ public:
         return true;
     }
 
+    // ericksun 此时得到了 scriptPubKey : *script << OP_HASH160 << ToByteVector(scriptID) << OP_EQUAL;
+	// witness 版本的脚本  例如 a9 14 077a414c3d707eaff2718369bad42b26878279c8 87
+	// OP_HASH160 = 0xa9, OP_EQUAL = 0x87,
+	// 0x14 = 20 表示rmd160长度
     bool operator()(const CScriptID &scriptID) const {
         script->clear();   // OP_HASH160 = 0xa9, OP_EQUAL = 0x87,
         *script << OP_HASH160 << ToByteVector(scriptID) << OP_EQUAL;

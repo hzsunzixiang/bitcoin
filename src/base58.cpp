@@ -124,6 +124,19 @@ std::string EncodeBase58Check(const std::vector<unsigned char>& vchIn)
 
 bool DecodeBase58Check(const char* psz, std::vector<unsigned char>& vchRet)
 {
+	  // 公钥为: 02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf
+	  // printf "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+      // result: 682f951f473c437f4489af026e5bfb1d1ed22aa3  # 公钥的hash
+	  // printf   0014682f951f473c437f4489af026e5bfb1d1ed22aa3 | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
+      // 得到 077a414c3d707eaff2718369bad42b26878279c8 这个部分内容就是构成钱包地址的部分
+	  // printf "c4077a414c3d707eaff2718369bad42b26878279c8" | xxd -r -p |sha256sum -b |xxd -r -p |sha256sum -b
+     //  a76c689754f7962a9ccad94e7e52ca44cf31e577c73ab62935a0b14213f2a5cd   # 取前四个字节 a76c6897
+
+	// psz = 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
+	// erick 这里解密 base58, 还原成原来的 scriptPubKey 中的内容
+    // "scriptPubKey": "a914 077a414c3d707eaff2718369bad42b26878279c8 87"
+	// vchRet = {0xc4, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8, 0xa7, 0x6c, 0x68, 0x97} :  c4 077a414c3d707eaff2718369bad42b26878279c8 a76c6897
+	// 
     if (!DecodeBase58(psz, vchRet) ||
         (vchRet.size() < 4)) {
         vchRet.clear();
@@ -131,20 +144,23 @@ bool DecodeBase58Check(const char* psz, std::vector<unsigned char>& vchRet)
     }
     // re-calculate the checksum, ensure it matches the included 4-byte checksum
     // erick 验证pubkeyhash的正确性  vchRet 计算方式入下
-    // 对公钥PUBKEY 做hash(sha256sum 和 rmd160) 然后加上前缀
-    //printf "$PUBKEY" | xxd -r -p |sha256sum -b |xxd -r -p |openssl rmd160
-    // 然后前面加上 前缀
+    // 对公钥pubkeyhash 做加上前缀(regnet 为c4)  然后计算 hash(sha256sum(sha256sum(c4 + pubkeyhash))) 
     // 验证的时候再做一次hash 对比前四个字节
-    // printf "$EXTEND160" | xxd -r -p |sha256sum -b |xxd -r -p |sha256sum -b
+	// printf "c4077a414c3d707eaff2718369bad42b26878279c8" | xxd -r -p |sha256sum -b |xxd -r -p |sha256sum -b
+    // a76c689754f7962a9ccad94e7e52ca44cf31e577c73ab62935a0b14213f2a5cd   # 取前四个字节 a76c6897
+
+	// c4077a414c3d707eaff2718369bad42b26878279c8 a76c6897  // 不算最后4个字节
     uint256 hash = Hash(vchRet.begin(), vchRet.end() - 4);
     if (memcmp(&hash, &vchRet[vchRet.size() - 4], 4) != 0) {
         vchRet.clear();
         return false;
     }
+	// 如果正确， 扔掉最后四个字节
     vchRet.resize(vchRet.size() - 4);
     return true;
 }
 
+// 取回了 suffix + rmd160 比如 c4 077a414c3d707eaff2718369bad42b26878279c8 
 bool DecodeBase58Check(const std::string& str, std::vector<unsigned char>& vchRet)
 {
     return DecodeBase58Check(str.c_str(), vchRet);

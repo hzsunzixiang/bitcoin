@@ -70,25 +70,39 @@ public:
     std::string operator()(const CNoDestination& no) const { return {}; }
 };
 
+// erick str 是一个地址 比如 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
 CTxDestination DecodeDestination(const std::string& str, const CChainParams& params)
 {
     std::vector<unsigned char> data;
     uint160 hash;
     if (DecodeBase58Check(str, data)) {
         // base58-encoded Bitcoin addresses.
+
+
+        // erick str 是一个地址 比如 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
+	    // erick for exampe: c4077a414c3d707eaff2718369bad42b26878279c8 a76c6897  // 不算最后4个字节
         // Public-key-hash-addresses have version 0 (or 111 testnet).
         // The data vector contains RIPEMD160(SHA256(pubkey)), where pubkey is the serialized public key.
+
+		// erick (1) 先判断是否公钥地址
         const std::vector<unsigned char>& pubkey_prefix = params.Base58Prefix(CChainParams::PUBKEY_ADDRESS);
+        // base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
+		// erick 在这里 
         if (data.size() == hash.size() + pubkey_prefix.size() && std::equal(pubkey_prefix.begin(), pubkey_prefix.end(), data.begin())) {
             std::copy(data.begin() + pubkey_prefix.size(), data.end(), hash.begin());
             return CKeyID(hash);
         }
+		// erick 这里相对公钥 起始是做了两层的，参看base58.cpp 中的解释
         // Script-hash-addresses have version 5 (or 196 testnet).
         // The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script.
+		// erick (2) 再判断是否 SCRIPT_ADDRESS 以 0xc4打头
+        // base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);  196=0xc4
+		// 正好符合 所以走这个分支返回
         const std::vector<unsigned char>& script_prefix = params.Base58Prefix(CChainParams::SCRIPT_ADDRESS);
         if (data.size() == hash.size() + script_prefix.size() && std::equal(script_prefix.begin(), script_prefix.end(), data.begin())) {
             // erick 对于 regtest 去除前面的 0xc4=196 得到RIPEMD160(SHA256(cscript))
             std::copy(data.begin() + script_prefix.size(), data.end(), hash.begin());
+	        // erick  077a414c3d707eaff2718369bad42b26878279c8  除去开头的0x4c
             return CScriptID(hash);
         }
     }
@@ -212,6 +226,7 @@ std::string EncodeDestination(const CTxDestination& dest)
     return boost::apply_visitor(DestinationEncoder(Params()), dest);
 }
 
+// 解析的是一个地址 比如 str = 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
 CTxDestination DecodeDestination(const std::string& str)
 {
     return DecodeDestination(str, Params());
