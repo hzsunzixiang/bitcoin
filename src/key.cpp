@@ -180,12 +180,17 @@ CPubKey CKey::GetPubKey() const {
     assert(fValid);
     secp256k1_pubkey pubkey;
     size_t clen = CPubKey::PUBLIC_KEY_SIZE;
+	// 公钥最终放在result中 , pubkey 还不清楚是什么可能是中间结果
     CPubKey result;
     int ret = secp256k1_ec_pubkey_create(secp256k1_context_sign, &pubkey, begin());
     assert(ret);
     secp256k1_ec_pubkey_serialize(secp256k1_context_sign, (unsigned char*)result.begin(), &clen, &pubkey, fCompressed ? SECP256K1_EC_COMPRESSED : SECP256K1_EC_UNCOMPRESSED);
     assert(result.size() == clen);
     assert(result.IsValid());
+// 此时才真正获取到了公钥
+//(gdb) p/x result
+//$8 = {static PUBLIC_KEY_SIZE = 0x41, static COMPRESSED_PUBLIC_KEY_SIZE = 0x21, static SIGNATURE_SIZE = 0x48,
+//  static COMPACT_SIGNATURE_SIZE = 0x41, vch = {0x2, 0xb9, 0xc7, 0x7, 0x7d, 0xaa, 0xa5, 0x5a, 0xcf, 0x0, 0x4, 0x8b, 0xca, 0x3c, 0x5d, 0x4, 0xd0, 0x53, 0xa5, 0xa4, 0xe4, 0x8c, 0x32, 0xc8, 0x8e, 0x67, 0x76, 0xcc, 0xc2, 0x75, 0xc9, 0x4d, 0xaf, 0x0 <repeats 32 times>}}
     return result;
 }
 
