@@ -5,7 +5,10 @@ set logging on
 break CRPCTable::execute                                                                                    
 
 break signrawtransaction 
+# 最终签名的地方
+break CKey::Sign
 #break CKey::GetPubKey
+break CKey::GetPubKey
 
 
 break SignTransaction
