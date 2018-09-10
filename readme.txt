@@ -54,3 +54,6 @@ StephenSun@debian-1:~/bitcoin$ ldd ./src/bitcoind
 
 # 编译时的详细输出
 # make V=1 
+
+# 运行时
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/BerkeleyDB.4.8/lib:/usr/local/lib
