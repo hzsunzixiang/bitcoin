@@ -107,10 +107,11 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt getaddressinfo 2N2EYbEMbZyr1zy7GAghRK
 
 
 
-总结一下
-地址 及对应的公钥
-对应私钥 
-ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
+#总结一下
+#地址 及对应的公钥
+#对应WIF cVSKEzHXxJ8pJcMB1BX6H6wPXG9ZPDKZQwtqBe9uvjDxoZwjySXg
+#对应私钥 
+#  ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
 
   "2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ", 
 {
