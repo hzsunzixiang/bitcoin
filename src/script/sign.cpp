@@ -17,8 +17,6 @@ typedef std::vector<unsigned char> valtype;
 
 TransactionSignatureCreator::TransactionSignatureCreator(const CKeyStore* keystoreIn, const CTransaction* txToIn, unsigned int nInIn, const CAmount& amountIn, int nHashTypeIn) : BaseSignatureCreator(keystoreIn), txTo(txToIn), nIn(nInIn), nHashType(nHashTypeIn), amount(amountIn), checker(txTo, nIn, amountIn) {}
 
-
-// ericksun Sign1->走到这里来签名
 bool TransactionSignatureCreator::CreateSig(std::vector<unsigned char>& vchSig, const CKeyID& address, const CScript& scriptCode, SigVersion sigversion) const
 {
     CKey key;  // key中存放着私钥
@@ -95,7 +93,6 @@ static bool SignStep(const BaseSignatureCreator& creator, const CScript& scriptP
         return Sign1(keyID, creator, scriptPubKey, ret, sigversion);
     case TX_PUBKEYHASH:
         keyID = CKeyID(uint160(vSolutions[0]));
-		//ericksun  走到这里做签名
         if (!Sign1(keyID, creator, scriptPubKey, ret, sigversion))
             return false;
         else
@@ -172,14 +169,12 @@ bool ProduceSignature(const BaseSignatureCreator& creator, const CScript& fromPu
         P2SH = true;
     }
 
-	// 走到这分支来做签名
     if (solved && whichType == TX_WITNESS_V0_KEYHASH)
     {
         CScript witnessscript;
         witnessscript << OP_DUP << OP_HASH160 << ToByteVector(result[0]) << OP_EQUALVERIFY << OP_CHECKSIG;
         txnouttype subType;
-	    // witnessscript 形如 76a914 682f951f473c437f4489af026e5bfb1d1ed22aa3 88ac 
-		//也就是包含公钥hash pubkeyhash 682f951f473c437f4489af026e5bfb1d1ed22aa3
+	    // witnessscript 形如 76a914682f951f473c437f4489af026e5bfb1d1ed22aa3 88ac
         solved = solved && SignStep(creator, witnessscript, result, subType, SIGVERSION_WITNESS_V0);
         sigdata.scriptWitness.stack = result;
         result.clear();

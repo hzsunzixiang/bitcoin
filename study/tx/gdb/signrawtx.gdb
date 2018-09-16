@@ -1,5 +1,7 @@
 set logging file signtx.txt 
 set logging on
+set print pretty
+set print elements 0
 
 
 break CRPCTable::execute                                                                                    
@@ -13,7 +15,18 @@ break CKey::GetPubKey
 
 break SignTransaction
 break signrawtransactionwithwallet
+break signrawtransactionwithkey
 break ProduceSignature
+
+# 得到hash值得地方 位于文件 interpreter.cpp
+break    SignatureHash
+
+break SignStep
+break Sign1
+break TransactionSignatureCreator::CreateSig
+
+
+# ProduceSignature ->  SignStep -> Sign1 -> TransactionSignatureCreator::CreateSig
 
 #break DecodeHexTx
 #break CheckTxScriptsSanity

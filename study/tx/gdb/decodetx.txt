@@ -277,3 +277,784 @@ $15 = (const CTransaction &) @0x7f148cab5580: {
         0x8e, 0xca, 0xd, 0x23, 0x37, 0xf6, 0x82, 0xfc, 0xdd, 0xaf, 0x9, 0xf4, 0xd9}
     }, <No data fields>}
 }
+258	}
+CTransaction::Serialize<CHashWriter> (this=0x7f148cab5580, s=...) at ./primitives/transaction.h:303
+303	    }
+Serialize<CHashWriter, CTransaction> (os=..., a=...) at ./serialize.h:562
+562	}
+CHashWriter::operator<< <CTransaction> (this=0x7f148cab4d90, obj=...) at ./hash.h:145
+145	        return (*this);
+146	    }
+SerializeHash<CTransaction> (obj=..., nType=4, nVersion=0) at ./hash.h:190
+190	    return ss.GetHash();
+$16 = {
+  ctx = {
+    sha = {
+      s = {0xb5558219, 0x5f83ded0, 0x2c70c1cf, 0x5d78b3ae, 0x4fbad8af, 0x4fc4312, 0x917c08e6, 0xf22580f2}, 
+      buf = {0x1a, 0xa2, 0xdb, 0x1f, 0xfc, 0x1e, 0x6f, 0xc8, 0x8c, 0x3f, 0xd4, 0x3e, 0xd9, 0x5f, 0x56, 0x2b, 0xc7, 0x1, 0x21, 
+        0x2, 0xb9, 0xc7, 0x7, 0x7d, 0xaa, 0xa5, 0x5a, 0xcf, 0x0, 0x4, 0x8b, 0xca, 0x3c, 0x5d, 0x4, 0xd0, 0x53, 0xa5, 0xa4, 
+        0xe4, 0x8c, 0x32, 0xc8, 0x8e, 0x67, 0x76, 0xcc, 0xc2, 0x75, 0xc9, 0x4d, 0xaf, 0x0, 0x0, 0x0, 0x0, 0x18, 0x8d, 0x38, 
+        0x5b, 0xd, 0x6c, 0xed, 0x44}, 
+      bytes = 0xf8, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+191	}
+$17 = {
+  ctx = {
+    sha = {
+      s = {0x3d6e53dd, 0x861bc5a, 0xd2d1791a, 0xca849328, 0xe9d02251, 0xe3bb25e7, 0xbd8002c1, 0xf076a3fe}, 
+      buf = {0x17, 0xc3, 0xb9, 0xa9, 0x48, 0x5, 0x6e, 0x42, 0x4e, 0xf8, 0xf9, 0x98, 0xed, 0x27, 0x82, 0xb6, 0xe4, 0xfb, 0xbb, 
+        0x27, 0x5b, 0xc0, 0x8a, 0x6d, 0xed, 0x83, 0x49, 0xba, 0xc5, 0x29, 0x8e, 0x2c, 0x80, 0x0 <repeats 29 times>, 0x1, 0x0}, 
+      bytes = 0x40, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+CTransaction::GetWitnessHash (this=0x7f148cab5580) at primitives/transaction.cpp:77
+77	}
+$18 = {
+  static CURRENT_VERSION = 0x2, 
+  static MAX_STANDARD_VERSION = 0x2, 
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0x16, 0x0, 0x14, 0x68, 0x2f, 0x95, 0x1f, 0x47, 0x3c, 0x43, 0x7f, 0x44, 0x89, 0xaf, 0x2, 0x6e, 0x5b, 
+              0xfb, 0x1d, 0x1e, 0xd2, 0x2a, 0xa3, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x68140016, 
+              indirect = 0x447f433c471f952f
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 2, capacity 2 = {std::vector of length 72, capacity 72 = {0x30, 0x45, 0x2, 0x21, 0x0, 
+            0xcd, 0x5c, 0xf2, 0x8, 0xa4, 0xc0, 0x64, 0x19, 0xd6, 0x4d, 0xf9, 0x8b, 0xa7, 0xef, 0xcc, 0xd4, 0xf6, 0x6a, 0x7e, 
+            0x77, 0xba, 0x4b, 0x30, 0xb9, 0x28, 0x5d, 0x50, 0x2b, 0x74, 0x8e, 0x66, 0x2a, 0x2, 0x20, 0x43, 0x21, 0x60, 0xa1, 
+            0xac, 0xb7, 0xf2, 0x18, 0x8d, 0x38, 0x5b, 0xd, 0x6c, 0xed, 0x44, 0x1a, 0xa2, 0xdb, 0x1f, 0xfc, 0x1e, 0x6f, 0xc8, 
+            0x8c, 0x3f, 0xd4, 0x3e, 0xd9, 0x5f, 0x56, 0x2b, 0xc7, 0x1}, std::vector of length 33, capacity 33 = {0x2, 0xb9, 
+            0xc7, 0x7, 0x7d, 0xaa, 0xa5, 0x5a, 0xcf, 0x0, 0x4, 0x8b, 0xca, 0x3c, 0x5d, 0x4, 0xd0, 0x53, 0xa5, 0xa4, 0xe4, 
+            0x8c, 0x32, 0xc8, 0x8e, 0x67, 0x76, 0xcc, 0xc2, 0x75, 0xc9, 0x4d, 0xaf}}
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 2, capacity 2 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }, {
+      nValue = 0xa9df8c80, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
+              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x986214a9, 
+              indirect = 0x4845309d352ba53e
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0, 
+  hash = {
+    <base_blob<256u>> = {
+      static WIDTH = 0x20, 
+      data = {0xc8, 0x60, 0x90, 0xb4, 0x60, 0x99, 0xc5, 0xe, 0xaf, 0xeb, 0xd, 0xb9, 0x79, 0x54, 0xd7, 0x30, 0x5e, 0x41, 0x8, 
+        0x8e, 0xca, 0xd, 0x23, 0x37, 0xf6, 0x82, 0xfc, 0xdd, 0xaf, 0x9, 0xf4, 0xd9}
+    }, <No data fields>}
+}
+TxToUniv (tx=..., hashBlock=..., entry=..., include_hex=false, serialize_flags=0) at core_write.cpp:161
+161	    entry.pushKV("version", tx.nVersion);
+162	    entry.pushKV("size", (int)::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION));
+
+Breakpoint 9, SerializeTransaction<CSizeComputer, CTransaction> (tx=..., s=...) at ./primitives/transaction.h:232
+232	inline void SerializeTransaction(const TxType& tx, Stream& s) {
+233	    const bool fAllowWitness = !(s.GetVersion() & SERIALIZE_TRANSACTION_NO_WITNESS);
+235	    s << tx.nVersion;
+$19 = 0x1
+236	    unsigned char flags = 0;
+238	    if (fAllowWitness) {
+240	        if (tx.HasWitness()) {
+241	            flags |= 1;
+244	    if (flags) {
+246	        std::vector<CTxIn> vinDummy;
+247	        s << vinDummy;
+$20 = std::vector of length 0, capacity 0
+$21 = (CSizeComputer &) @0x7f148cab4e20: {
+  nSize = 0x4, 
+  nType = 0x1, 
+  nVersion = 0x1117f
+}
+$22 = (CSizeComputer &) @0x7f148cab4e20: {
+  nSize = 4, 
+  nType = 1, 
+  nVersion = 70015
+}
+$23 = 0x2
+248	        s << flags;
+$24 = (CSizeComputer &) @0x7f148cab4e20: {
+  nSize = 0x5, 
+  nType = 0x1, 
+  nVersion = 0x1117f
+}
+type = class CSizeComputer {
+  protected:
+    size_t nSize;
+    const int nType;
+    const int nVersion;
+
+  public:
+    CSizeComputer(int, int);
+    void write(const char *, size_t);
+    void seek(size_t);
+    size_t size(void) const;
+    int GetVersion(void) const;
+    int GetType(void) const;
+    CSizeComputer & operator<< <unsigned int>(const unsigned int &);
+    CSizeComputer & operator<< <std::vector<CTxOut> >(const std::vector<CTxOut> &);
+    CSizeComputer & operator<< <unsigned char>(const unsigned char &);
+    CSizeComputer & operator<< <std::vector<CTxIn> >(const std::vector<CTxIn> &);
+    CSizeComputer & operator<< <int>(const int &);
+    CSizeComputer & operator<< <std::vector<std::vector<unsigned char> > >(const std::vector<std::vector<unsigned char>> &);
+    CSizeComputer & operator<< <CTransaction>(const CTransaction &);
+} &
+Print value of expression EXP.
+Variables accessible are those of the lexical environment of the selected
+stack frame, plus all those whose scope is global or an entire file.
+
+$NUM gets previous value number NUM.  $ and $$ are the last two values.
+$$NUM refers to NUM'th value back from the last one.
+Names starting with $ refer to registers (with the values they would have
+if the program were to return to the stack frame now selected, restoring
+all registers saved by frames farther in) or else to debugger
+"convenience" variables (any such name not a known register).
+Use assignment expressions to give values to convenience variables.
+
+{TYPE}ADREXP refers to a datum of data type TYPE, located at address ADREXP.
+@ is a binary operator for treating consecutive data objects
+anywhere in memory as an array.  FOO@NUM gives an array whose first
+element is FOO, whose second element is stored in the space following
+where FOO is stored, etc.  FOO must be an expression whose value
+resides in memory.
+
+EXP may be preceded with /FMT, where FMT is a format letter
+but no count or size letter (see "x" command).
+Evaluate expression EXP and assign result to variable VAR, using assignment
+syntax appropriate for the current language (VAR = EXP or VAR := EXP for
+example).  VAR may be a debugger "convenience" variable (names starting
+with $), a register (a few standard names starting with $), or an actual
+variable in the program being debugged.  EXP is any valid expression.
+Use "set variable" for variables with names identical to set subcommands.
+
+With a subcommand, this command modifies parts of the gdb environment.
+You can see these environment settings with the "show" command.
+
+List of set subcommands:
+
+set ada -- Prefix command for changing Ada-specfic settings
+set agent -- Set debugger's willingness to use agent as a helper
+set annotate -- Set annotation_level
+set architecture -- Set architecture of target
+set args -- Set argument list to give program being debugged when it is started
+set auto-load -- Auto-loading specific settings
+set auto-load-scripts -- Set the debugger's behaviour regarding auto-loaded Python scripts
+set auto-solib-add -- Set autoloading of shared library symbols
+set backtrace -- Set backtrace specific variables
+set basenames-may-differ -- Set whether a source file may have multiple base names
+set breakpoint -- Breakpoint specific settings
+set can-use-hw-watchpoints -- Set debugger's willingness to use watchpoint hardware
+set case-sensitive -- Set case sensitivity in name search
+set charset -- Set the host and target character sets
+set check -- Set the status of the type/range checker
+set circular-trace-buffer -- Set target's use of circular trace buffer
+set code-cache -- Set cache use for code segment access
+set coerce-float-to-double -- Set coercion of floats to doubles when calling functions
+set complaints -- Set max number of complaints about incorrect symbols
+set confirm -- Set whether to confirm potentially dangerous operations
+set cp-abi -- Set the ABI used for inspecting C++ objects
+set data-directory -- Set GDB's data directory
+set dcache -- Use this command to set number of lines in dcache and line-size
+set debug -- Generic command for setting gdb debugging flags
+set debug-file-directory -- Set the directories where separate debug symbols are searched for
+set debugvarobj -- Set varobj debugging
+set default-collect -- Set the list of expressions to collect by default
+set demangle-style -- Set the current C++ demangling style
+set detach-on-fork -- Set whether gdb will detach the child of a fork
+set directories -- Set the search path for finding source files
+set disable-randomization -- Set disabling of debuggee's virtual address space randomization
+set disassemble-next-line -- Set whether to disassemble next source line or insn when execution stops
+set disassembly-flavor -- Set the disassembly flavor
+set disconnected-dprintf -- Set whether dprintf continues after GDB disconnects
+set disconnected-tracing -- Set whether tracing continues after GDB disconnects
+set displaced-stepping -- Set debugger's willingness to use displaced stepping
+set dprintf-channel -- Set the channel to use for dynamic printf
+set dprintf-function -- Set the function to use for dynamic printf
+set dprintf-style -- Set the style of usage for dynamic printf
+set editing -- Set editing of command lines as they are typed
+set endian -- Set endianness of target
+set environment -- Set environment variable value to give the program
+set exec-direction -- Set direction of execution
+set exec-done-display -- Set notification of completion for asynchronous execution commands
+set exec-wrapper -- Set a wrapper for running programs
+set extended-prompt -- Set the extended prompt
+set extension-language -- Set mapping between filename extension and source language
+set filename-display -- Set how to display filenames
+set follow-exec-mode -- Set debugger response to a program call of exec
+set follow-fork-mode -- Set debugger response to a program call of fork or vfork
+set frame-filter -- Prefix command for 'set' frame-filter related operations
+set gnutarget -- Set the current BFD target
+set height -- Set number of lines in a page for GDB output pagination
+set history -- Generic command for setting command history parameters
+set host-charset -- Set the host character set
+set inferior-tty -- Set terminal for future runs of program being debugged
+set input-radix -- Set default input radix for entering numbers
+set interactive-mode -- Set whether GDB's standard input is a terminal
+set language -- Set the current source language
+set libthread-db-search-path -- Set search path for libthread_db
+set listsize -- Set number of source lines gdb will list by default
+set logging -- Set logging options
+set max-user-call-depth -- Set the max call depth for non-python user-defined commands
+set may-insert-breakpoints -- Set permission to insert breakpoints in the target
+set may-insert-fast-tracepoints -- Set permission to insert fast tracepoints in the target
+set may-insert-tracepoints -- Set permission to insert tracepoints in the target
+set may-interrupt -- Set permission to interrupt or signal the target
+set may-write-memory -- Set permission to write into target memory
+set may-write-registers -- Set permission to write into registers
+set mem -- Memory regions settings
+set multiple-symbols -- Set the debugger behavior when more than one symbol are possible matches
+set non-stop -- Set whether gdb controls the inferior in non-stop mode
+set observer -- Set whether gdb controls the inferior in observer mode
+set opaque-type-resolution -- Set resolution of opaque struct/class/union types (if set before loading symbols)
+set osabi -- Set OS ABI of target
+set output-radix -- Set default output radix for printing of values
+set overload-resolution -- Set overload resolution in evaluating C++ functions
+set pagination -- Set state of GDB output pagination
+set print -- Generic command for setting how things print
+set prompt -- Set gdb's prompt
+set python -- Prefix command for python preference settings
+set radix -- Set default input and output number radices
+set range-stepping -- Enable or disable range stepping
+set record -- Set record options
+set remote -- Remote protocol specific variables
+set remoteaddresssize -- Set the maximum size of the address (in bits) in a memory packet
+set remotebaud -- Set baud rate for remote serial I/O
+set remotebreak -- Set whether to send break if interrupted
+set remotecache -- Set cache use for remote targets
+set remoteflow -- Set use of hardware flow control for remote serial I/O
+set remotelogbase -- Set numerical base for remote session logging
+set remotelogfile -- Set filename for remote session recording
+set remotetimeout -- Set timeout limit to wait for target to respond
+set remotewritesize -- Set the maximum number of bytes per memory write packet (deprecated)
+set schedule-multiple -- Set mode for resuming threads of all processes
+set scheduler-locking -- Set mode for locking scheduler during execution
+set script-extension -- Set mode for script filename extension recognition
+set serial -- Set default serial/parallel port configuration
+set solib-absolute-prefix -- Set an alternate system root
+set solib-search-path -- Set the search path for loading non-absolute shared library symbol files
+set stack-cache -- Set cache use for stack access
+set startup-with-shell -- Set use of shell to start subprocesses
+set step-mode -- Set mode of the step operation
+set stop-on-solib-events -- Set stopping for shared library events
+set struct-convention -- Set the convention for returning small structs
+set substitute-path -- Usage: set substitute-path FROM TO
+set sysroot -- Set an alternate system root
+set target-async -- Set whether gdb controls the inferior in asynchronous mode
+set target-charset -- Set the target character set
+set target-file-system-kind -- Set assumed file system kind for target reported file names
+set target-wide-charset -- Set the target wide character set
+set tcp -- TCP protocol specific variables
+set tdesc -- Set target description specific variables
+set trace-buffer-size -- Set requested size of trace buffer
+set trace-commands -- Set tracing of GDB CLI commands
+set trace-notes -- Set notes string to use for current and future trace runs
+set trace-stop-notes -- Set notes string to use for future tstop commands
+set trace-user -- Set the user name to use for current and future trace runs
+set trust-readonly-sections -- Set mode for reading from readonly sections
+set tui -- TUI configuration variables
+set unwind-on-terminating-exception -- Set unwinding of stack if std::terminate is called while in call dummy
+set unwindonsignal -- Set unwinding of stack if a signal is received while in a call dummy
+set use-deprecated-index-sections -- Set whether to use deprecated gdb_index sections
+set variable -- Evaluate expression EXP and assign result to variable VAR
+set verbose -- Set verbosity
+set watchdog -- Set watchdog timer
+set width -- Set number of characters where GDB should wrap lines of its output
+set write -- Set writing into executable and core files
+
+Type "help set" followed by set subcommand name for full documentation.
+Type "apropos word" to search for commands related to "word".
+Command name abbreviations are allowed if unambiguous.
+Generic command for setting how things print.
+
+List of set print subcommands:
+
+set print address -- Set printing of addresses
+set print array -- Set pretty formatting of arrays
+set print array-indexes -- Set printing of array indexes
+set print asm-demangle -- Set demangling of C++/ObjC names in disassembly listings
+set print demangle -- Set demangling of encoded C++/ObjC names when displaying symbols
+set print elements -- Set limit on string chars or array elements to print
+set print entry-values -- Set printing of function arguments at function entry
+set print frame-arguments -- Set printing of non-scalar frame arguments
+set print inferior-events -- Set printing of inferior events (e.g.
+set print max-symbolic-offset -- Set the largest offset that will be printed in <symbol+1234> form
+set print null-stop -- Set printing of char arrays to stop at first null char
+set print object -- Set printing of object's derived type based on vtable info
+set print pascal_static-members -- Set printing of pascal static members
+set print pretty -- Set pretty formatting of structures
+set print raw -- Generic command for setting what things to print in "raw" mode
+set print repeats -- Set threshold for repeated print elements
+set print sevenbit-strings -- Set printing of 8-bit characters in strings as \nnn
+set print static-members -- Set printing of C++ static members
+set print symbol -- Set printing of symbol names when printing pointers
+set print symbol-filename -- Set printing of source filename and line number with <symbol>
+set print thread-events -- Set printing of thread events (such as thread start and exit)
+set print type -- Generic command for setting how types print
+set print union -- Set printing of unions interior to structures
+set print vtbl -- Set printing of C++ virtual function tables
+
+Type "help set print" followed by set print subcommand name for full documentation.
+Type "apropos word" to search for commands related to "word".
+Command name abbreviations are allowed if unambiguous.
+type = class CSizeComputer {
+  protected:
+    size_t nSize;
+    const int nType;
+    const int nVersion;
+
+  public:
+    CSizeComputer(int, int);
+    void write(const char *, size_t);
+    void seek(size_t);
+    size_t size(void) const;
+    int GetVersion(void) const;
+    int GetType(void) const;
+    CSizeComputer & operator<< <unsigned int>(const unsigned int &);
+    CSizeComputer & operator<< <std::vector<CTxOut> >(const std::vector<CTxOut> &);
+    CSizeComputer & operator<< <unsigned char>(const unsigned char &);
+    CSizeComputer & operator<< <std::vector<CTxIn> >(const std::vector<CTxIn> &);
+    CSizeComputer & operator<< <int>(const int &);
+    CSizeComputer & operator<< <std::vector<std::vector<unsigned char> > >(const std::vector<std::vector<unsigned char>> &);
+    CSizeComputer & operator<< <CTransaction>(const CTransaction &);
+} &
+$25 = (CSizeComputer &) @0x7f148cab4e20: {
+  nSize = 0x5, 
+  nType = 0x1, 
+  nVersion = 0x1117f
+}
+#0  SerializeTransaction<CSizeComputer, CTransaction> (tx=..., s=...) at ./primitives/transaction.h:248
+#1  0x00007f14934c041e in CTransaction::Serialize<CSizeComputer> (this=0x7f148cab5580, s=...) at ./primitives/transaction.h:302
+#2  0x00007f14934b3c5d in Serialize<CSizeComputer, CTransaction> (os=..., a=...) at ./serialize.h:561
+#3  0x00007f14934a6746 in CSizeComputer::operator<< <CTransaction> (this=0x7f148cab4e20, obj=...) at ./serialize.h:893
+#4  0x00007f1493497c8e in GetSerializeSize<CTransaction> (t=..., nType=1, nVersion=70015) at ./serialize.h:955
+#5  0x00007f14938dc923 in TxToUniv (tx=..., hashBlock=..., entry=..., include_hex=false, serialize_flags=0)
+    at core_write.cpp:162
+#6  0x00007f14935717f9 in decoderawtransaction (request=...) at rpc/rawtransaction.cpp:567
+#7  0x00007f1493597c0a in CRPCTable::execute (this=0x7f1493f60fa0 <tableRPC>, request=...) at rpc/server.cpp:497
+#8  0x00007f14937493c2 in HTTPReq_JSONRPC (req=0x7f1460000a30) at httprpc.cpp:191
+#9  0x00007f149351c6a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
+    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
+    at /usr/include/c++/6/functional:1717
+#10 0x00007f14937565f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7f1460000f20, __args#0=0x7f1460000a30, __args#1="") at /usr/include/c++/6/functional:2127
+#11 0x00007f1493754abd in HTTPWorkItem::operator() (this=0x7f1460000ef0) at httpserver.cpp:53
+#12 0x00007f1493757844 in WorkQueue<HTTPClosure>::Run (this=0x7f1495b7ce30) at httpserver.cpp:112
+#13 0x00007f149374fb8c in HTTPWorkQueueRun (queue=0x7f1495b7ce30) at httpserver.cpp:334
+#14 0x00007f14937656a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7f1495b7d868) at /usr/include/c++/6/functional:1391
+#15 0x00007f1493765122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
+    this=0x7f1495b7d868) at /usr/include/c++/6/functional:1380
+#16 0x00007f14937649e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7f1495b7d860) at /usr/include/c++/6/thread:197
+#17 0x00007f1491484e6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+#18 0x00007f1490c9a494 in start_thread (arg=0x7f148cab6700) at pthread_create.c:333
+#19 0x00007f14909dcacf in clone () from /lib/x86_64-linux-gnu/libc.so.6
+246	        std::vector<CTxIn> vinDummy;
+250	    s << tx.vin;
+251	    s << tx.vout;
+$26 = (const CTransaction &) @0x7f148cab5580: {
+  static CURRENT_VERSION = 0x2, 
+  static MAX_STANDARD_VERSION = 0x2, 
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0x16, 0x0, 0x14, 0x68, 0x2f, 0x95, 0x1f, 0x47, 0x3c, 0x43, 0x7f, 0x44, 0x89, 0xaf, 0x2, 0x6e, 0x5b, 
+              0xfb, 0x1d, 0x1e, 0xd2, 0x2a, 0xa3, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x68140016, 
+              indirect = 0x447f433c471f952f
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 2, capacity 2 = {std::vector of length 72, capacity 72 = {0x30, 0x45, 0x2, 0x21, 0x0, 
+            0xcd, 0x5c, 0xf2, 0x8, 0xa4, 0xc0, 0x64, 0x19, 0xd6, 0x4d, 0xf9, 0x8b, 0xa7, 0xef, 0xcc, 0xd4, 0xf6, 0x6a, 0x7e, 
+            0x77, 0xba, 0x4b, 0x30, 0xb9, 0x28, 0x5d, 0x50, 0x2b, 0x74, 0x8e, 0x66, 0x2a, 0x2, 0x20, 0x43, 0x21, 0x60, 0xa1, 
+            0xac, 0xb7, 0xf2, 0x18, 0x8d, 0x38, 0x5b, 0xd, 0x6c, 0xed, 0x44, 0x1a, 0xa2, 0xdb, 0x1f, 0xfc, 0x1e, 0x6f, 0xc8, 
+            0x8c, 0x3f, 0xd4, 0x3e, 0xd9, 0x5f, 0x56, 0x2b, 0xc7, 0x1}, std::vector of length 33, capacity 33 = {0x2, 0xb9, 
+            0xc7, 0x7, 0x7d, 0xaa, 0xa5, 0x5a, 0xcf, 0x0, 0x4, 0x8b, 0xca, 0x3c, 0x5d, 0x4, 0xd0, 0x53, 0xa5, 0xa4, 0xe4, 
+            0x8c, 0x32, 0xc8, 0x8e, 0x67, 0x76, 0xcc, 0xc2, 0x75, 0xc9, 0x4d, 0xaf}}
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 2, capacity 2 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }, {
+      nValue = 0xa9df8c80, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
+              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x986214a9, 
+              indirect = 0x4845309d352ba53e
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0, 
+  hash = {
+    <base_blob<256u>> = {
+      static WIDTH = 0x20, 
+      data = {0xc8, 0x60, 0x90, 0xb4, 0x60, 0x99, 0xc5, 0xe, 0xaf, 0xeb, 0xd, 0xb9, 0x79, 0x54, 0xd7, 0x30, 0x5e, 0x41, 0x8, 
+        0x8e, 0xca, 0xd, 0x23, 0x37, 0xf6, 0x82, 0xfc, 0xdd, 0xaf, 0x9, 0xf4, 0xd9}
+    }, <No data fields>}
+}
+252	    if (flags & 1) {
+253	        for (size_t i = 0; i < tx.vin.size(); i++) {
+254	            s << tx.vin[i].scriptWitness.stack;
+253	        for (size_t i = 0; i < tx.vin.size(); i++) {
+257	    s << tx.nLockTime;
+258	}
+CTransaction::Serialize<CSizeComputer> (this=0x7f148cab5580, s=...) at ./primitives/transaction.h:303
+303	    }
+Serialize<CSizeComputer, CTransaction> (os=..., a=...) at ./serialize.h:562
+562	}
+CSizeComputer::operator<< <CTransaction> (this=0x7f148cab4e20, obj=...) at ./serialize.h:894
+894	        return (*this);
+$27 = {
+  nSize = 0xf8, 
+  nType = 0x1, 
+  nVersion = 0x1117f
+}
+895	    }
+GetSerializeSize<CTransaction> (t=..., nType=1, nVersion=70015) at ./serialize.h:956
+956	}
+TxToUniv (tx=..., hashBlock=..., entry=..., include_hex=false, serialize_flags=0) at core_write.cpp:163
+163	    entry.pushKV("vsize", (GetTransactionWeight(tx) + WITNESS_SCALE_FACTOR - 1) / WITNESS_SCALE_FACTOR);
+$28 = (UniValue &) @0x7f148cab5b30: {
+  typ = 0x1, 
+  val = "", 
+  keys = std::vector of length 4, capacity 4 = {"txid", "hash", "version", "size"}, 
+  values = std::vector of length 4, capacity 4 = {{
+      typ = 0x3, 
+      val = "d9f409afddfc82f637230dca8e08415e30d75479b90debaf0ec59960b49060c8", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x3, 
+      val = "fea376f0c10280bde725bbe35122d0e9289384ca1a79d1d25abc6108dd536e3d", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x4, 
+      val = "2", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x4, 
+      val = "248", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }}
+}
+
+Breakpoint 9, SerializeTransaction<CSizeComputer, CTransaction> (tx=..., s=...) at ./primitives/transaction.h:232
+232	inline void SerializeTransaction(const TxType& tx, Stream& s) {
+233	    const bool fAllowWitness = !(s.GetVersion() & SERIALIZE_TRANSACTION_NO_WITNESS);
+235	    s << tx.nVersion;
+236	    unsigned char flags = 0;
+238	    if (fAllowWitness) {
+244	    if (flags) {
+250	    s << tx.vin;
+251	    s << tx.vout;
+252	    if (flags & 1) {
+257	    s << tx.nLockTime;
+#0  SerializeTransaction<CSizeComputer, CTransaction> (tx=..., s=...) at ./primitives/transaction.h:257
+#1  0x00007f14934c041e in CTransaction::Serialize<CSizeComputer> (this=0x7f148cab5580, s=...) at ./primitives/transaction.h:302
+#2  0x00007f14934b3c5d in Serialize<CSizeComputer, CTransaction> (os=..., a=...) at ./serialize.h:561
+#3  0x00007f14934a6746 in CSizeComputer::operator<< <CTransaction> (this=0x7f148cab4de0, obj=...) at ./serialize.h:893
+#4  0x00007f1493497c8e in GetSerializeSize<CTransaction> (t=..., nType=1, nVersion=1073811839) at ./serialize.h:955
+#5  0x00007f14938db2ea in GetTransactionWeight (tx=...) at ./consensus/validation.h:98
+#6  0x00007f14938dc990 in TxToUniv (tx=..., hashBlock=..., entry=..., include_hex=false, serialize_flags=0)
+    at core_write.cpp:163
+#7  0x00007f14935717f9 in decoderawtransaction (request=...) at rpc/rawtransaction.cpp:567
+#8  0x00007f1493597c0a in CRPCTable::execute (this=0x7f1493f60fa0 <tableRPC>, request=...) at rpc/server.cpp:497
+#9  0x00007f14937493c2 in HTTPReq_JSONRPC (req=0x7f1460000a30) at httprpc.cpp:191
+#10 0x00007f149351c6a0 in std::_Function_handler<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), bool (*)(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::_M_invoke(std::_Any_data const&, HTTPRequest*&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (__functor=..., 
+    __args#0=<unknown type in /home/StephenSun/bitcoin/src/bitcoind, CU 0x50bff9, DIE 0x55c9ad>, __args#1="")
+    at /usr/include/c++/6/functional:1717
+#11 0x00007f14937565f4 in std::function<bool (HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>::operator()(HTTPRequest*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (this=0x7f1460000f20, __args#0=0x7f1460000a30, __args#1="") at /usr/include/c++/6/functional:2127
+#12 0x00007f1493754abd in HTTPWorkItem::operator() (this=0x7f1460000ef0) at httpserver.cpp:53
+#13 0x00007f1493757844 in WorkQueue<HTTPClosure>::Run (this=0x7f1495b7ce30) at httpserver.cpp:112
+#14 0x00007f149374fb8c in HTTPWorkQueueRun (queue=0x7f1495b7ce30) at httpserver.cpp:334
+#15 0x00007f14937656a6 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::_M_invoke<0ul>(std::_Index_tuple<0ul>) (this=0x7f1495b7d868) at /usr/include/c++/6/functional:1391
+#16 0x00007f1493765122 in std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)>::operator()() (
+    this=0x7f1495b7d868) at /usr/include/c++/6/functional:1380
+#17 0x00007f14937649e3 in std::thread::_State_impl<std::_Bind_simple<void (*(WorkQueue<HTTPClosure>*))(WorkQueue<HTTPClosure>*)> >::_M_run() (this=0x7f1495b7d860) at /usr/include/c++/6/thread:197
+#18 0x00007f1491484e6f in ?? () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+#19 0x00007f1490c9a494 in start_thread (arg=0x7f148cab6700) at pthread_create.c:333
+#20 0x00007f14909dcacf in clone () from /lib/x86_64-linux-gnu/libc.so.6
+258	}
+CTransaction::Serialize<CSizeComputer> (this=0x7f148cab5580, s=...) at ./primitives/transaction.h:303
+303	    }
+Serialize<CSizeComputer, CTransaction> (os=..., a=...) at ./serialize.h:562
+562	}
+CSizeComputer::operator<< <CTransaction> (this=0x7f148cab4de0, obj=...) at ./serialize.h:894
+894	        return (*this);
+895	    }
+GetSerializeSize<CTransaction> (t=..., nType=1, nVersion=1073811839) at ./serialize.h:956
+956	}
+
+Breakpoint 9, SerializeTransaction<CSizeComputer, CTransaction> (tx=..., s=...) at ./primitives/transaction.h:232
+232	inline void SerializeTransaction(const TxType& tx, Stream& s) {
+233	    const bool fAllowWitness = !(s.GetVersion() & SERIALIZE_TRANSACTION_NO_WITNESS);
+235	    s << tx.nVersion;
+236	    unsigned char flags = 0;
+238	    if (fAllowWitness) {
+240	        if (tx.HasWitness()) {
+241	            flags |= 1;
+244	    if (flags) {
+246	        std::vector<CTxIn> vinDummy;
+247	        s << vinDummy;
+248	        s << flags;
+246	        std::vector<CTxIn> vinDummy;
+250	    s << tx.vin;
+251	    s << tx.vout;
+252	    if (flags & 1) {
+253	        for (size_t i = 0; i < tx.vin.size(); i++) {
+254	            s << tx.vin[i].scriptWitness.stack;
+253	        for (size_t i = 0; i < tx.vin.size(); i++) {
+257	    s << tx.nLockTime;
+258	}
+CTransaction::Serialize<CSizeComputer> (this=0x7f148cab5580, s=...) at ./primitives/transaction.h:303
+303	    }
+Serialize<CSizeComputer, CTransaction> (os=..., a=...) at ./serialize.h:562
+562	}
+CSizeComputer::operator<< <CTransaction> (this=0x7f148cab4de0, obj=...) at ./serialize.h:894
+894	        return (*this);
+895	    }
+GetSerializeSize<CTransaction> (t=..., nType=1, nVersion=70015) at ./serialize.h:956
+956	}
+GetTransactionWeight (tx=...) at ./consensus/validation.h:99
+99	}
+TxToUniv (tx=..., hashBlock=..., entry=..., include_hex=false, serialize_flags=0) at core_write.cpp:164
+164	    entry.pushKV("locktime", (int64_t)tx.nLockTime);
+166	    UniValue vin(UniValue::VARR);
+$29 = (UniValue &) @0x7f148cab5b30: {
+  typ = 0x1, 
+  val = "", 
+  keys = std::vector of length 6, capacity 8 = {"txid", "hash", "version", "size", "vsize", "locktime"}, 
+  values = std::vector of length 6, capacity 8 = {{
+      typ = 0x3, 
+      val = "d9f409afddfc82f637230dca8e08415e30d75479b90debaf0ec59960b49060c8", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x3, 
+      val = "fea376f0c10280bde725bbe35122d0e9289384ca1a79d1d25abc6108dd536e3d", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x4, 
+      val = "2", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x4, 
+      val = "248", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x4, 
+      val = "166", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x4, 
+      val = "0", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }}
+}
+167	    for (unsigned int i = 0; i < tx.vin.size(); i++) {
+168	        const CTxIn& txin = tx.vin[i];
+169	        UniValue in(UniValue::VOBJ);
+170	        if (tx.IsCoinBase())
+173	            in.pushKV("txid", txin.prevout.hash.GetHex());
+174	            in.pushKV("vout", (int64_t)txin.prevout.n);
+175	            UniValue o(UniValue::VOBJ);
+176	            o.pushKV("asm", ScriptToAsmStr(txin.scriptSig, true));
+177	            o.pushKV("hex", HexStr(txin.scriptSig.begin(), txin.scriptSig.end()));
+178	            in.pushKV("scriptSig", o);
+179	            if (!tx.vin[i].scriptWitness.IsNull()) {
+$30 = {
+  typ = 0x1, 
+  val = "", 
+  keys = std::vector of length 2, capacity 2 = {"asm", "hex"}, 
+  values = std::vector of length 2, capacity 2 = {{
+      typ = 0x3, 
+      val = "0014682f951f473c437f4489af026e5bfb1d1ed22aa3", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x3, 
+      val = "160014682f951f473c437f4489af026e5bfb1d1ed22aa3", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }}
+}
+180	                UniValue txinwitness(UniValue::VARR);
+181	                for (const auto& item : tx.vin[i].scriptWitness.stack) {
+182	                    txinwitness.push_back(HexStr(item.begin(), item.end()));
+181	                for (const auto& item : tx.vin[i].scriptWitness.stack) {
+182	                    txinwitness.push_back(HexStr(item.begin(), item.end()));
+181	                for (const auto& item : tx.vin[i].scriptWitness.stack) {
+184	                in.pushKV("txinwitness", txinwitness);
+180	                UniValue txinwitness(UniValue::VARR);
+$31 = {
+  typ = 0x2, 
+  val = "", 
+  keys = std::vector of length 0, capacity 0, 
+  values = std::vector of length 2, capacity 2 = {{
+      typ = 0x3, 
+      val = "3045022100cd5cf208a4c06419d64df98ba7efccd4f66a7e77ba4b30b9285d502b748e662a0220432160a1acb7f2188d385b0d6ced441aa2db1ffc1e6fc88c3fd43ed95f562bc701", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }, {
+      typ = 0x3, 
+      val = "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf", 
+      keys = std::vector of length 0, capacity 0, 
+      values = std::vector of length 0, capacity 0
+    }}
+}
+175	            UniValue o(UniValue::VOBJ);
+187	        in.pushKV("sequence", (int64_t)txin.nSequence);
+188	        vin.push_back(in);
+169	        UniValue in(UniValue::VOBJ);
+167	    for (unsigned int i = 0; i < tx.vin.size(); i++) {
+190	    entry.pushKV("vin", vin);
+192	    UniValue vout(UniValue::VARR);
+193	    for (unsigned int i = 0; i < tx.vout.size(); i++) {
+194	        const CTxOut& txout = tx.vout[i];
+196	        UniValue out(UniValue::VOBJ);
+198	        out.pushKV("value", ValueFromAmount(txout.nValue));
+199	        out.pushKV("n", (int64_t)i);
+201	        UniValue o(UniValue::VOBJ);
+202	        ScriptPubKeyToUniv(txout.scriptPubKey, o, true);
+203	        out.pushKV("scriptPubKey", o);
+204	        vout.push_back(out);
+201	        UniValue o(UniValue::VOBJ);
+196	        UniValue out(UniValue::VOBJ);
+193	    for (unsigned int i = 0; i < tx.vout.size(); i++) {
+194	        const CTxOut& txout = tx.vout[i];
+196	        UniValue out(UniValue::VOBJ);
+198	        out.pushKV("value", ValueFromAmount(txout.nValue));
+199	        out.pushKV("n", (int64_t)i);
+201	        UniValue o(UniValue::VOBJ);
+202	        ScriptPubKeyToUniv(txout.scriptPubKey, o, true);
+203	        out.pushKV("scriptPubKey", o);
+204	        vout.push_back(out);
+201	        UniValue o(UniValue::VOBJ);
+196	        UniValue out(UniValue::VOBJ);
+193	    for (unsigned int i = 0; i < tx.vout.size(); i++) {
+206	    entry.pushKV("vout", vout);
+208	    if (!hashBlock.IsNull())
+211	    if (include_hex) {
+192	    UniValue vout(UniValue::VARR);
+166	    UniValue vin(UniValue::VARR);
+214	}
+decoderawtransaction (request=...) at rpc/rawtransaction.cpp:569
+569	    return result;
+557	    CMutableTransaction mtx;
+554	    LOCK(cs_main);
+569	    return result;
+570	}
+CRPCTable::execute (this=0x7f1493f60fa0 <tableRPC>, request=...) at rpc/server.cpp:504
+504	}
+HTTPReq_JSONRPC (req=0x7f1460000a30) at httprpc.cpp:194
+194	            strReply = JSONRPCReply(result, NullUniValue, jreq.id);
+191	            UniValue result = tableRPC.execute(jreq);
+202	        req->WriteHeader("Content-Type", "application/json");
+203	        req->WriteReply(HTTP_OK, strReply);
+184	        std::string strReply;
+177	        UniValue valRequest;
+211	    return true;
+A debugging session is active.
+
+	Inferior 1 [process 15686] will be detached.
+
+Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 15686

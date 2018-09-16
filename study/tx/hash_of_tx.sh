@@ -1,7 +1,11 @@
-alias rt='bitcoin-cli -regtest'
 
 
 # 这里研究 transaction 的hash 得到的方法
+# 包括三个hash
+
+alias rt='bitcoin-cli -regtest'
+
+
 #set -x
 prevtxid="45a88f2a2f7b215f8014af127bd9bb29ee524ea95ada7f90854e36b22c8bcd00"
 addr1="2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ"
@@ -35,10 +39,9 @@ StephenSun@debian-1:~/bitcoin/study/tx$ bitcoin-cli -regtest signrawtransaction 
   compute_hash_of_tx.sh 这个文件中解释了这个数据的得到的方式
  
 # 再看 生成签名时的hash
+  参看文件 compute_hash_of_sign.sh
 
-
-
-# 解码交易
+# 附录: 解码交易
 StephenSun@debian-1:~/bitcoin/study/tx$ rt decoderawtransaction 0200000000010100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000017160014682f951f473c437f4489af026e5bfb1d1ed22aa3ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008702483045022100cd5cf208a4c06419d64df98ba7efccd4f66a7e77ba4b30b9285d502b748e662a0220432160a1acb7f2188d385b0d6ced441aa2db1ffc1e6fc88c3fd43ed95f562bc7012102b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf00000000 
 {
   "txid": "d9f409afddfc82f637230dca8e08415e30d75479b90debaf0ec59960b49060c8",
@@ -90,4 +93,11 @@ StephenSun@debian-1:~/bitcoin/study/tx$ rt decoderawtransaction 0200000000010100
       }
     }
   ]
+}
+
+
+StephenSun@debian-1:~/bitcoin/study/tx$ bitcoin-cli -regtest signrawtransaction 020000000100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000000ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008700000000  [] [\"cVSKEzHXxJ8pJcMB1BX6H6wPXG9ZPDKZQwtqBe9uvjDxoZwjySXg\"]
+{
+	  "hex": "0200000000010100cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa8450000000017160014682f951f473c437f4489af026e5bfb1d1ed22aa3ffffffff02402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887808cdfa90000000017a91462983ea52b359d304548bf09e4a09f4a4ac7b7008702483045022100cd5cf208a4c06419d64df98ba7efccd4f66a7e77ba4b30b9285d502b748e662a0220432160a1acb7f2188d385b0d6ced441aa2db1ffc1e6fc88c3fd43ed95f562bc7012102b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf00000000",
+		    "complete": true
 }
