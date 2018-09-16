@@ -18,6 +18,7 @@ static const int SERIALIZE_TRANSACTION_NO_WITNESS = 0x40000000;
 class COutPoint
 {
 public:
+    //COutPoint prevout; // 要花费的输出: hash 和序号
     uint256 hash;
     uint32_t n;
 
@@ -28,8 +29,8 @@ public:
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action) {
-        READWRITE(hash);
-        READWRITE(n);
+        READWRITE(hash); // 对应 txTo.vin[nIn].prevout;
+        READWRITE(n);    //  n
     }
 
     void SetNull() { hash.SetNull(); n = (uint32_t) -1; }
@@ -61,7 +62,7 @@ public:
 class CTxIn
 {
 public:
-    COutPoint prevout;
+    COutPoint prevout; // 要花费的输出: hash 和序号
     CScript scriptSig;
     uint32_t nSequence;
     CScriptWitness scriptWitness; //! Only serialized through CTransaction
