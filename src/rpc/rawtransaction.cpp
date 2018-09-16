@@ -853,7 +853,7 @@ UniValue SignTransaction(CMutableTransaction& mtx, const UniValue& prevTxsUnival
 			// 这里计算出来 签名
             ProduceSignature(MutableTransactionSignatureCreator(keystore, &mtx, i, amount, nHashType), prevPubKey, sigdata);
         }
-		// 这里做何操作 TODO
+		// 这里做何操作 TODO 在里面是个循环 
         sigdata = CombineSignatures(prevPubKey, TransactionSignatureChecker(&txConst, i, amount), sigdata, DataFromTransaction(mtx, i));
 
         UpdateTransaction(mtx, i, sigdata);

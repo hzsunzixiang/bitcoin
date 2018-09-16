@@ -1217,7 +1217,7 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
         // The input being signed (replacing the scriptSig with scriptCode + amount)
         // The prevout may already be contained in hashPrevout, and the nSequence
         // may already be contain in hashSequence.
-		// 这里一个的时候 36个字节 序列化输入的个数（4个字节）
+		// 这里一个的时候 36个字节 第n个（4个字节）
         ss << txTo.vin[nIn].prevout;
 		// scriptCode的值       direct = {0x76, 0xa9, 0x14, 0x68, 0x2f, 0x95, 0x1f, 0x47, 0x3c, 0x43, 0x7f, 0x44, 0x89, 0xaf, 0x2, 0x6e, 0x5b, 0xfb, 0x1d, 0x1e, 0xd2, 0x2a, 0xa3, 0x88, 0xac, 0x0, 0x0, 0x0},
 		// 也就是 76a914682f951f473c437f4489af026e5bfb1d1ed22aa3 88ac
