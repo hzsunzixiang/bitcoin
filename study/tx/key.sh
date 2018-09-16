@@ -1,4 +1,5 @@
 
+# 分解transaction二进制
 
 # 好文章  介绍了 segwit的好处
 https://bitcoincore.org/en/2016/01/26/segwit-benefits/
