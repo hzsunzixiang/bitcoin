@@ -3871,3 +3871,603 @@ A debugging session is active.
 	Inferior 1 [process 8042] will be detached.
 
 Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 8042
+Breakpoint 1 at 0x7f298d45da1f: file rpc/server.cpp, line 473.
+Breakpoint 2 at 0x7f298d43c0f8: file rpc/rawtransaction.cpp, line 964.
+Breakpoint 3 at 0x7f298d7a79b3: file key.cpp, line 201.
+Breakpoint 4 at 0x7f298d7a7827: file key.cpp, line 180.
+Breakpoint 5 at 0x7f298d439653: file rpc/rawtransaction.cpp, line 726.
+Breakpoint 6 at 0x7f298d6842eb: file wallet/rpcwallet.cpp, line 3260.
+Breakpoint 7 at 0x7f298d43b86f: file rpc/rawtransaction.cpp, line 884.
+Breakpoint 8 at 0x7f298d7d102e: file script/sign.cpp, line 150.
+Breakpoint 9 at 0x7f298d82072b: file script/interpreter.cpp, line 1182.
+Breakpoint 10 at 0x7f298d7d07d3: file script/sign.cpp, line 75.
+Breakpoint 11 at 0x7f298d7d0586: file script/sign.cpp, line 45.
+Breakpoint 12 at 0x7f298d7d0411: file script/sign.cpp, line 21.
+Continuing.
+[Switching to Thread 0x7f298717d700 (LWP 10198)]
+
+Breakpoint 1, CRPCTable::execute (this=0x7f298de26fa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
+Continuing.
+
+Breakpoint 2, signrawtransaction (request=...) at rpc/rawtransaction.cpp:964
+964	{
+Continuing.
+
+Breakpoint 7, signrawtransactionwithkey (request=...) at rpc/rawtransaction.cpp:884
+884	{
+Continuing.
+
+Breakpoint 4, CKey::GetPubKey (this=0x7f298717c0b0) at key.cpp:180
+180	CPubKey CKey::GetPubKey() const {
+Continuing.
+
+Breakpoint 5, SignTransaction (mtx=..., prevTxsUnival=..., keystore=0x7f298717c230, is_temp_keystore=true, hashType=...)
+    at rpc/rawtransaction.cpp:726
+726	{
+Continuing.
+
+Breakpoint 8, ProduceSignature (creator=..., fromPubKey=..., sigdata=...) at script/sign.cpp:150
+150	{
+Continuing.
+
+Breakpoint 10, SignStep (creator=..., scriptPubKey=..., ret=std::vector of length 0, capacity 0, 
+    whichTypeRet=@0x7f298717b514: TX_NONSTANDARD, sigversion=SIGVERSION_BASE) at script/sign.cpp:75
+75	{
+Continuing.
+
+Breakpoint 10, SignStep (creator=..., scriptPubKey=..., ret=std::vector of length 1, capacity 1 = {...}, 
+    whichTypeRet=@0x7f298717b514: TX_SCRIPTHASH, sigversion=SIGVERSION_BASE) at script/sign.cpp:75
+75	{
+Continuing.
+
+Breakpoint 10, SignStep (creator=..., scriptPubKey=..., ret=std::vector of length 1, capacity 1 = {...}, 
+    whichTypeRet=@0x7f298717b580: 1610618982, sigversion=SIGVERSION_WITNESS_V0) at script/sign.cpp:75
+75	{
+Continuing.
+
+Breakpoint 11, Sign1 (address=..., creator=..., scriptCode=..., ret=std::vector of length 0, capacity 1, 
+    sigversion=SIGVERSION_WITNESS_V0) at script/sign.cpp:45
+45	{
+46	    std::vector<unsigned char> vchSig;
+47	    if (!creator.CreateSig(vchSig, address, scriptCode, sigversion))
+Continuing.
+
+Breakpoint 12, TransactionSignatureCreator::CreateSig (this=0x7f298717bea0, vchSig=std::vector of length 0, capacity 0, 
+    address=..., scriptCode=..., sigversion=SIGVERSION_WITNESS_V0) at script/sign.cpp:21
+21	{
+22	    CKey key;  // key中存放着私钥
+23	    if (!keystore->GetKey(address, key))
+30	    if (sigversion == SIGVERSION_WITNESS_V0 && !key.IsCompressed())
+33	    uint256 hash = SignatureHash(scriptCode, *txTo, nIn, nHashType, amount, sigversion);
+$1 = {
+  static CURRENT_VERSION = 0x2, 
+  static MAX_STANDARD_VERSION = 0x2, 
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x0, 
+          _union = {
+            direct = {0x70, 0x34, 0x5f, 0x8f, 0x29, 0x7f, 0x0, 0x0, 0x0, 0x10, 0xd, 0x8d, 0x29, 0x7f, 0x0, 0x0, 0x1b, 0x10, 
+              0x0, 0x0, 0x4, 0x0, 0x0, 0x0, 0xa5, 0x1, 0x0, 0x0}, 
+            {
+              capacity = 0x8f5f3470, 
+              indirect = 0x8d0d100000007f29
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 0, capacity 0
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 2, capacity 2 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }, {
+      nValue = 0xa9df8c80, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
+              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x986214a9, 
+              indirect = 0x4845309d352ba53e
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0, 
+  hash = {
+    <base_blob<256u>> = {
+      static WIDTH = 0x20, 
+      data = {0xce, 0x1b, 0x6a, 0x54, 0x79, 0xf8, 0x41, 0xf1, 0x77, 0x3c, 0xe6, 0xde, 0x15, 0xce, 0x19, 0xdb, 0x50, 0xf8, 
+        0x4a, 0x4c, 0xfa, 0xe6, 0x73, 0x83, 0xdb, 0x97, 0x3a, 0x61, 0xe0, 0xf3, 0x6b, 0xfb}
+    }, <No data fields>}
+}
+
+Breakpoint 9, SignatureHash (scriptCode=..., txTo=..., nIn=0, nHashType=1, amount=@0x7f298717bec0: 5000000000, 
+    sigversion=SIGVERSION_WITNESS_V0, cache=0x0) at script/interpreter.cpp:1182
+1182	{
+1186	    assert(nIn < txTo.vin.size());
+Cannot resolve function operator* to any overloaded instance
+1188	    if (sigversion == SIGVERSION_WITNESS_V0) {
+$2 = (const CTransaction &) @0x7f298717bef0: {
+  static CURRENT_VERSION = 0x2, 
+  static MAX_STANDARD_VERSION = 0x2, 
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x0, 
+          _union = {
+            direct = {0x70, 0x34, 0x5f, 0x8f, 0x29, 0x7f, 0x0, 0x0, 0x0, 0x10, 0xd, 0x8d, 0x29, 0x7f, 0x0, 0x0, 0x1b, 0x10, 
+              0x0, 0x0, 0x4, 0x0, 0x0, 0x0, 0xa5, 0x1, 0x0, 0x0}, 
+            {
+              capacity = 0x8f5f3470, 
+              indirect = 0x8d0d100000007f29
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 0, capacity 0
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 2, capacity 2 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }, {
+      nValue = 0xa9df8c80, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
+              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x986214a9, 
+              indirect = 0x4845309d352ba53e
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0, 
+  hash = {
+    <base_blob<256u>> = {
+      static WIDTH = 0x20, 
+      data = {0xce, 0x1b, 0x6a, 0x54, 0x79, 0xf8, 0x41, 0xf1, 0x77, 0x3c, 0xe6, 0xde, 0x15, 0xce, 0x19, 0xdb, 0x50, 0xf8, 
+        0x4a, 0x4c, 0xfa, 0xe6, 0x73, 0x83, 0xdb, 0x97, 0x3a, 0x61, 0xe0, 0xf3, 0x6b, 0xfb}
+    }, <No data fields>}
+}
+1189	        uint256 hashPrevouts;
+$3 = 0x0
+Function "GetPrevoutHash" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) Function "GetPrevoutHash" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) 1190	        uint256 hashSequence;
+1191	        uint256 hashOutputs;
+1192	        const bool cacheready = cache && cache->ready;
+1194	        if (!(nHashType & SIGHASH_ANYONECANPAY)) {
+$4 = 0x0
+Breakpoint 13 at 0x7f298d8202b1: file script/interpreter.cpp, line 1144.
+1195	            hashPrevouts = cacheready ? cache->hashPrevouts : GetPrevoutHash(txTo);
+
+Breakpoint 13, (anonymous namespace)::GetPrevoutHash (txTo=...) at script/interpreter.cpp:1144
+1144	uint256 GetPrevoutHash(const CTransaction& txTo) {
+$5 = (const CTransaction &) @0x7f298717bef0: {
+  static CURRENT_VERSION = 0x2, 
+  static MAX_STANDARD_VERSION = 0x2, 
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x0, 
+          _union = {
+            direct = {0x70, 0x34, 0x5f, 0x8f, 0x29, 0x7f, 0x0, 0x0, 0x0, 0x10, 0xd, 0x8d, 0x29, 0x7f, 0x0, 0x0, 0x1b, 0x10, 
+              0x0, 0x0, 0x4, 0x0, 0x0, 0x0, 0xa5, 0x1, 0x0, 0x0}, 
+            {
+              capacity = 0x8f5f3470, 
+              indirect = 0x8d0d100000007f29
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 0, capacity 0
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 2, capacity 2 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }, {
+      nValue = 0xa9df8c80, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
+              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x986214a9, 
+              indirect = 0x4845309d352ba53e
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0, 
+  hash = {
+    <base_blob<256u>> = {
+      static WIDTH = 0x20, 
+      data = {0xce, 0x1b, 0x6a, 0x54, 0x79, 0xf8, 0x41, 0xf1, 0x77, 0x3c, 0xe6, 0xde, 0x15, 0xce, 0x19, 0xdb, 0x50, 0xf8, 
+        0x4a, 0x4c, 0xfa, 0xe6, 0x73, 0x83, 0xdb, 0x97, 0x3a, 0x61, 0xe0, 0xf3, 0x6b, 0xfb}
+    }, <No data fields>}
+}
+$6 = std::vector of length 1, capacity 1 = {{
+    prevout = {
+      hash = {
+        <base_blob<256u>> = {
+          static WIDTH = 0x20, 
+          data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+            0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+        }, <No data fields>}, 
+      n = 0x0
+    }, 
+    scriptSig = {
+      <prevector<28u, unsigned char, unsigned int, int>> = {
+        _size = 0x0, 
+        _union = {
+          direct = {0x70, 0x34, 0x5f, 0x8f, 0x29, 0x7f, 0x0, 0x0, 0x0, 0x10, 0xd, 0x8d, 0x29, 0x7f, 0x0, 0x0, 0x1b, 0x10, 0x0, 
+            0x0, 0x4, 0x0, 0x0, 0x0, 0xa5, 0x1, 0x0, 0x0}, 
+          {
+            capacity = 0x8f5f3470, 
+            indirect = 0x8d0d100000007f29
+          }
+        }
+      }, <No data fields>}, 
+    nSequence = 0xffffffff, 
+    scriptWitness = {
+      stack = std::vector of length 0, capacity 0
+    }, 
+    static SEQUENCE_FINAL = 0xffffffff, 
+    static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+    static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+    static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+    static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+  }}
+1145	    CHashWriter ss(SER_GETHASH, 0);
+1146	    for (const auto& txin : txTo.vin) {
+1147	        ss << txin.prevout;
+1146	    for (const auto& txin : txTo.vin) {
+1149	    return ss.GetHash();
+$7 = {
+  ctx = {
+    sha = {
+      s = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19}, 
+      buf = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 0xd9, 
+        0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45, 0x0, 0x0, 0x0, 0x0, 0x29, 0x7f, 0x0, 
+        0x0, 0x0, 0x2c, 0xd7, 0xc7, 0xbb, 0xd2, 0x1a, 0x59, 0x30, 0xb0, 0x17, 0x87, 0x29, 0x7f, 0x0, 0x0, 0xef, 0xac, 0x24, 
+        0x8d, 0x29, 0x7f, 0x0, 0x0}, 
+      bytes = 0x24, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+Breakpoint 14 at 0x7f298d8203b6: file script/interpreter.cpp, line 1152.
+Continuing.
+
+Breakpoint 14, (anonymous namespace)::GetSequenceHash (txTo=...) at script/interpreter.cpp:1152
+1152	uint256 GetSequenceHash(const CTransaction& txTo) {
+1153	    CHashWriter ss(SER_GETHASH, 0);
+$8 = (const CTransaction &) @0x7f298717bef0: {
+  static CURRENT_VERSION = 0x2, 
+  static MAX_STANDARD_VERSION = 0x2, 
+  vin = std::vector of length 1, capacity 1 = {{
+      prevout = {
+        hash = {
+          <base_blob<256u>> = {
+            static WIDTH = 0x20, 
+            data = {0x0, 0xcd, 0x8b, 0x2c, 0xb2, 0x36, 0x4e, 0x85, 0x90, 0x7f, 0xda, 0x5a, 0xa9, 0x4e, 0x52, 0xee, 0x29, 0xbb, 
+              0xd9, 0x7b, 0x12, 0xaf, 0x14, 0x80, 0x5f, 0x21, 0x7b, 0x2f, 0x2a, 0x8f, 0xa8, 0x45}
+          }, <No data fields>}, 
+        n = 0x0
+      }, 
+      scriptSig = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x0, 
+          _union = {
+            direct = {0x70, 0x34, 0x5f, 0x8f, 0x29, 0x7f, 0x0, 0x0, 0x0, 0x10, 0xd, 0x8d, 0x29, 0x7f, 0x0, 0x0, 0x1b, 0x10, 
+              0x0, 0x0, 0x4, 0x0, 0x0, 0x0, 0xa5, 0x1, 0x0, 0x0}, 
+            {
+              capacity = 0x8f5f3470, 
+              indirect = 0x8d0d100000007f29
+            }
+          }
+        }, <No data fields>}, 
+      nSequence = 0xffffffff, 
+      scriptWitness = {
+        stack = std::vector of length 0, capacity 0
+      }, 
+      static SEQUENCE_FINAL = 0xffffffff, 
+      static SEQUENCE_LOCKTIME_DISABLE_FLAG = 0x80000000, 
+      static SEQUENCE_LOCKTIME_TYPE_FLAG = 0x400000, 
+      static SEQUENCE_LOCKTIME_MASK = 0xffff, 
+      static SEQUENCE_LOCKTIME_GRANULARITY = 0x9
+    }}, 
+  vout = std::vector of length 2, capacity 2 = {{
+      nValue = 0x80172340, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 
+              0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x7a0714a9, 
+              indirect = 0x71f2af7e703d4c41
+            }
+          }
+        }, <No data fields>}
+    }, {
+      nValue = 0xa9df8c80, 
+      scriptPubKey = {
+        <prevector<28u, unsigned char, unsigned int, int>> = {
+          _size = 0x17, 
+          _union = {
+            direct = {0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 
+              0x4a, 0x4a, 0xc7, 0xb7, 0x0, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+            {
+              capacity = 0x986214a9, 
+              indirect = 0x4845309d352ba53e
+            }
+          }
+        }, <No data fields>}
+    }}, 
+  nVersion = 0x2, 
+  nLockTime = 0x0, 
+  hash = {
+    <base_blob<256u>> = {
+      static WIDTH = 0x20, 
+      data = {0xce, 0x1b, 0x6a, 0x54, 0x79, 0xf8, 0x41, 0xf1, 0x77, 0x3c, 0xe6, 0xde, 0x15, 0xce, 0x19, 0xdb, 0x50, 0xf8, 
+        0x4a, 0x4c, 0xfa, 0xe6, 0x73, 0x83, 0xdb, 0x97, 0x3a, 0x61, 0xe0, 0xf3, 0x6b, 0xfb}
+    }, <No data fields>}
+}
+1154	    for (const auto& txin : txTo.vin) {
+1155	        ss << txin.nSequence;
+1154	    for (const auto& txin : txTo.vin) {
+$9 = {
+  ctx = {
+    sha = {
+      s = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19}, 
+      buf = {0xff, 0xff, 0xff, 0xff, 0x95, 0xc8, 0x25, 0xdd, 0x74, 0xd6, 0x36, 0x9d, 0x7c, 0x0, 0x69, 0x5d, 0x53, 0x7e, 0xa8, 
+        0xd5, 0x79, 0xcc, 0x9, 0xd6, 0x15, 0x9c, 0x95, 0x5a, 0x16, 0xd6, 0xe4, 0x6d, 0x80, 0x0 <repeats 29 times>, 0x1, 0x0}, 
+      bytes = 0x4, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+1157	    return ss.GetHash();
+$10 = {
+  ctx = {
+    sha = {
+      s = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19}, 
+      buf = {0xff, 0xff, 0xff, 0xff, 0x95, 0xc8, 0x25, 0xdd, 0x74, 0xd6, 0x36, 0x9d, 0x7c, 0x0, 0x69, 0x5d, 0x53, 0x7e, 0xa8, 
+        0xd5, 0x79, 0xcc, 0x9, 0xd6, 0x15, 0x9c, 0x95, 0x5a, 0x16, 0xd6, 0xe4, 0x6d, 0x80, 0x0 <repeats 29 times>, 0x1, 0x0}, 
+      bytes = 0x4, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+1158	}
+SignatureHash (scriptCode=..., txTo=..., nIn=0, nHashType=1, amount=@0x7f298717bec0: 5000000000, 
+    sigversion=SIGVERSION_WITNESS_V0, cache=0x0) at script/interpreter.cpp:1203
+1203	        if ((nHashType & 0x1f) != SIGHASH_SINGLE && (nHashType & 0x1f) != SIGHASH_NONE) {
+1204	            hashOutputs = cacheready ? cache->hashOutputs : GetOutputsHash(txTo);
+Function "GetOutputsHash" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) Breakpoint 15 at 0x7f298d8204bf: file script/interpreter.cpp, line 1160.
+
+Breakpoint 15, (anonymous namespace)::GetOutputsHash (txTo=...) at script/interpreter.cpp:1160
+1160	uint256 GetOutputsHash(const CTransaction& txTo) {
+1161	    CHashWriter ss(SER_GETHASH, 0);
+1162	    for (const auto& txout : txTo.vout) {
+1163	        ss << txout;
+$11 = (const CTxOut &) @0x7f29600019c0: {
+  nValue = 0x80172340, 
+  scriptPubKey = {
+    <prevector<28u, unsigned char, unsigned int, int>> = {
+      _size = 0x17, 
+      _union = {
+        direct = {0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 
+          0x87, 0x82, 0x79, 0xc8, 0x87, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+        {
+          capacity = 0x7a0714a9, 
+          indirect = 0x71f2af7e703d4c41
+        }
+      }
+    }, <No data fields>}
+}
+1162	    for (const auto& txout : txTo.vout) {
+1163	        ss << txout;
+$12 = {
+  ctx = {
+    sha = {
+      s = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19}, 
+      buf = {0x40, 0x23, 0x17, 0x80, 0x0, 0x0, 0x0, 0x0, 0x17, 0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 
+        0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x80, 0x0 <repeats 29 times>, 0x1, 0x0}, 
+      bytes = 0x20, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+1162	    for (const auto& txout : txTo.vout) {
+1165	    return ss.GetHash();
+$13 = {
+  ctx = {
+    sha = {
+      s = {0x7a40e4e9, 0xef0b5a20, 0x7dbda124, 0xce8d32bb, 0x2e7ae953, 0xc7522f8, 0xc0a71277, 0x862aa236}, 
+      buf = {0x40, 0x23, 0x17, 0x80, 0x0, 0x0, 0x0, 0x0, 0x17, 0xa9, 0x14, 0x7, 0x7a, 0x41, 0x4c, 0x3d, 0x70, 0x7e, 0xaf, 
+        0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x80, 0x8c, 0xdf, 0xa9, 0x0, 0x0, 0x0, 
+        0x0, 0x17, 0xa9, 0x14, 0x62, 0x98, 0x3e, 0xa5, 0x2b, 0x35, 0x9d, 0x30, 0x45, 0x48, 0xbf, 0x9, 0xe4, 0xa0, 0x9f, 0x4a, 
+        0x4a, 0xc7, 0xb7, 0x0, 0x87}, 
+      bytes = 0x40, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+1166	}
+SignatureHash (scriptCode=..., txTo=..., nIn=0, nHashType=1, amount=@0x7f298717bec0: 5000000000, 
+    sigversion=SIGVERSION_WITNESS_V0, cache=0x0) at script/interpreter.cpp:1211
+1211	        CHashWriter ss(SER_GETHASH, 0);
+1213	        ss << txTo.nVersion;
+1215	        ss << hashPrevouts;
+1216	        ss << hashSequence;
+1221	        ss << txTo.vin[nIn].prevout;
+1224	        ss << scriptCode;
+1225	        ss << amount;
+1226	        ss << txTo.vin[nIn].nSequence;
+1228	        ss << hashOutputs;
+1230	        ss << txTo.nLockTime;
+1232	        ss << nHashType;
+1234	        return ss.GetHash();
+1254	}
+A debugging session is active.
+
+	Inferior 1 [process 10195] will be detached.
+
+Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 10195
+Breakpoint 1 at 0x7f298d45da1f: file rpc/server.cpp, line 473.
+Breakpoint 2 at 0x7f298d43c0f8: file rpc/rawtransaction.cpp, line 964.
+Breakpoint 3 at 0x7f298d7a79b3: file key.cpp, line 201.
+Breakpoint 4 at 0x7f298d7a7827: file key.cpp, line 180.
+Breakpoint 5 at 0x7f298d439653: file rpc/rawtransaction.cpp, line 726.
+Breakpoint 6 at 0x7f298d6842eb: file wallet/rpcwallet.cpp, line 3260.
+Breakpoint 7 at 0x7f298d43b86f: file rpc/rawtransaction.cpp, line 884.
+Breakpoint 8 at 0x7f298d7d102e: file script/sign.cpp, line 150.
+Breakpoint 9 at 0x7f298d82072b: file script/interpreter.cpp, line 1182.
+Breakpoint 10 at 0x7f298d7d07d3: file script/sign.cpp, line 75.
+Breakpoint 11 at 0x7f298d7d0586: file script/sign.cpp, line 45.
+Breakpoint 12 at 0x7f298d7d0411: file script/sign.cpp, line 21.
+Continuing.
+[Switching to Thread 0x7f298717d700 (LWP 10198)]
+
+Breakpoint 1, CRPCTable::execute (this=0x7f298de26fa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
+476	        LOCK(cs_rpcWarmup);
+Continuing.
+
+Breakpoint 2, signrawtransaction (request=...) at rpc/rawtransaction.cpp:964
+964	{
+Continuing.
+
+Breakpoint 7, signrawtransactionwithkey (request=...) at rpc/rawtransaction.cpp:884
+884	{
+Continuing.
+
+Breakpoint 4, CKey::GetPubKey (this=0x7f298717c0b0) at key.cpp:180
+180	CPubKey CKey::GetPubKey() const {
+Continuing.
+
+Breakpoint 5, SignTransaction (mtx=..., prevTxsUnival=..., keystore=0x7f298717c230, is_temp_keystore=true, hashType=...)
+    at rpc/rawtransaction.cpp:726
+726	{
+Continuing.
+
+Breakpoint 8, ProduceSignature (creator=..., fromPubKey=..., sigdata=...) at script/sign.cpp:150
+150	{
+Continuing.
+
+Breakpoint 10, SignStep (creator=..., scriptPubKey=..., ret=std::vector of length 0, capacity 0, 
+    whichTypeRet=@0x7f298717b514: TX_NONSTANDARD, sigversion=SIGVERSION_BASE) at script/sign.cpp:75
+75	{

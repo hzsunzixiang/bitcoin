@@ -1,5 +1,11 @@
 
 
+# 需要继续研究 里面的这个循环
+
+# for (unsigned int i = 0; i < mtx.vin.size(); i++) { 841         CTxIn& txin = mtx.vin[i];
+
+# rawtransaction.cpp  构造多个输入
+
 # 这里研究 transaction 的hash 得到的方法
 # 包括三个hash
 

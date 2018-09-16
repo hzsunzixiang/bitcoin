@@ -62,7 +62,7 @@ ad15f6b0317497b72a6cad8fd0a16c9677d7ca246c3a437f50becc121de92cc0  # hashPrevouts
 #        0x8d, 0x29, 0x7f, 0x0, 0x0},
 #      bytes = 0x24,
 
-# 这里通过循环序列化所有的输入数据 然后做hash
+# 这里通过循环序列化所有的输入数据数据的 prevout  然后做hash
 printf "00cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa84500000000" | xxd -r -p |sha256sum -b |xxd -r -p | sha256sum -b
 
 # 结果为  
@@ -85,7 +85,7 @@ printf "ffffffff" | xxd -r -p |sha256sum -b |xxd -r -p | sha256sum -b
 
 #*** 这里占用了 0x24 = 36 个字节 这里只有32个
 00cd8b2cb2364e85907fda5aa94e52ee29bbd97b12af14805f217b2f2a8fa845  # hashPrevout 的逆序
-00000000   # 序号 注意是在后面 跟累的序列化相对应 
+00000000   # 序号 注意是在后面 跟类的序列化相对应 
 
 #*** 这里占用 0x1a = 26个字节 
 19  # 0x19 =25
