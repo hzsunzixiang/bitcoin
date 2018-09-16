@@ -3,7 +3,7 @@
 #相对应的源码
 # interpreter.cpp 中的函数 SignatureHash
 
-# TODO  构成签名字符串里面的有些hash还没搞明白作用
+# 构成签名字符串里面的hash 已经搞明白
 
 # coinbase 的 hashtx
 
@@ -105,7 +105,7 @@ ddc2897edac1d67e877c63cb51ff0a2bb3f6f0abbdaa5f66b61386c8764c018b # hashOutputs
 #        0xf2, 0x71, 0x83, 0x69, 0xba, 0xd4, 0x2b, 0x26, 0x87, 0x82, 0x79, 0xc8, 0x87, 0x80, 0x0 <repeats 29 times>, 0x1, 0x0},
 #      bytes = 0x20,
 #
-遍历所有的输出 然后hash
+# 遍历所有的输出 然后hash
 402317800000000017a914077a414c3d707eaff2718369bad42b26878279c887
     # 含义如下
     4023178000000000  # We then write an 8-byte field (64 bit integer, little-endian) containing the amount we want to redeem from the specified output  

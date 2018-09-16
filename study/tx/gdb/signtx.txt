@@ -4471,3 +4471,8 @@ Continuing.
 Breakpoint 10, SignStep (creator=..., scriptPubKey=..., ret=std::vector of length 0, capacity 0, 
     whichTypeRet=@0x7f298717b514: TX_NONSTANDARD, sigversion=SIGVERSION_BASE) at script/sign.cpp:75
 75	{
+A debugging session is active.
+
+	Inferior 1 [process 10195] will be detached.
+
+Quit anyway? (y or n) Detaching from program: /home/StephenSun/bitcoin/src/bitcoind, process 10195
