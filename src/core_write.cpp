@@ -156,7 +156,9 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
 
 void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry, bool include_hex, int serialize_flags)
 {
+	// ericksun 这里的tx.GetHash().GetHex() 得到的即为  解码中的 "txid" 这部分 
     entry.pushKV("txid", tx.GetHash().GetHex());
+	// ericksun 这里的tx.GetWitnessHash().GetHex() 得到的即为  解码中的 "hash" 这部分 
     entry.pushKV("hash", tx.GetWitnessHash().GetHex());
     entry.pushKV("version", tx.nVersion);
     entry.pushKV("size", (int)::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION));

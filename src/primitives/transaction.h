@@ -237,6 +237,7 @@ inline void SerializeTransaction(const TxType& tx, Stream& s) {
     // Consistency check
     if (fAllowWitness) {
         /* Check whether witnesses need to be serialized. */
+		// ericksun 这个标志位 也就是开头的 0001
         if (tx.HasWitness()) {
             flags |= 1;
         }
@@ -244,11 +245,15 @@ inline void SerializeTransaction(const TxType& tx, Stream& s) {
     if (flags) {
         /* Use extended format in case witnesses are to be serialized. */
         std::vector<CTxIn> vinDummy;
+		// 这个是 00 
         s << vinDummy;
+		// 这个是 01
         s << flags;
     }
     s << tx.vin;
     s << tx.vout;
+	// ericksun 如果是 witness开关打开, 也就是有 0001 标志位
+	// 则 不序列化这部分数据 这样可以解决transaction malleability 
     if (flags & 1) {
         for (size_t i = 0; i < tx.vin.size(); i++) {
             s << tx.vin[i].scriptWitness.stack;

@@ -724,6 +724,7 @@ UniValue combinerawtransaction(const JSONRPCRequest& request)
 
 UniValue SignTransaction(CMutableTransaction& mtx, const UniValue& prevTxsUnival, CBasicKeyStore *keystore, bool is_temp_keystore, const UniValue& hashType)
 {
+	// ericksun keystore 中存放信息已清楚
     // Fetch previous transactions (inputs):
     CCoinsView viewDummy;
     CCoinsViewCache view(&viewDummy);
@@ -849,7 +850,7 @@ UniValue SignTransaction(CMutableTransaction& mtx, const UniValue& prevTxsUnival
         SignatureData sigdata;
         // Only sign SIGHASH_SINGLE if there's a corresponding output:
         if (!fHashSingle || (i < mtx.vout.size())) {
-			// 这里其实已经计算出来了 签名
+			// 这里计算出来 签名
             ProduceSignature(MutableTransactionSignatureCreator(keystore, &mtx, i, amount, nHashType), prevPubKey, sigdata);
         }
 		// 这里做何操作 TODO
@@ -948,6 +949,7 @@ UniValue signrawtransactionwithkey(const JSONRPCRequest& request)
     const UniValue& keys = request.params[1].get_array();
     for (unsigned int idx = 0; idx < keys.size(); ++idx) {
         UniValue k = keys[idx];
+		// 这里解析出私钥key  形如 ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
         CKey key = DecodeSecret(k.get_str());
         if (!key.IsValid()) {
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key");

@@ -7,6 +7,7 @@
 
 #include <util.h>
 
+// key 中存放私钥 ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20
 bool CKeyStore::AddKey(const CKey &key) {
     return AddKeyPubKey(key, key.GetPubKey());
 }
@@ -32,6 +33,8 @@ void CBasicKeyStore::ImplicitlyLearnRelatedKeyScripts(const CPubKey& pubkey)
         CScript script = GetScriptForDestination(WitnessV0KeyHash(key_id));
         // This does not use AddCScript, as it may be overridden.
         CScriptID id(script);
+		// ericksun 这里的kv对为 [rmd160(hashpubkey),hashpubkey脚本]
+		// [077a414c3d707eaff2718369bad42b26878279c8,0014682f951f473c437f4489af026e5bfb1d1ed22aa3]
         mapScripts[id] = std::move(script);
     }
 }
@@ -52,9 +55,12 @@ bool CBasicKeyStore::GetPubKey(const CKeyID &address, CPubKey &vchPubKeyOut) con
     return true;
 }
 
+// key中存放私钥   ea628ae24b0a6852fc55f8a40bf07fa9a9e3be78d76359671f2c4aa2e695ca20 
+// pubkey中存放公钥 "pubkey": "02b9c7077daaa55acf00048bca3c5d04d053a5a4e48c32c88e6776ccc275c94daf",
 bool CBasicKeyStore::AddKeyPubKey(const CKey& key, const CPubKey &pubkey)
 {
     LOCK(cs_KeyStore);
+	// GetID() 获取到公钥hashkey， 所以这里存放的kv对为[pubhashkey, privkey]   
     mapKeys[pubkey.GetID()] = key;
     ImplicitlyLearnRelatedKeyScripts(pubkey);
     return true;
