@@ -1,0 +1,57 @@
+
+
+
+
+# 提纲
+
+弄懂以下几个逻辑
+
+
+1. 何时收集已存在的交易
+2. 何时构造coin币基交易
+3. 构造及验证block的过程 
+
+
+ 
+1. 何时收集已存在的交易
+   * 何时构造的交易对象
+
+
+   193 ./src/validation.cpp:CTxMemPool mempool(&feeEstimator);
+
+   mempool.setSanityCheck
+
+
+   (gdb) p/x commitment
+   $77 = std::vector of length 38, capacity 38 = {0x6a, 0x24, 0xaa, 0x21, 0xa9, 0xed, 0xe2, 0xf6, 0x1c, 0x3f, 0x71, 0xd1, 0xde, 0xfd, 0x3f, 0xa9, 0x99, 0xdf, 0xa3, 0x69, 0x53, 0x75, 0x5c, 0x69, 0x6, 0x89, 0x79, 0x99, 0x62, 0xb4, 0x8b, 0xeb, 0xd8, 0x36, 0x97, 0x4e, 0x8c, 0xf9}
+
+
+
+# 承接 construct_block.sh
+
+   这里有个交易
+StephenSun@debian-1:~/bitcoin/study/mining$ rt getrawmempool true
+{
+  "7c2caa00ea331216d6835433b6c177448ca5133ba22cd85e8488b19c811ccf66": {
+    "size": 134,
+    "fee": 0.01000000,
+    "modifiedfee": 0.01000000,
+    "time": 1537142834,
+    "height": 996,
+    "descendantcount": 1,
+    "descendantsize": 134,
+    "descendantfees": 1000000,
+    "ancestorcount": 1,
+    "ancestorsize": 134,
+    "ancestorfees": 1000000,
+    "wtxid": "c12dbca0a024400dd2de8da47a0bf7fcd8d61953f9a84054a81e3a3927433c8d",
+    "depends": [
+    ],
+    "spentby": [
+    ]
+  }
+}
+
+看下何时加入tx数组中
+
+
