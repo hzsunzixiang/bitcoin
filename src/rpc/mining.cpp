@@ -118,14 +118,34 @@ UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGen
     UniValue blockHashes(UniValue::VARR);
     while (nHeight < nHeightEnd)
     {
+		// erick 把这里拆开重新编译
+        // tmp = BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript)
+        // std::unique_ptr<CBlockTemplate> pblocktemplate(tmp);
+
+        /** Generate a new block, without valid proof-of-work */
+        // class BlockAssembler 首先构造一个没有 proof-of-work 的区块
+		// 调用这里的 Params()
+        // const CChainParams &Params() {      assert(globalChainParams);     return *globalChainParams;  }
+		// 下面这里CreateNewBlock构造了一个区块
+		// 这里已经获取到了所有的交易  并构造币基交易
         std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript));
         if (!pblocktemplate.get())
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
         CBlock *pblock = &pblocktemplate->block;
         {
             LOCK(cs_main);
+			// 说明在这里已经把所有的交易 打包完毕
             IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce); // ericksun here merkel tree root
         }
+		// 开始工作量证明
+		// pblock->GetHash() 这里直接计算hash值
+        //template<typename T>
+        //uint256 SerializeHash(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL_VERSION)
+		// block.cpp
+        //uint256 CBlockHeader::GetHash() const
+        //{
+        //    return SerializeHash(*this);
+        //}
         while (nMaxTries > 0 && pblock->nNonce < nInnerLoopCount && !CheckProofOfWork(pblock->GetHash(), pblock->nBits, Params().GetConsensus())) {
             ++pblock->nNonce;
             --nMaxTries;
@@ -174,13 +194,17 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
         nMaxTries = request.params[2].get_int();
     }
 
+    //这类似一个union
+	//typedef boost::variant<CNoDestination, CKeyID, CScriptID, WitnessV0ScriptHash, WitnessV0KeyHash, WitnessUnknown> CTxDestination;
     CTxDestination destination = DecodeDestination(request.params[1].get_str());
     if (!IsValidDestination(destination)) {
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Error: Invalid address");
     }
 
+	// destination 中存放 077a414c3d707eaff2718369bad42b26878279c8
     std::shared_ptr<CReserveScript> coinbaseScript = std::make_shared<CReserveScript>();
     coinbaseScript->reserveScript = GetScriptForDestination(destination);
+	// a914 077a414c3d707eaff2718369bad42b26878279c8 87
 
     return generateBlocks(coinbaseScript, nGenerate, nMaxTries, false);
 }

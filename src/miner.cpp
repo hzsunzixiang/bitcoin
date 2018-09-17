@@ -99,12 +99,14 @@ void BlockAssembler::resetBlock()
     nFees = 0;
 }
 
+// ericksun 这里真正创建一个区块
 std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, bool fMineWitnessTx)
 {
     int64_t nTimeStart = GetTimeMicros();
 
     resetBlock();
 
+	// 在这里创建的 CBlockTemplate 对象
     pblocktemplate.reset(new CBlockTemplate());
 
     if(!pblocktemplate.get())
@@ -112,11 +114,18 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     pblock = &pblocktemplate->block; // pointer for convenience
 
     // Add dummy coinbase tx as first transaction
+	// 这里创建一个智能指针 指向 CTransaction
+    // typedef std::shared_ptr<const CTransaction> CTransactionRef;
+	// 先把币基交易占个位, 后面再放入其他交易
     pblock->vtx.emplace_back();
     pblocktemplate->vTxFees.push_back(-1); // updated at end
     pblocktemplate->vTxSigOpsCost.push_back(-1); // updated at end
 
+    // 定义 CTxMemPool mempool(&feeEstimator);
+	// CTxMemPool 中信息很多 当一个叫交易发送出去，合法就会放到mempool
     LOCK2(cs_main, mempool.cs);
+    /** ericksun Returns the index entry for the tip of this chain, or nullptr if none. */
+	//TODO  在这里可能取到了 内存中的新的交易
     CBlockIndex* pindexPrev = chainActive.Tip();
     assert(pindexPrev != nullptr);
     nHeight = pindexPrev->nHeight + 1;
@@ -144,6 +153,9 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
 
     int nPackagesSelected = 0;
     int nDescendantsUpdated = 0;
+
+	//ericksun  在这里把内存中的交易放入区块链中
+	// 此时已经放入了币基交易， 开始放入其他tx
     addPackageTxs(nPackagesSelected, nDescendantsUpdated);
 
     int64_t nTime1 = GetTimeMicros();
@@ -151,14 +163,20 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     nLastBlockTx = nBlockTx;
     nLastBlockWeight = nBlockWeight;
 
+	// 开始填充币基交易
     // Create coinbase transaction.
     CMutableTransaction coinbaseTx;
     coinbaseTx.vin.resize(1);
+	// 设置prevout
     coinbaseTx.vin[0].prevout.SetNull();
     coinbaseTx.vout.resize(1);
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
+	// nFees 加当前奖励值
+	// TODO nFees 没看到哪里得到的
     coinbaseTx.vout[0].nValue = nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
+	// scriptSig 的信息 在这里
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
+	// ericksun 这里把币基交易放进去
     pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
     pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, chainparams.GetConsensus());
     pblocktemplate->vTxFees[0] = -nFees;
@@ -223,6 +241,7 @@ bool BlockAssembler::TestPackageTransactions(const CTxMemPool::setEntries& packa
 
 void BlockAssembler::AddToBlock(CTxMemPool::txiter iter)
 {
+	// ericksun mempool中的交易最终在这里 放区块中
     pblock->vtx.emplace_back(iter->GetSharedTx());
     pblocktemplate->vTxFees.push_back(iter->GetFee());
     pblocktemplate->vTxSigOpsCost.push_back(iter->GetSigOpCost());
@@ -402,6 +421,7 @@ void BlockAssembler::addPackageTxs(int &nPackagesSelected, int &nDescendantsUpda
         mempool.CalculateMemPoolAncestors(*iter, ancestors, nNoLimit, nNoLimit, nNoLimit, nNoLimit, dummy, false);
 
         onlyUnconfirmed(ancestors);
+		// ericksun 这里插入了一个 tx
         ancestors.insert(iter);
 
         // Test if all tx's are Final
@@ -421,6 +441,7 @@ void BlockAssembler::addPackageTxs(int &nPackagesSelected, int &nDescendantsUpda
         SortForBlock(ancestors, sortedEntries);
 
         for (size_t i=0; i<sortedEntries.size(); ++i) {
+			// ericksun  在这里把交易加入到区块链中
             AddToBlock(sortedEntries[i]);
             // Erase from the modified set, if present
             mapModifiedTx.erase(sortedEntries[i]);

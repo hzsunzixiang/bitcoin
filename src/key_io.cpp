@@ -70,6 +70,7 @@ public:
     std::string operator()(const CNoDestination& no) const { return {}; }
 };
 
+// 创建交易和mining的时候都会走到这里
 // erick str 是一个地址 比如 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
 CTxDestination DecodeDestination(const std::string& str, const CChainParams& params)
 {
@@ -92,7 +93,7 @@ CTxDestination DecodeDestination(const std::string& str, const CChainParams& par
             std::copy(data.begin() + pubkey_prefix.size(), data.end(), hash.begin());
             return CKeyID(hash);
         }
-		// erick 这里相对公钥 起始是做了两层的，参看base58.cpp 中的解释
+		// erick 这里相对公钥 其实是做了两层的，参看base58.cpp 中的解释
         // Script-hash-addresses have version 5 (or 196 testnet).
         // The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script.
 		// erick (2) 再判断是否 SCRIPT_ADDRESS 以 0xc4打头
@@ -227,10 +228,17 @@ std::string EncodeDestination(const CTxDestination& dest)
     return boost::apply_visitor(DestinationEncoder(Params()), dest);
 }
 
+
 // 解析的是一个地址 比如 str = 2MsvmB4K5yFMxAdFhGyGW87SeWrPRSksRYJ
 CTxDestination DecodeDestination(const std::string& str)
 {
-    return DecodeDestination(str, Params());
+	// DecodeDestination 中的函数Params 调用这个函数
+	//const CChainParams &Params() {
+	//    assert(globalChainParams);
+	//    return *globalChainParams;
+	//}
+    // 也就是对这个解引用: static std::unique_ptr<CChainParams> globalChainParams;
+	return DecodeDestination(str, Params());
 }
 
 bool IsValidDestinationString(const std::string& str, const CChainParams& params)

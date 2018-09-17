@@ -73,6 +73,7 @@ class CBlock : public CBlockHeader
 {
 public:
     // network and disk
+    // ericksun typedef std::shared_ptr<const CTransaction> CTransactionRef;
     std::vector<CTransactionRef> vtx;
 
     // memory only

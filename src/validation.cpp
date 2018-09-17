@@ -226,6 +226,8 @@ CFeeRate minRelayTxFee = CFeeRate(DEFAULT_MIN_RELAY_TX_FEE);
 CAmount maxTxFee = DEFAULT_TRANSACTION_MAXFEE;
 
 CBlockPolicyEstimator feeEstimator;
+
+//erick 这里定义 mempool
 CTxMemPool mempool(&feeEstimator);
 
 /** Constant stuff for coinbase transactions we create: */
@@ -3118,6 +3120,7 @@ std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBloc
             CTxOut out;
             out.nValue = 0;
             out.scriptPubKey.resize(38);
+			// 这里是一个map
             out.scriptPubKey[0] = OP_RETURN;
             out.scriptPubKey[1] = 0x24;
             out.scriptPubKey[2] = 0xaa;
@@ -3126,6 +3129,7 @@ std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBloc
             out.scriptPubKey[5] = 0xed;
             memcpy(&out.scriptPubKey[6], witnessroot.begin(), 32);
             commitment = std::vector<unsigned char>(out.scriptPubKey.begin(), out.scriptPubKey.end());
+			// 修改了币基交易的 out 
             CMutableTransaction tx(*block.vtx[0]);
             tx.vout.push_back(out);
             block.vtx[0] = MakeTransactionRef(std::move(tx));
