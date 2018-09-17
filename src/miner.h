@@ -143,7 +143,7 @@ private:
     // Chain context for the block
     int nHeight;
     int64_t nLockTimeCutoff;
-    const CChainParams& chainparams
+    const CChainParams& chainparams;
 
 public:
     struct Options {
