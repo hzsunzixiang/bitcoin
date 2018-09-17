@@ -66,8 +66,14 @@ $110 = {
 
 printf  00000020da5771918c4df2b0d9bd5c3799de8b9fe14d0473540e13692d5308c8c19d8b2dda57020ed6ee59ed64e552d269f7b89463d52725149565bc67b455fe284806eb68fb9e5bffff7f2000000000 | xxd -r -p |sha256sum -b |xxd -r -p | sha256sum -b
 
-#结果为
+#结果为 
 7b032b3acd8db850f49f2aebb8eb7b19f4cee9623bd99bb1fb5b5c1d51da614a
 
 正好符合
+
+# 然后逆序
+StephenSun@debian-1:~/bitcoin/study/mining/gdb$ rt getblockcount
+997
+StephenSun@debian-1:~/bitcoin/study/mining/gdb$ rt getblockhash 997
+4a61da511d5c5bfbb19bd93b62e9cef4197bebb8eb2a9ff450b88dcd3a2b037b
 
