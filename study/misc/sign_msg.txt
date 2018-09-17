@@ -1,0 +1,181 @@
+Breakpoint 1 at 0x5622f63f1a5f: file rpc/server.cpp, line 473.
+Breakpoint 2 at 0x5622f63b3a92: file rpc/misc.cpp, line 205.
+Continuing.
+[Switching to Thread 0x7fdad7710700 (LWP 11315)]
+
+Thread 4 "bitcoin-httpwor" hit Breakpoint 1, CRPCTable::execute (this=0x5622f6dbafa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
+476	        LOCK(cs_rpcWarmup);
+477	        if (fRPCInWarmup)
+476	        LOCK(cs_rpcWarmup);
+484	    const CRPCCommand *pcmd = tableRPC[request.strMethod];
+485	    if (!pcmd)
+488	    g_rpcSignals.PreCommand(*pcmd);
+493	        if (request.params.isObject()) {
+497	            return pcmd->actor(request);
+
+Thread 4 "bitcoin-httpwor" hit Breakpoint 2, signmessagewithprivkey (request=...) at rpc/misc.cpp:205
+warning: Source file is more recent than executable.
+205	{
+206	    if (request.fHelp || request.params.size() != 2)
+224	    std::string strPrivkey = request.params[0].get_str();
+225	    std::string strMessage = request.params[1].get_str();
+227	    CKey key = DecodeSecret(strPrivkey);
+$1 = "cVSKEzHXxJ8pJcMB1BX6H6wPXG9ZPDKZQwtqBe9uvjDxoZwjySXg"
+$2 = "fea376f0c10280bde725bbe35122d0e9289384ca1a79d1d25abc6108dd536e3d"
+228	    if (!key.IsValid()) {
+232	    CHashWriter ss(SER_GETHASH, 0);
+233	    ss << strMessageMagic;
+No symbol "strMessageMagic" in current context.
+No symbol "strMessageMagic" in current context.
+No symbol "strMessageMagic" in current context.
+234	    ss << strMessage;
+$3 = {
+  ctx = {
+    sha = {
+      s = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19}, 
+      buf = {0x18, 0x42, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e, 0x20, 0x53, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x20, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x3a, 0xa, 
+        0x0 <repeats 16 times>, 0xc8, 0x1a, 0xc8, 0xf, 0x2a, 0x7b, 0xc6, 0x0, 0xf6, 0x70, 0xd7, 0xda, 0x7f, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+      bytes = 0x19, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+$4 = {
+  ctx = {
+    sha = {
+      s = {1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225}, 
+      buf = "\030Bitcoin Signed Message:\n", '\000' <repeats 16 times>, "\310\032\310\017*{\306\000\366p\327\332\177\000\000\000\000\000\000\000\000\000", 
+      bytes = 25, 
+      static OUTPUT_SIZE = 32
+    }, 
+    static OUTPUT_SIZE = 32
+  }, 
+  nType = 4, 
+  nVersion = 0
+}
+236	    std::vector<unsigned char> vchSig;
+$5 = {
+  ctx = {
+    sha = {
+      s = {2788459208, 803934000, 609130131, 3793533870, 185825688, 1079958563, 3922373223, 4075850995}, 
+      buf = "ca1a79d1d25abc6108dd536e3dfea376f0c10280bde725bbe35122d0e9289384", 
+      bytes = 90, 
+      static OUTPUT_SIZE = 32
+    }, 
+    static OUTPUT_SIZE = 32
+  }, 
+  nType = 4, 
+  nVersion = 0
+}
+$6 = "fea376f0c10280bde725bbe35122d0e9289384ca1a79d1d25abc6108dd536e3d"
+$7 = {
+  ctx = {
+    sha = {
+      s = {2788459208, 803934000, 609130131, 3793533870, 185825688, 1079958563, 3922373223, 4075850995}, 
+      buf = "ca1a79d1d25abc6108dd536e3dfea376f0c10280bde725bbe35122d0e9289384", 
+      bytes = 90, 
+      static OUTPUT_SIZE = 32
+    }, 
+    static OUTPUT_SIZE = 32
+  }, 
+  nType = 4, 
+  nVersion = 0
+}
+Continuing.
+
+Thread 4 "bitcoin-httpwor" hit Breakpoint 1, CRPCTable::execute (this=0x5622f6dbafa0 <tableRPC>, request=...) at rpc/server.cpp:473
+473	{
+476	        LOCK(cs_rpcWarmup);
+477	        if (fRPCInWarmup)
+476	        LOCK(cs_rpcWarmup);
+484	    const CRPCCommand *pcmd = tableRPC[request.strMethod];
+485	    if (!pcmd)
+488	    g_rpcSignals.PreCommand(*pcmd);
+493	        if (request.params.isObject()) {
+497	            return pcmd->actor(request);
+
+Thread 4 "bitcoin-httpwor" hit Breakpoint 2, signmessagewithprivkey (request=...) at rpc/misc.cpp:205
+205	{
+206	    if (request.fHelp || request.params.size() != 2)
+224	    std::string strPrivkey = request.params[0].get_str();
+225	    std::string strMessage = request.params[1].get_str();
+227	    CKey key = DecodeSecret(strPrivkey);
+$8 = "helloworld"
+228	    if (!key.IsValid()) {
+232	    CHashWriter ss(SER_GETHASH, 0);
+233	    ss << strMessageMagic;
+No symbol "strMessageMagic" in current context.
+234	    ss << strMessage;
+$9 = {
+  ctx = {
+    sha = {
+      s = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19}, 
+      buf = {0x18, 0x42, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e, 0x20, 0x53, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x20, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x3a, 0xa, 
+        0x0 <repeats 16 times>, 0xc8, 0x1a, 0xc8, 0xf, 0x2a, 0x7b, 0xc6, 0x0, 0xf6, 0x70, 0xd7, 0xda, 0x7f, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+      bytes = 0x19, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+$10 = {
+  ctx = {
+    sha = {
+      s = {1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225}, 
+      buf = "\030Bitcoin Signed Message:\n", '\000' <repeats 16 times>, "\310\032\310\017*{\306\000\366p\327\332\177\000\000\000\000\000\000\000\000\000", 
+      bytes = 25, 
+      static OUTPUT_SIZE = 32
+    }, 
+    static OUTPUT_SIZE = 32
+  }, 
+  nType = 4, 
+  nVersion = 0
+}
+236	    std::vector<unsigned char> vchSig;
+$11 = {
+  ctx = {
+    sha = {
+      s = {1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225}, 
+      buf = "\030Bitcoin Signed Message:\n\nhelloworld\000\000\000\000\000\310\032\310\017*{\306\000\366p\327\332\177\000\000\000\000\000\000\000\000\000", 
+      bytes = 36, 
+      static OUTPUT_SIZE = 32
+    }, 
+    static OUTPUT_SIZE = 32
+  }, 
+  nType = 4, 
+  nVersion = 0
+}
+237	    if (!key.SignCompact(ss.GetHash(), vchSig))
+$12 = {
+  ctx = {
+    sha = {
+      s = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19}, 
+      buf = {0x18, 0x42, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e, 0x20, 0x53, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x20, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x3a, 0xa, 0xa, 
+        0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8, 0x1a, 0xc8, 0xf, 0x2a, 0x7b, 0xc6, 0x0, 0xf6, 0x70, 0xd7, 0xda, 0x7f, 
+        0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+      bytes = 0x24, 
+      static OUTPUT_SIZE = 0x20
+    }, 
+    static OUTPUT_SIZE = 0x20
+  }, 
+  nType = 0x4, 
+  nVersion = 0x0
+}
+$13 = 36
+240	    return EncodeBase64(vchSig.data(), vchSig.size());
+$14 = {
+  <base_blob<256u>> = {
+    static WIDTH = 0x20, 
+    data = {0x8d, 0x83, 0x51, 0xfc, 0xd1, 0xf2, 0x84, 0xe5, 0xf2, 0x2e, 0x4c, 0x60, 0x88, 0x69, 0x11, 0xcc, 0x10, 0x4f, 0xc3, 0x2, 0xbd, 0x5d, 0xeb, 0xe4, 0xea, 0x6b, 
+      0xfb, 0xea, 0x1c, 0xd3, 0x46, 0x84}
+  }, <No data fields>}
+$15 = std::vector of length 65, capacity 65 = {0x1f, 0x5e, 0x1, 0xce, 0xae, 0x63, 0x73, 0x7b, 0xb5, 0x85, 0x8f, 0x86, 0x65, 0xa9, 0xe2, 0x25, 0x7b, 0x82, 0xa1, 0x1d, 
+  0x63, 0x5, 0xe9, 0x5, 0x21, 0x62, 0x54, 0xa8, 0xfa, 0xde, 0x5d, 0x59, 0x6a, 0x68, 0x54, 0xc2, 0xbc, 0x4f, 0x8, 0x50, 0x4, 0x73, 0x33, 0x8c, 0x7d, 0xd9, 0x54, 0x35, 0xc, 
+  0xc6, 0x33, 0xbe, 0x19, 0x80, 0xc0, 0x16, 0x51, 0x7, 0x8c, 0xb2, 0x95, 0x51, 0x1c, 0x65, 0xd4}
+Detaching from program: /home/ericksun/bitcoin/src/bitcoind, process 11309
