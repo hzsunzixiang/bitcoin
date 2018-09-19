@@ -18,6 +18,7 @@
 #include <stdint.h>
 
 #include <unordered_map>
+#include <iostream>
 
 /**
  * A UTXO entry.
@@ -96,6 +97,7 @@ public:
      * uint64_t, resulting in failures when syncing the chain (#4634).
      */
     size_t operator()(const COutPoint& id) const {
+		std::cout << "k0\t" << k0 << "\tk1" << k1 << std::endl;
         return SipHashUint256Extra(k0, k1, id.hash, id.n);
     }
 };
