@@ -1507,6 +1507,15 @@ bool AppInitMain()
                 }
 
                 // The on-disk coinsdb is now in a good state, create the cache
+				// ericksun  这里是初始化 CCoinsViewCache pcoinsTip 的源头
+				// 此类不能被拷贝构造 是单例  
+				// 所以里面含有的这个成员也只被初始化一次: mutable CCoinsMap cacheCoins;
+				// 初始化CCoinsMap 的时候里面有个成员
+                // 从而下面这里也只会被调用一次
+				// SaltedOutpointHasher::SaltedOutpointHasher() : k0(GetRand(std::numeric_limits<uint64_t>::max())), k1(GetRand(std::numeric_limits<uint64_t>::max())) {}
+				// 所以在整个程序启动的过程中 k0 k1 始终保持不变， 因为只有一个实例
+				// 但是每次启动的时候 值都不相同
+
                 pcoinsTip.reset(new CCoinsViewCache(pcoinscatcher.get()));
 
                 bool is_coinsview_empty = fReset || fReindexChainState || pcoinsTip->GetBestBlock().IsNull();
